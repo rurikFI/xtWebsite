@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Xtruder™ — Patented insulation and coating tool. Apply materials uniformly around pipes, cables, hoses, and more. Made in Finland.">
+    <title>Xtruder™ — Insulate in a New, Efficient Way</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        orange: { DEFAULT: '#F97316', dark: '#EA6C0A' },
+                        slate: {
+                            750: '#334155',
+                            850: '#1E293B',
+                            950: '#0F172A',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Rubik', 'sans-serif'],
+                        body: ['"Nunito Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Nunito Sans', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Rubik', sans-serif; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s cubic-bezier(.22,.61,.36,1), transform 0.65s cubic-bezier(.22,.61,.36,1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-d1 { transition-delay: 0.1s; }
+        .reveal-d2 { transition-delay: 0.2s; }
+        .reveal-d3 { transition-delay: 0.3s; }
+        .reveal-d4 { transition-delay: 0.4s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        #navbar { transition: background 0.3s ease, box-shadow 0.3s ease; }
+        #navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 24px rgba(0,0,0,0.35);
+        }
+
+        .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #F97316, #FBBF24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-white text-slate-700">
+
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 cursor-pointer">
+            <div class="w-8 h-8 bg-[#F97316] rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <span class="font-heading font-bold text-xl text-white tracking-wide">XTRUDER<span class="text-[#F97316]">™</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#how-it-works" class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">How It Works</a>
+            <a href="#features" class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">Features</a>
+            <a href="#for-you" class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">Who It's For</a>
+            <a href="#materials" class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">Materials</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="#cta" class="hidden sm:block text-sm text-slate-300 hover:text-white transition-colors duration-200 font-medium cursor-pointer">View Kits</a>
+            <a href="#cta" class="bg-[#F97316] hover:bg-[#EA6C0A] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">Buy Now</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="relative min-h-screen bg-[#0F172A] flex items-center overflow-hidden pt-20">
+    <!-- Grid texture -->
+    <div class="absolute inset-0 opacity-[0.07]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#64748B" stroke-width="0.5"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#grid)"/>
+        </svg>
+    </div>
+    <!-- Glow -->
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[32rem] h-[32rem] bg-[#F97316] opacity-[0.08] rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-blue-600 opacity-[0.05] rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left: Copy -->
+            <div>
+                <div class="inline-flex items-center gap-2 bg-[#F97316]/15 border border-[#F97316]/30 rounded-full px-4 py-1.5 mb-6">
+                    <span class="w-2 h-2 bg-[#F97316] rounded-full animate-pulse"></span>
+                    <span class="text-[#F97316] text-sm font-semibold">Patented Technology · Made in Finland</span>
+                </div>
+                <h1 class="font-heading text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-6">
+                    Insulate in a<br>
+                    <span class="text-gradient">New, Efficient</span><br>
+                    Way.
+                </h1>
+                <p class="text-slate-300 text-lg lg:text-xl leading-relaxed mb-8 max-w-xl">
+                    The Xtruder™ is the patented applicator that coats pipes, cables, hoses, ropes, and wires with any material — uniformly, around the full 360° circumference, every single time.
+                </p>
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="#cta" class="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA6C0A] text-white font-semibold px-7 py-3.5 rounded-xl transition-colors duration-200 text-base cursor-pointer">
+                        View Xtruder Kits
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#how-it-works" class="inline-flex items-center gap-2 text-white border border-white/25 hover:border-white/60 hover:bg-white/5 font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 text-base cursor-pointer">
+                        <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        See How It Works
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-6 text-sm text-slate-400">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Patented design
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        500+ sizes
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Family business
+                    </span>
+                </div>
+            </div>
+
+            <!-- Right: SVG illustration -->
+            <div class="flex justify-center lg:justify-end">
+                <div class="relative w-full max-w-lg">
+                    <svg viewBox="0 0 480 310" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full" style="filter:drop-shadow(0 0 30px rgba(249,115,22,0.15))">
+                        <defs>
+                            <linearGradient id="coatGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#F97316" stop-opacity="0.8"/>
+                                <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+                            </linearGradient>
+                            <linearGradient id="pipeGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#475569"/>
+                                <stop offset="40%" stop-color="#334155"/>
+                                <stop offset="100%" stop-color="#1E293B"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Shadow -->
+                        <ellipse cx="240" cy="240" rx="190" ry="16" fill="#000" opacity="0.2"/>
+
+                        <!-- Pipe body -->
+                        <rect x="20" y="125" width="440" height="72" rx="4" fill="url(#pipeGrad)"/>
+                        <!-- Pipe highlight -->
+                        <rect x="20" y="125" width="440" height="12" rx="4" fill="#64748B" opacity="0.6"/>
+                        <!-- Pipe left end -->
+                        <ellipse cx="20" cy="161" rx="10" ry="36" fill="#1E293B"/>
+                        <ellipse cx="20" cy="161" rx="6" ry="28" fill="#0F172A"/>
+                        <!-- Pipe right end -->
+                        <ellipse cx="460" cy="161" rx="10" ry="36" fill="#1E293B"/>
+                        <ellipse cx="460" cy="161" rx="6" ry="28" fill="#0F172A"/>
+
+                        <!-- Coated section (orange) -->
+                        <rect x="20" y="125" width="175" height="72" fill="#F97316" opacity="0.75"/>
+                        <rect x="20" y="125" width="175" height="10" fill="#FBBF24" opacity="0.5"/>
+                        <!-- Feather edge -->
+                        <rect x="168" y="125" width="36" height="72" fill="url(#coatGrad)"/>
+                        <!-- Left end coat -->
+                        <ellipse cx="20" cy="161" rx="10" ry="36" fill="#F97316" opacity="0.75"/>
+
+                        <!-- Xtruder tool housing -->
+                        <rect x="198" y="108" width="84" height="106" rx="8" fill="#1E293B" stroke="#F97316" stroke-width="2.5"/>
+                        <rect x="203" y="113" width="74" height="96" rx="6" fill="#0F172A"/>
+                        <!-- Tool detail lines -->
+                        <line x1="203" y1="140" x2="277" y2="140" stroke="#1E293B" stroke-width="1.5"/>
+                        <line x1="203" y1="155" x2="277" y2="155" stroke="#1E293B" stroke-width="1.5"/>
+                        <line x1="203" y1="170" x2="277" y2="170" stroke="#1E293B" stroke-width="1.5"/>
+                        <line x1="203" y1="185" x2="277" y2="185" stroke="#1E293B" stroke-width="1.5"/>
+                        <!-- Orange accent stripe on tool -->
+                        <rect x="198" y="155" width="4" height="12" rx="2" fill="#F97316"/>
+                        <rect x="278" y="155" width="4" height="12" rx="2" fill="#F97316"/>
+
+                        <!-- Material tube (top) -->
+                        <rect x="226" y="42" width="28" height="72" rx="6" fill="#334155"/>
+                        <rect x="228" y="42" width="24" height="8" rx="4" fill="#475569"/>
+                        <!-- Tube material label -->
+                        <rect x="227" y="56" width="26" height="42" rx="3" fill="#F97316" opacity="0.25"/>
+                        <text x="240" y="82" fill="#F97316" font-size="7" font-family="Rubik" font-weight="700" text-anchor="middle" letter-spacing="0.5">MATERIAL</text>
+
+                        <!-- Handle right -->
+                        <rect x="282" y="153" width="52" height="16" rx="8" fill="#334155"/>
+                        <rect x="316" y="148" width="22" height="26" rx="6" fill="#475569"/>
+                        <!-- Handle grip lines -->
+                        <line x1="320" y1="152" x2="320" y2="170" stroke="#64748B" stroke-width="1.5"/>
+                        <line x1="325" y1="152" x2="325" y2="170" stroke="#64748B" stroke-width="1.5"/>
+                        <line x1="330" y1="152" x2="330" y2="170" stroke="#64748B" stroke-width="1.5"/>
+
+                        <!-- Direction arrow -->
+                        <path d="M 345 68 L 410 68" stroke="#F97316" stroke-width="2" stroke-dasharray="5 3"/>
+                        <polygon points="408,63 418,68 408,73" fill="#F97316"/>
+                        <text x="374" y="58" fill="#F97316" font-size="9" font-family="Rubik" font-weight="600" text-anchor="middle" letter-spacing="0.5">DIRECTION</text>
+
+                        <!-- 360° badge -->
+                        <circle cx="420" cy="115" r="28" fill="#1E293B" stroke="#F97316" stroke-width="2"/>
+                        <text x="420" y="111" fill="#F97316" font-size="11" font-family="Rubik" font-weight="800" text-anchor="middle">360°</text>
+                        <text x="420" y="124" fill="#94A3B8" font-size="8" font-family="Rubik" text-anchor="middle">COVERAGE</text>
+
+                        <!-- Labels -->
+                        <text x="90" y="102" fill="#F97316" font-size="11" font-family="Rubik" font-weight="700" text-anchor="middle">COATED</text>
+                        <line x1="90" y1="105" x2="90" y2="124" stroke="#F97316" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.7"/>
+
+                        <text x="360" y="102" fill="#94A3B8" font-size="11" font-family="Rubik" font-weight="700" text-anchor="middle">UNCOATED</text>
+                        <line x1="360" y1="105" x2="360" y2="124" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.7"/>
+
+                        <text x="240" y="264" fill="#94A3B8" font-size="12" font-family="Rubik" font-weight="600" text-anchor="middle" letter-spacing="1.5">THE XTRUDER™</text>
+                        <line x1="200" y1="258" x2="225" y2="245" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+                    </svg>
+
+                    <!-- Floating badge: PATENTED -->
+                    <div class="absolute -top-3 -right-2 bg-[#F97316] text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg tracking-wide">PATENTED</div>
+                    <!-- Floating badge: 500+ Sizes -->
+                    <div class="absolute bottom-10 -left-3 bg-[#1E293B] border border-slate-600/40 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>500+ Sizes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500">
+        <span class="text-xs">Scroll to explore</span>
+        <div class="w-5 h-8 border border-slate-700 rounded-full flex items-start justify-center p-1">
+            <div class="w-1 h-2 bg-[#F97316] rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TRUST BAR ========== -->
+<section class="bg-[#F97316] py-5">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14">
+            <div class="flex items-center gap-2.5 text-white">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span class="font-heading font-bold text-sm">Patented Technology</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-white">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                <span class="font-heading font-bold text-sm">500+ Sizes Available</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-white">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span class="font-heading font-bold text-sm">Made in Finland</span>
+            </div>
+            <div class="flex items-center gap-2.5 text-white">
+                <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                <span class="font-heading font-bold text-sm">Finnish Family Business</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PROBLEM ========== -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div class="reveal">
+            <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">The Problem</span>
+            <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                Coating pipes and cables<br><span class="text-slate-400">shouldn't be a mess</span>
+            </h2>
+            <p class="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
+                Traditional methods leave uneven coverage, waste material, and take far too long. Getting a uniform coat around a round surface by hand is nearly impossible.
+            </p>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6 reveal reveal-d2">
+            <div class="card-hover bg-white rounded-2xl p-6 text-left border border-slate-100 shadow-sm cursor-default">
+                <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 mb-2">Uneven Coverage</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Manual application always misses spots, leaving gaps that compromise insulation and protection.</p>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-6 text-left border border-slate-100 shadow-sm cursor-default">
+                <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 mb-2">Time-Consuming</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Wrapping and coating by hand takes ages, especially on long pipes or cables.</p>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-6 text-left border border-slate-100 shadow-sm cursor-default">
+                <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-5 h-5 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 mb-2">Material Waste</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Over-applying in some spots, missing others — inconsistency wastes expensive materials.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section id="how-it-works" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">How It Works</span>
+            <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">4 Simple Steps to<br>Perfect Coverage</h2>
+            <p class="text-slate-500 text-lg max-w-xl mx-auto">The Xtruder™ makes professional-grade coating accessible to everyone.</p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8 md:gap-6">
+            <div class="relative text-center reveal reveal-d1">
+                <div class="w-16 h-16 bg-[#F97316] rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-orange-200">
+                    <span class="font-heading font-black text-white text-2xl">1</span>
+                </div>
+                <div class="hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r from-[#F97316]/40 to-slate-200"></div>
+                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Select Material</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Choose your coating — epoxy, silicone, latex, paint, or any compatible material.</p>
+            </div>
+            <div class="relative text-center reveal reveal-d2">
+                <div class="w-16 h-16 bg-[#64748B] rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-slate-200">
+                    <span class="font-heading font-black text-white text-2xl">2</span>
+                </div>
+                <div class="hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r from-slate-300 to-slate-200"></div>
+                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Attach Xtruder</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Twist the Xtruder™ onto your material tube. It locks in securely, ready for application.</p>
+            </div>
+            <div class="relative text-center reveal reveal-d3">
+                <div class="w-16 h-16 bg-[#64748B] rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-slate-200">
+                    <span class="font-heading font-black text-white text-2xl">3</span>
+                </div>
+                <div class="hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r from-slate-300 to-[#F97316]/40"></div>
+                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Position & Lock</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Clamp onto the object you want to coat — pipe, cable, hose, or rope.</p>
+            </div>
+            <div class="relative text-center reveal reveal-d4">
+                <div class="w-16 h-16 bg-[#F97316] rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-orange-200">
+                    <span class="font-heading font-black text-white text-2xl">4</span>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">Apply Evenly</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Slide along the surface. The Xtruder™ applies coating uniformly around the full 360° circumference.</p>
+            </div>
+        </div>
+
+        <!-- Result banner -->
+        <div class="mt-16 bg-gradient-to-r from-[#0F172A] to-[#1E293B] rounded-3xl p-8 md:p-12 text-center reveal">
+            <div class="w-14 h-14 bg-[#F97316]/20 border border-[#F97316]/40 rounded-full flex items-center justify-center mx-auto mb-5">
+                <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="font-heading text-3xl font-black text-white mb-3">360° Uniform Coverage</h3>
+            <p class="text-slate-400 text-lg max-w-xl mx-auto">No gaps. No drips. No waste. Just perfect, professional-grade coating — every time.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FEATURES ========== -->
+<section id="features" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">What You Can Do</span>
+            <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">One Tool. Endless Applications.</h2>
+            <p class="text-slate-500 text-lg max-w-xl mx-auto">The Xtruder™ handles any task involving cylindrical surface coating.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d1">
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">Insulation</h3>
+                <p class="text-slate-500 leading-relaxed">Apply thermal and cold insulation materials around pipes and cables with perfect, continuous coverage.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">Thermal</span>
+                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">Cold Protection</span>
+                </div>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d2">
+                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">Protection</h3>
+                <p class="text-slate-500 leading-relaxed">Waterproof cables, protect pipes from corrosion, and add a durable barrier against environmental damage.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full">Waterproofing</span>
+                    <span class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full">Cable Repair</span>
+                </div>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d3">
+                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">Restoration</h3>
+                <p class="text-slate-500 leading-relaxed">Repair worn or damaged surfaces by applying restoration coatings uniformly. Bring old pipes back to life.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full">Surface Repair</span>
+                    <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full">Refurbishment</span>
+                </div>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d1">
+                <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">Reinforcement</h3>
+                <p class="text-slate-500 leading-relaxed">Strengthen hoses, ropes, and cables with structural coatings. Add durability where it counts most.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">Structural</span>
+                    <span class="text-xs font-semibold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-full">Durability</span>
+                </div>
+            </div>
+            <div class="card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d2">
+                <div class="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">Aesthetics</h3>
+                <p class="text-slate-500 leading-relaxed">Create a professional, clean finish on any pipe or cable. Perfect appearance for visible installations.</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-xs font-semibold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-full">Professional Finish</span>
+                    <span class="text-xs font-semibold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-full">Pipe Painting</span>
+                </div>
+            </div>
+            <!-- Works on card -->
+            <div class="card-hover bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-2xl p-8 border border-slate-700/50 shadow-sm cursor-default reveal reveal-d3">
+                <div class="w-12 h-12 bg-[#F97316]/15 border border-[#F97316]/30 rounded-xl flex items-center justify-center mb-5">
+                    <svg class="w-6 h-6 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-white text-xl mb-4">Works On</h3>
+                <div class="space-y-2.5">
+                    <div class="flex items-center gap-2.5"><div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div><span class="text-slate-300 text-sm">Pipes &amp; Tubes</span></div>
+                    <div class="flex items-center gap-2.5"><div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div><span class="text-slate-300 text-sm">Cables &amp; Wires</span></div>
+                    <div class="flex items-center gap-2.5"><div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div><span class="text-slate-300 text-sm">Hoses</span></div>
+                    <div class="flex items-center gap-2.5"><div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div><span class="text-slate-300 text-sm">Ropes</span></div>
+                    <div class="flex items-center gap-2.5"><div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div><span class="text-slate-300 text-sm">And more...</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== WHO IT'S FOR ========== -->
+<section id="for-you" class="py-24 bg-[#1E293B]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Who It's For</span>
+            <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
+                Built for the Professionals<br><span class="text-[#64748B]">Who Get Things Done</span>
+            </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Plumbers -->
+            <div class="card-hover bg-[#0F172A]/60 border border-slate-700/50 rounded-2xl p-8 cursor-default reveal reveal-d1">
+                <div class="w-14 h-14 bg-[#F97316]/15 border border-[#F97316]/30 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-white text-2xl mb-3">Plumbers</h3>
+                <p class="text-slate-400 leading-relaxed mb-5">Speed up your pipe work with consistent, professional results on every job site.</p>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pipe painting &amp; finishing</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Water &amp; corrosion protection</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Thermal insulation</li>
+                </ul>
+            </div>
+            <!-- Electricians -->
+            <div class="card-hover bg-[#0F172A]/60 border border-slate-700/50 rounded-2xl p-8 cursor-default reveal reveal-d2">
+                <div class="w-14 h-14 bg-[#F97316]/15 border border-[#F97316]/30 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-white text-2xl mb-3">Electricians</h3>
+                <p class="text-slate-400 leading-relaxed mb-5">Keep cables and wires properly coated, protected, and ready for any environment.</p>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cable repair &amp; reinforcement</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Wire covering &amp; waterproofing</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Insulation application</li>
+                </ul>
+            </div>
+            <!-- DIY -->
+            <div class="card-hover bg-[#0F172A]/60 border border-slate-700/50 rounded-2xl p-8 cursor-default reveal reveal-d3">
+                <div class="w-14 h-14 bg-[#F97316]/15 border border-[#F97316]/30 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3 class="font-heading font-bold text-white text-2xl mb-3">DIY Enthusiasts</h3>
+                <p class="text-slate-400 leading-relaxed mb-5">Get professional results at home without any special skills or experience.</p>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Home plumbing projects</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Repair &amp; restoration</li>
+                    <li class="flex items-center gap-3 text-slate-300 text-sm"><svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Creative projects &amp; crafts</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MATERIALS ========== -->
+<section id="materials" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Compatible Materials</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">Works With Any<br>Coating Material</h2>
+                <p class="text-slate-500 text-lg leading-relaxed mb-8">The Xtruder™ is compatible with virtually any viscous coating material. Whatever your project demands, we have a size and configuration for it.</p>
+                <a href="#cta" class="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA6C0A] text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200 cursor-pointer">
+                    Find Your Size
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 reveal reveal-d2">
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Epoxies</span>
+                </div>
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Silicones</span>
+                </div>
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Acrylics</span>
+                </div>
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-teal-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12h8"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Latexes</span>
+                </div>
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Paints</span>
+                </div>
+                <div class="card-hover bg-slate-50 rounded-2xl p-5 text-center border border-slate-100 cursor-default">
+                    <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-5 h-5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-slate-800 text-sm">Chemical Metals</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== MADE IN FINLAND ========== -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+        <div class="reveal">
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <div class="h-px bg-gradient-to-r from-transparent to-blue-700 w-20"></div>
+                <div class="w-14 h-9 rounded-md overflow-hidden border border-slate-200 shadow-sm flex-shrink-0">
+                    <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <rect width="18" height="11" fill="white"/>
+                        <rect y="4" width="18" height="3" fill="#003580"/>
+                        <rect x="5" width="3" height="11" fill="#003580"/>
+                    </svg>
+                </div>
+                <div class="h-px bg-gradient-to-l from-transparent to-blue-700 w-20"></div>
+            </div>
+            <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Our Story</span>
+            <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+                Innovation in Insulation.<br><span class="text-blue-700">Quality from Finland.</span>
+            </h2>
+            <p class="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
+                Xtruder Tools AB is a Finnish family company, founded by Patrik and Rurik with a single mission: to solve the problem of uneven coating on cylindrical surfaces. Every Xtruder™ is designed, developed, and produced with Finnish precision and craftsmanship.
+            </p>
+            <div class="grid sm:grid-cols-3 gap-6 text-left">
+                <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm reveal reveal-d1">
+                    <div class="font-heading font-black text-4xl text-[#F97316] mb-2">500+</div>
+                    <div class="font-heading font-semibold text-slate-900 mb-1">Sizes Available</div>
+                    <p class="text-slate-500 text-sm">From the smallest wire to the largest industrial pipe.</p>
+                </div>
+                <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm reveal reveal-d2">
+                    <div class="font-heading font-black text-4xl text-[#F97316] mb-2">360°</div>
+                    <div class="font-heading font-semibold text-slate-900 mb-1">Full Coverage</div>
+                    <p class="text-slate-500 text-sm">Uniform coating around the complete circumference, always.</p>
+                </div>
+                <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm reveal reveal-d3">
+                    <div class="font-heading font-black text-4xl text-[#F97316] mb-2">1</div>
+                    <div class="font-heading font-semibold text-slate-900 mb-1">Patented Design</div>
+                    <p class="text-slate-500 text-sm">Protected innovation you can trust on every single job.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section id="cta" class="py-24 bg-[#0F172A] relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.07]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#64748B" stroke-width="0.5"/></pattern></defs>
+            <rect width="100%" height="100%" fill="url(#grid2)"/>
+        </svg>
+    </div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] bg-[#F97316] opacity-[0.07] rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div class="reveal">
+            <div class="inline-flex items-center gap-2 bg-[#F97316]/15 border border-[#F97316]/30 rounded-full px-4 py-1.5 mb-6">
+                <span class="w-2 h-2 bg-[#F97316] rounded-full animate-pulse"></span>
+                <span class="text-[#F97316] text-sm font-semibold">Ready to get started?</span>
+            </div>
+            <h2 class="font-heading text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+                Start Insulating<br><span class="text-gradient">The Smart Way</span>
+            </h2>
+            <p class="text-slate-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+                Join professionals and DIY enthusiasts who've already upgraded to uniform, efficient coating with the Xtruder™. Available in 500+ sizes.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center mb-10">
+                <a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#F97316] hover:bg-[#EA6C0A] text-white font-bold px-8 py-4 rounded-xl transition-colors duration-200 text-lg cursor-pointer shadow-xl shadow-orange-900/30">
+                    View Xtruder Kits
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-white border border-white/20 hover:border-white/50 hover:bg-white/5 font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-lg cursor-pointer">
+                    Go to Store
+                </a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 text-slate-500 text-sm">
+                <span class="flex items-center gap-2"><svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Patented Technology</span>
+                <span class="flex items-center gap-2"><svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Made in Finland</span>
+                <span class="flex items-center gap-2"><svg class="w-4 h-4 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>500+ Sizes</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-black py-12 border-t border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-10 mb-10">
+            <div>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-8 h-8 bg-[#F97316] rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-white tracking-wide">XTRUDER<span class="text-[#F97316]">™</span></span>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed">Innovation in insulation.<br>Quality from Finland.</p>
+                <p class="text-slate-700 text-xs mt-3">&copy; 2024 Xtruder Tools AB. All rights reserved.</p>
+            </div>
+            <div>
+                <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Product</h4>
+                <ul class="space-y-2">
+                    <li><a href="#how-it-works" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">How It Works</a></li>
+                    <li><a href="#features" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">Features</a></li>
+                    <li><a href="#for-you" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">Who It's For</a></li>
+                    <li><a href="#materials" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">Compatible Materials</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Company</h4>
+                <ul class="space-y-2">
+                    <li><a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">Visit Store</a></li>
+                    <li><a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">About Us</a></li>
+                    <li><span class="text-slate-700 text-sm">Xtruder Tools AB · Finland</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-slate-700 text-xs">Patented technology. Unauthorized reproduction prohibited.</p>
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-3.5 rounded-sm overflow-hidden flex-shrink-0">
+                    <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                        <rect width="18" height="11" fill="white"/>
+                        <rect y="4" width="18" height="3" fill="#003580"/>
+                        <rect x="5" width="3" height="11" fill="#003580"/>
+                    </svg>
+                </div>
+                <span class="text-slate-600 text-xs">Made in Finland</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+    });
+</script>
+</body>
+</html>

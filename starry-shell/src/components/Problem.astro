@@ -1,0 +1,51 @@
+---
+const problems = [
+  {
+    color: "red",
+    icon: `<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>`,
+    title: "Uneven Coverage",
+    body: "Manual application always misses spots, leaving gaps that compromise insulation and protection.",
+  },
+  {
+    color: "amber",
+    icon: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+    title: "Time-Consuming",
+    body: "Wrapping and coating by hand takes ages, especially on long pipes or cables.",
+  },
+  {
+    color: "red",
+    icon: `<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`,
+    title: "Material Waste",
+    body: "Over-applying in some spots, missing others — inconsistency wastes expensive materials.",
+  },
+];
+
+const bgMap: Record<string, string> = { red: "bg-red-50", amber: "bg-amber-50" };
+const textMap: Record<string, string> = { red: "text-red-400", amber: "text-amber-400" };
+---
+
+<section class="py-24 bg-slate-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+    <div class="reveal">
+      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">The Problem</span>
+      <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
+        Coating pipes and cables<br/><span class="text-slate-400">shouldn't be a mess</span>
+      </h2>
+      <p class="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto mb-12">
+        Traditional methods leave uneven coverage, waste material, and take far too long. Getting a uniform coat around a round surface by hand is nearly impossible.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6 reveal reveal-d2">
+      {problems.map(({ color, icon, title, body }) => (
+        <div class="card-hover bg-white rounded-2xl p-6 text-left border border-slate-100 shadow-sm cursor-default">
+          <div class={`w-10 h-10 ${bgMap[color]} rounded-xl flex items-center justify-center mb-4`}>
+            <svg class={`w-5 h-5 ${textMap[color]}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+          </div>
+          <h3 class="font-heading font-bold text-slate-900 mb-2">{title}</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">{body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

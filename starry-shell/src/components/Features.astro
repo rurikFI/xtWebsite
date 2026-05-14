@@ -1,0 +1,88 @@
+---
+const features = [
+  {
+    bg: "bg-blue-50", iconColor: "text-blue-500",
+    icon: `<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>`,
+    title: "Insulation",
+    body: "Apply thermal and cold insulation materials around pipes and cables with perfect, continuous coverage.",
+    tags: [{ label: "Thermal", style: "text-blue-600 bg-blue-50" }, { label: "Cold Protection", style: "text-blue-600 bg-blue-50" }],
+  },
+  {
+    bg: "bg-green-50", iconColor: "text-green-500",
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+    title: "Protection",
+    body: "Waterproof cables, protect pipes from corrosion, and add a durable barrier against environmental damage.",
+    tags: [{ label: "Waterproofing", style: "text-green-600 bg-green-50" }, { label: "Cable Repair", style: "text-green-600 bg-green-50" }],
+  },
+  {
+    bg: "bg-purple-50", iconColor: "text-purple-500",
+    icon: `<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>`,
+    title: "Restoration",
+    body: "Repair worn or damaged surfaces by applying restoration coatings uniformly. Bring old pipes back to life.",
+    tags: [{ label: "Surface Repair", style: "text-purple-600 bg-purple-50" }, { label: "Refurbishment", style: "text-purple-600 bg-purple-50" }],
+  },
+  {
+    bg: "bg-orange-50", iconColor: "text-[#F97316]",
+    icon: `<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>`,
+    title: "Reinforcement",
+    body: "Strengthen hoses, ropes, and cables with structural coatings. Add durability where it counts most.",
+    tags: [{ label: "Structural", style: "text-orange-600 bg-orange-50" }, { label: "Durability", style: "text-orange-600 bg-orange-50" }],
+  },
+  {
+    bg: "bg-pink-50", iconColor: "text-pink-500",
+    icon: `<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>`,
+    title: "Aesthetics",
+    body: "Create a professional, clean finish on any pipe or cable. Perfect appearance for visible installations.",
+    tags: [{ label: "Professional Finish", style: "text-pink-600 bg-pink-50" }, { label: "Pipe Painting", style: "text-pink-600 bg-pink-50" }],
+  },
+];
+
+const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more..."];
+---
+
+<section id="features" class="py-24 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16 reveal">
+      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">What You Can Do</span>
+      <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">One Tool. Endless Applications.</h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">The Xtruder™ handles any task involving cylindrical surface coating.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map(({ bg, iconColor, icon, title, body, tags }, i) => (
+        <div class={`card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm cursor-default reveal reveal-d${(i % 3) + 1}`}>
+          <div class={`w-12 h-12 ${bg} rounded-xl flex items-center justify-center mb-5`}>
+            <svg class={`w-6 h-6 ${iconColor}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+          </div>
+          <h3 class="font-heading font-bold text-slate-900 text-xl mb-3">{title}</h3>
+          <p class="text-slate-500 leading-relaxed">{body}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {tags.map(({ label, style }) => (
+              <span class={`text-xs font-semibold ${style} px-2.5 py-1 rounded-full`}>{label}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Works On card -->
+      <div class="card-hover bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-2xl p-8 border border-slate-700/50 shadow-sm cursor-default reveal reveal-d3">
+        <div class="w-12 h-12 bg-[#F97316]/15 border border-[#F97316]/30 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3 class="font-heading font-bold text-white text-xl mb-4">Works On</h3>
+        <div class="space-y-2.5">
+          {worksOn.map(item => (
+            <div class="flex items-center gap-2.5">
+              <div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div>
+              <span class="text-slate-300 text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

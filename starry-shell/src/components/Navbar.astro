@@ -1,0 +1,58 @@
+---
+const links = [
+  { href: "#how-it-works", label: "How It Works" },
+  { href: "#features", label: "Features" },
+  { href: "#for-you", label: "Who It's For" },
+  { href: "#materials", label: "Materials" },
+];
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 cursor-pointer">
+      <div class="w-8 h-8 bg-[#F97316] rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <span class="font-heading font-bold text-xl text-white tracking-wide">
+        XTRUDER<span class="text-[#F97316]">™</span>
+      </span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      {links.map(({ href, label }) => (
+        <a href={href} class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="flex items-center gap-3">
+      <a href="#cta" class="hidden sm:block text-sm text-slate-300 hover:text-white transition-colors duration-200 font-medium cursor-pointer">
+        View Kits
+      </a>
+      <a href="#cta" class="bg-[#F97316] hover:bg-[#EA6C0A] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">
+        Buy Now
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const href = (anchor as HTMLAnchorElement).getAttribute('href')!;
+      const target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>

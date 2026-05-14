@@ -1,0 +1,57 @@
+---
+const audiences = [
+  {
+    icon: `<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>`,
+    title: "Plumbers",
+    desc: "Speed up your pipe work with consistent, professional results on every job site.",
+    items: ["Pipe painting & finishing", "Water & corrosion protection", "Thermal insulation"],
+  },
+  {
+    icon: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+    title: "Electricians",
+    desc: "Keep cables and wires properly coated, protected, and ready for any environment.",
+    items: ["Cable repair & reinforcement", "Wire covering & waterproofing", "Insulation application"],
+  },
+  {
+    icon: `<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+    title: "DIY Enthusiasts",
+    desc: "Get professional results at home without any special skills or experience.",
+    items: ["Home plumbing projects", "Repair & restoration", "Creative projects & crafts"],
+  },
+];
+---
+
+<section id="for-you" class="py-24 bg-[#1E293B]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-16 reveal">
+      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Who It's For</span>
+      <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
+        Built for the Professionals<br/><span class="text-[#64748B]">Who Get Things Done</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {audiences.map(({ icon, title, desc, items }, i) => (
+        <div class={`card-hover bg-[#0F172A]/60 border border-slate-700/50 rounded-2xl p-8 cursor-default reveal reveal-d${i + 1}`}>
+          <div class="w-14 h-14 bg-[#F97316]/15 border border-[#F97316]/30 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+          </div>
+          <h3 class="font-heading font-bold text-white text-2xl mb-3">{title}</h3>
+          <p class="text-slate-400 leading-relaxed mb-5">{desc}</p>
+          <ul class="space-y-2.5">
+            {items.map(item => (
+              <li class="flex items-center gap-3 text-slate-300 text-sm">
+                <svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
