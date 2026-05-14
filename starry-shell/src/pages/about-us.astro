@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="About Us — Xtruder Tools" description="The story behind Xtruder Tools AB — a father and son from the Finnish archipelago building a better way to insulate.">
+  <Navbar />
+
+  <section class="bg-slate-950 pt-32 pb-14 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Our Story</p>
+      <h1 class="text-white font-heading text-4xl md:text-5xl font-bold leading-tight">About Xtruder Tools</h1>
+      <p class="text-slate-400 mt-4 text-lg">Two people. One idea. Six years of work.</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 px-4">
+    <div class="max-w-3xl mx-auto space-y-10 text-slate-600 leading-relaxed">
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+          <p class="font-heading font-bold text-slate-900 text-lg">Who are we?</p>
+          <p class="text-slate-500 text-sm mt-1">Patrik and Rurik — father and son, from the archipelago of southern Finland.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+          <p class="font-heading font-bold text-slate-900 text-lg">Where are we?</p>
+          <p class="text-slate-500 text-sm mt-1">Torilla tavataan — in southern Finland, where it all began.</p>
+        </div>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">The Origin</h2>
+        <p>The Xtruder was first thought of back in 2012 by Patrik while he was insulating pipes under their house. He felt there had to be a simpler, easier way of doing it.</p>
+        <p class="mt-4">Patrik was certain a tool like this already existed. He searched online and found nothing.</p>
+        <blockquote class="border-l-4 border-brand pl-5 my-6 italic text-slate-500">
+          "I was completely sure that there would exist a tool like the Xtruder already, but I could not find it."
+        </blockquote>
+        <p>So he began drawing a solution he thought would work.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">From Wax Molds to Resin Printers</h2>
+        <p>The first version was built using a wax mold and tin — let's just say it didn't live up to the precise standards we have today.</p>
+        <p class="mt-4">By 2018, consumer 3D printers had become more affordable. We bought a Vertex K8400 and started producing better prototypes. We later moved to resin 3D printers for their superior precision and throughput, and that's still how we produce the Xtruder today.</p>
+        <p class="mt-4">Once the product worked reliably with several materials, we applied for a patent.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Building the Company</h2>
+        <p>Xtruder Tools AB was founded in 2022 by Patrik and Rurik Örtendahl. To help make the vision a reality, Rurik learned everything needed: slicing software, 3D printing, web development, advertising, and more.</p>
+        <p class="mt-4">We have worked on this together for around six years. We are continually improving the Xtruder with your feedback, and developing new versions compatible with paint and polyurethane foam.</p>
+        <p class="mt-4">We got the patents. Now we want to share this product with the world.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+        <p class="text-slate-700 text-lg leading-relaxed">Thanks for reading! — <strong class="text-slate-900">Rurik and Patrik</strong></p>
+        <p class="text-slate-500 text-sm mt-2 italic">Some images of early attempts coming soon — stay tuned!</p>
+      </div>
+
+      <div class="text-center pt-4">
+        <a href="/contact-us/" class="inline-block bg-brand hover:bg-brand-hover text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
+          Get in Touch
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

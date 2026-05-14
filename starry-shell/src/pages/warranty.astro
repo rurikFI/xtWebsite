@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Warranty — Xtruder Tools">
+  <Navbar />
+
+  <section class="bg-slate-950 pt-32 pb-14 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Legal</p>
+      <h1 class="text-white font-heading text-4xl font-bold">Limited Warranty</h1>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 px-4">
+    <div class="max-w-3xl mx-auto space-y-8 text-slate-600 leading-relaxed">
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+        <p class="text-2xl font-heading font-bold text-slate-900">12-month warranty</p>
+        <p class="text-slate-500 mt-1">Xtruder Tools AB warrants that the Xtruder™ and related accessories are free from defects in materials and workmanship under normal use for a period of 12 months from the date of delivery.</p>
+      </div>
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">What This Warranty Covers</h2>
+        <ul class="list-disc list-outside ml-5 space-y-2">
+          <li>Manufacturing defects</li>
+          <li>Structural failure under normal, intended use</li>
+          <li>Defects that materially affect function</li>
+        </ul>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">What This Warranty Does Not Cover</h2>
+        <ul class="list-disc list-outside ml-5 space-y-2">
+          <li>Normal wear and cosmetic imperfections</li>
+          <li>Damage caused by misuse, abuse, modification, improper cleaning, or improper storage</li>
+          <li>Damage caused by incompatible materials, excessive pressure, or incorrect application</li>
+          <li>Damage resulting from accidents, fire, heat, chemicals, or environmental exposure</li>
+          <li>Variations inherent to additive manufacturing that do not affect function</li>
+        </ul>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Remedies</h2>
+        <p>Upon confirmed defect, Xtruder Tools AB will, at its sole discretion: repair the product, replace it with an equivalent item, or refund the purchase price. This is your exclusive remedy under this warranty.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">How to File a Warranty Claim</h2>
+        <ol class="list-decimal list-outside ml-5 space-y-2">
+          <li>Contact Xtruder Tools AB during the warranty period</li>
+          <li>Provide proof of purchase</li>
+          <li>Provide a description of the issue, with photos or videos if requested</li>
+        </ol>
+        <p class="mt-4">We may require you to return the product for inspection. Shipping costs will be handled in accordance with applicable consumer law.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Limitation of Liability</h2>
+        <ul class="list-disc list-outside ml-5 space-y-2">
+          <li>We are not liable for indirect, incidental, or consequential damages.</li>
+          <li>Liability is capped at the original purchase price of the product.</li>
+          <li>Your statutory consumer rights remain unaffected by this warranty.</li>
+        </ul>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Governing Law</h2>
+        <p>This warranty is governed by the laws of <strong class="text-slate-800">Finland</strong>.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Contact</h2>
+        <p>To initiate a warranty claim, contact us at <a href="mailto:support@xtrudertools.com" class="text-brand hover:underline">support@xtrudertools.com</a>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

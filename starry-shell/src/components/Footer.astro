@@ -5,12 +5,27 @@ const productLinks = [
   { href: "#for-you", label: "Who It's For" },
   { href: "#materials", label: "Compatible Materials" },
 ];
+
+const companyLinks = [
+  { href: "https://www.xtrudertools.com", label: "Visit Store", external: true },
+  { href: "/about-us/", label: "About Us", external: false },
+  { href: "/contact-us/", label: "Contact Us", external: false },
+];
+
+const legalLinks = [
+  { href: "/privacy-policy/", label: "Privacy Policy" },
+  { href: "/terms-conditions/", label: "Terms & Conditions" },
+  { href: "/return-policy/", label: "Return Policy" },
+  { href: "/shipping-policy/", label: "Shipping Policy" },
+  { href: "/warranty/", label: "Warranty" },
+  { href: "/patent/", label: "Patent" },
+];
 ---
 
 <footer class="bg-black py-12 border-t border-slate-800/60">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="grid md:grid-cols-3 gap-10 mb-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-x-16 gap-y-10 mb-10">
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-2 mb-4">
@@ -39,9 +54,27 @@ const productLinks = [
       <div>
         <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Company</h4>
         <ul class="space-y-2">
-          <li><a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">Visit Store</a></li>
-          <li><a href="https://www.xtrudertools.com" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">About Us</a></li>
-          <li><span class="text-slate-700 text-sm">Xtruder Tools AB · Finland</span></li>
+          {companyLinks.map(({ href, label, external }) => (
+            <li>
+              <a
+                href={href}
+                class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer"
+                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Legal</h4>
+        <ul class="space-y-2">
+          {legalLinks.map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
