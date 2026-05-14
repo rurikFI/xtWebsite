@@ -3,6 +3,8 @@
 @theme {
   --font-heading: "Rubik", sans-serif;
   --font-body: "Nunito Sans", sans-serif;
+  --color-brand: #E8490C;
+  --color-brand-hover: #CF400A;
 }
 
 /* Scroll animations */
@@ -35,7 +37,7 @@
 
 /* Gradient text */
 .text-gradient {
-  background: linear-gradient(135deg, #F97316, #FBBF24);
+  background: linear-gradient(135deg, var(--color-brand), #FBBF24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -45,4 +47,4 @@ html { scroll-behavior: smooth; }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0F172A; }
-::-webkit-scrollbar-thumb { background: #F97316; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--color-brand); border-radius: 3px; }

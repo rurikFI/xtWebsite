@@ -25,7 +25,7 @@ const audiences = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Who It's For</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">Who It's For</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
         Built for the Professionals<br/><span class="text-[#64748B]">Who Get Things Done</span>
       </h2>
@@ -34,15 +34,15 @@ const audiences = [
     <div class="grid md:grid-cols-3 gap-6">
       {audiences.map(({ icon, title, desc, items }, i) => (
         <div class={`card-hover bg-[#0F172A]/60 border border-slate-700/50 rounded-2xl p-8 cursor-default reveal reveal-d${i + 1}`}>
-          <div class="w-14 h-14 bg-[#F97316]/15 border border-[#F97316]/30 rounded-2xl flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
+          <div class="w-14 h-14 bg-brand/15 border border-brand/30 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={icon} />
           </div>
           <h3 class="font-heading font-bold text-white text-2xl mb-3">{title}</h3>
           <p class="text-slate-400 leading-relaxed mb-5">{desc}</p>
           <ul class="space-y-2.5">
             {items.map(item => (
               <li class="flex items-center gap-3 text-slate-300 text-sm">
-                <svg class="w-4 h-4 text-[#F97316] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="w-4 h-4 text-brand flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
                 {item}

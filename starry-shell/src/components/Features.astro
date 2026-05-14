@@ -22,7 +22,7 @@ const features = [
     tags: [{ label: "Surface Repair", style: "text-purple-600 bg-purple-50" }, { label: "Refurbishment", style: "text-purple-600 bg-purple-50" }],
   },
   {
-    bg: "bg-orange-50", iconColor: "text-[#F97316]",
+    bg: "bg-orange-50", iconColor: "text-brand",
     icon: `<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>`,
     title: "Reinforcement",
     body: "Strengthen hoses, ropes, and cables with structural coatings. Add durability where it counts most.",
@@ -44,7 +44,7 @@ const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more.
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">What You Can Do</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">What You Can Do</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">One Tool. Endless Applications.</h2>
       <p class="text-slate-500 text-lg max-w-xl mx-auto">The Xtruder™ handles any task involving cylindrical surface coating.</p>
     </div>
@@ -67,8 +67,8 @@ const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more.
 
       <!-- Works On card -->
       <div class="card-hover bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-2xl p-8 border border-slate-700/50 shadow-sm cursor-default reveal reveal-d3">
-        <div class="w-12 h-12 bg-[#F97316]/15 border border-[#F97316]/30 rounded-xl flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="w-12 h-12 bg-brand/15 border border-brand/30 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-6 h-6 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
         </div>
@@ -76,7 +76,7 @@ const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more.
         <div class="space-y-2.5">
           {worksOn.map(item => (
             <div class="flex items-center gap-2.5">
-              <div class="w-1.5 h-1.5 bg-[#F97316] rounded-full flex-shrink-0"></div>
+              <div class="w-1.5 h-1.5 bg-brand rounded-full flex-shrink-0"></div>
               <span class="text-slate-300 text-sm">{item}</span>
             </div>
           ))}

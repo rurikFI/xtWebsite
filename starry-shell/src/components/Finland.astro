@@ -23,7 +23,7 @@ const stats = [
         <div class="h-px bg-gradient-to-l from-transparent to-blue-700 w-20"></div>
       </div>
 
-      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">Our Story</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">Our Story</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
         Innovation in Insulation.<br/><span class="text-blue-700">Quality from Finland.</span>
       </h2>
@@ -34,7 +34,7 @@ const stats = [
       <div class="grid sm:grid-cols-3 gap-6 text-left">
         {stats.map(({ value, label, desc }, i) => (
           <div class={`card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm reveal reveal-d${i + 1}`}>
-            <div class="font-heading font-black text-4xl text-[#F97316] mb-2">{value}</div>
+            <div class="font-heading font-black text-4xl text-brand mb-2">{value}</div>
             <div class="font-heading font-semibold text-slate-900 mb-1">{label}</div>
             <p class="text-slate-500 text-sm">{desc}</p>
           </div>

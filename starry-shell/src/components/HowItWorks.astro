@@ -31,7 +31,7 @@ const steps = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-4 block">How It Works</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">How It Works</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">
         4 Simple Steps to<br/>Perfect Coverage
       </h2>
@@ -43,11 +43,11 @@ const steps = [
     <div class="grid md:grid-cols-4 gap-8 md:gap-6">
       {steps.map(({ n, accent, title, body }, i) => (
         <div class={`relative text-center reveal reveal-d${i + 1}`}>
-          <div class={`w-16 h-16 ${accent ? 'bg-[#F97316] shadow-orange-200' : 'bg-[#64748B] shadow-slate-200'} rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg`}>
+          <div class={`w-16 h-16 ${accent ? 'bg-brand shadow-orange-200' : 'bg-[#64748B] shadow-slate-200'} rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg`}>
             <span class="font-heading font-black text-white text-2xl">{n}</span>
           </div>
           {i < 3 && (
-            <div class={`hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r ${accent ? 'from-[#F97316]/40 to-slate-200' : i === 2 ? 'from-slate-300 to-[#F97316]/40' : 'from-slate-300 to-slate-200'}`}></div>
+            <div class={`hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r ${accent ? 'from-brand/40 to-slate-200' : i === 2 ? 'from-slate-300 to-brand/40' : 'from-slate-300 to-slate-200'}`}></div>
           )}
           <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">{title}</h3>
           <p class="text-slate-500 text-sm leading-relaxed">{body}</p>
@@ -57,8 +57,8 @@ const steps = [
 
     <!-- Result banner -->
     <div class="mt-16 bg-gradient-to-r from-[#0F172A] to-[#1E293B] rounded-3xl p-8 md:p-12 text-center reveal">
-      <div class="w-14 h-14 bg-[#F97316]/20 border border-[#F97316]/40 rounded-full flex items-center justify-center mx-auto mb-5">
-        <svg class="w-7 h-7 text-[#F97316]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <div class="w-14 h-14 bg-brand/20 border border-brand/40 rounded-full flex items-center justify-center mx-auto mb-5">
+        <svg class="w-7 h-7 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>

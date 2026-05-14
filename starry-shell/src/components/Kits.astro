@@ -46,7 +46,7 @@ const kits = [
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
     <!-- Header -->
     <div class="text-center mb-14 reveal">
-      <span class="text-[#F97316] font-semibold text-sm uppercase tracking-widest mb-3 block">Kits & Pricing</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Kits & Pricing</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
         Choose Your <span class="text-gradient">Xtruder Kit</span>
       </h2>
@@ -60,12 +60,12 @@ const kits = [
       {kits.map(({ name, price, range, count, desc, tag, highlight }, i) => (
         <div class={`reveal reveal-d${i + 1} relative flex flex-col rounded-2xl border p-8 transition-all duration-300 ${
           highlight
-            ? "bg-[#F97316] border-[#F97316] shadow-2xl shadow-orange-900/40 scale-[1.02]"
+            ? "bg-brand border-brand shadow-2xl shadow-orange-900/40 scale-[1.02]"
             : "bg-white/5 border-white/10 hover:border-white/20"
         }`}>
           {tag && (
             <div class={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-              highlight ? "bg-white text-[#F97316]" : "bg-[#F97316] text-white"
+              highlight ? "bg-white text-brand" : "bg-brand text-white"
             }`}>
               {tag}
             </div>
@@ -85,19 +85,19 @@ const kits = [
           <!-- Specs -->
           <ul class="space-y-3 mb-8 flex-1">
             <li class="flex items-center gap-3">
-              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-[#F97316]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-brand"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
               <span class={`text-sm ${highlight ? "text-white" : "text-slate-300"}`}><strong>{count} Xtruders</strong> included</span>
             </li>
             <li class="flex items-center gap-3">
-              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-[#F97316]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-brand"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
               <span class={`text-sm ${highlight ? "text-white" : "text-slate-300"}`}>Covers <strong>{range}</strong> diameter</span>
             </li>
             <li class="flex items-center gap-3">
-              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-[#F97316]"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg class={`w-5 h-5 flex-shrink-0 ${highlight ? "text-white" : "text-brand"}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
               <span class={`text-sm ${highlight ? "text-white" : "text-slate-300"}`}>Patented 360° coverage</span>
@@ -111,8 +111,8 @@ const kits = [
             rel="noopener noreferrer"
             class={`inline-flex items-center justify-center gap-2 font-bold py-3.5 px-6 rounded-xl transition-all duration-200 cursor-pointer text-sm ${
               highlight
-                ? "bg-white text-[#F97316] hover:bg-orange-50"
-                : "bg-[#F97316] text-white hover:bg-[#EA6C0A]"
+                ? "bg-white text-brand hover:bg-orange-50"
+                : "bg-brand text-white hover:bg-brand-hover"
             }`}
           >
             Order {name}
