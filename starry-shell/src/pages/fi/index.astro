@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Problem from '../../components/Problem.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import Features from '../../components/Features.astro';
+import WhoItsFor from '../../components/WhoItsFor.astro';
+import Materials from '../../components/Materials.astro';
+import Finland from '../../components/Finland.astro';
+import Kits from '../../components/Kits.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout
+  lang="fi"
+  title="Xtruder™ — Eristä uudella, tehokkaalla tavalla"
+  description="Xtruder™ — Patentoitu eristys- ja pinnoitustyökalu. Levitä materiaalia tasaisesti putkien, kaapelien, letkujen ympärille. Valmistettu Suomessa."
+>
+  <Navbar lang="fi" />
+  <Hero lang="fi" />
+  <TrustBar lang="fi" />
+  <Problem lang="fi" />
+  <HowItWorks lang="fi" />
+  <Features lang="fi" />
+  <WhoItsFor lang="fi" />
+  <Materials lang="fi" />
+  <Finland lang="fi" />
+  <Kits lang="fi" />
+  <CTA lang="fi" />
+  <Footer lang="fi" />
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

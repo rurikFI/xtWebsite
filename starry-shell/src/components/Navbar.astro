@@ -1,10 +1,13 @@
 ---
-const links = [
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#features", label: "Features" },
-  { href: "#for-you", label: "Who It's For" },
-  { href: "#materials", label: "Materials" },
-];
+import { translations } from '../i18n/translations';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'en' } = Astro.props;
+const links = translations[lang].navbar.links;
 ---
 
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
@@ -24,13 +27,75 @@ const links = [
       ))}
     </div>
 
+    <!-- Language switcher (desktop) -->
+    <div class="hidden md:flex items-center gap-2">
+      {(['en', 'sv', 'fi'] as const).map((l) => (
+        <a
+          id={`lang-${l}`}
+          href="#"
+          title={l === 'en' ? 'English' : l === 'sv' ? 'Svenska' : 'Suomi'}
+          class={`w-7 h-[18px] rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
+            lang === l
+              ? 'border-white/60 ring-2 ring-white/40 opacity-100'
+              : 'border-white/20 opacity-60 hover:opacity-100'
+          }`}
+        >
+          {l === 'en' && (
+            <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <rect width="60" height="30" fill="#012169"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="white" stroke-width="6"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/>
+              <rect x="25" width="10" height="30" fill="white"/>
+              <rect y="10" width="60" height="10" fill="white"/>
+              <rect x="27" width="6" height="30" fill="#C8102E"/>
+              <rect y="12" width="60" height="6" fill="#C8102E"/>
+            </svg>
+          )}
+          {l === 'sv' && (
+            <svg viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <rect width="16" height="10" fill="#006AA7"/>
+              <rect x="5" width="2" height="10" fill="#FECC02"/>
+              <rect y="4" width="16" height="2" fill="#FECC02"/>
+            </svg>
+          )}
+          {l === 'fi' && (
+            <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <rect width="18" height="11" fill="white"/>
+              <rect y="4" width="18" height="3" fill="#003580"/>
+              <rect x="5" width="3" height="11" fill="#003580"/>
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+
     <!-- CTA -->
     <div class="flex items-center gap-3">
+      <!-- Mobile language switcher -->
+      <div class="flex md:hidden items-center gap-1.5">
+        {(['en', 'sv', 'fi'] as const).map((l) => (
+          <a
+            id={`lang-mob-${l}`}
+            href="#"
+            title={l === 'en' ? 'English' : l === 'sv' ? 'Svenska' : 'Suomi'}
+            class={`w-6 h-[15px] rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
+              lang === l
+                ? 'border-white/60 ring-1 ring-white/40 opacity-100'
+                : 'border-white/20 opacity-60 hover:opacity-100'
+            }`}
+          >
+            {l === 'en' && (<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="white" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="30" fill="white"/><rect y="10" width="60" height="10" fill="white"/><rect x="27" width="6" height="30" fill="#C8102E"/><rect y="12" width="60" height="6" fill="#C8102E"/></svg>)}
+            {l === 'sv' && (<svg viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="16" height="10" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC02"/><rect y="4" width="16" height="2" fill="#FECC02"/></svg>)}
+            {l === 'fi' && (<svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="18" height="11" fill="white"/><rect y="4" width="18" height="3" fill="#003580"/><rect x="5" width="3" height="11" fill="#003580"/></svg>)}
+          </a>
+        ))}
+      </div>
+
       <a href="#cta" class="hidden sm:block text-sm text-slate-300 hover:text-white transition-colors duration-200 font-medium cursor-pointer">
-        View Kits
+        {translations[lang].navbar.viewKits}
       </a>
       <a href="#cta" class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer whitespace-nowrap">
-        Buy Now
+        {translations[lang].navbar.buyNow}
       </a>
     </div>
   </div>
@@ -49,4 +114,22 @@ const links = [
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
+
+  // Language switcher URL logic
+  (function() {
+    const path = window.location.pathname;
+    let basePath = path;
+    if (path.startsWith('/sv')) basePath = path.slice(3) || '/';
+    else if (path.startsWith('/fi')) basePath = path.slice(3) || '/';
+    if (!basePath.startsWith('/')) basePath = '/' + basePath;
+    if (!basePath.endsWith('/') && !basePath.includes('.')) basePath += '/';
+
+    const urls: Record<string, string> = { en: basePath, sv: '/sv' + basePath, fi: '/fi' + basePath };
+    ['en', 'sv', 'fi'].forEach(l => {
+      const el = document.getElementById('lang-' + l);
+      const mob = document.getElementById('lang-mob-' + l);
+      if (el) el.href = urls[l];
+      if (mob) mob.href = urls[l];
+    });
+  })();
 </script>

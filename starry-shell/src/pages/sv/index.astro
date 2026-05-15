@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Problem from '../../components/Problem.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import Features from '../../components/Features.astro';
+import WhoItsFor from '../../components/WhoItsFor.astro';
+import Materials from '../../components/Materials.astro';
+import Finland from '../../components/Finland.astro';
+import Kits from '../../components/Kits.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout
+  lang="sv"
+  title="Xtruder™ — Isolera på ett nytt, effektivt sätt"
+  description="Xtruder™ — Patenterat isolerings- och beläggningsverktyg. Applicera material jämnt runt rör, kablar, slangar och mer. Tillverkat i Finland."
+>
+  <Navbar lang="sv" />
+  <Hero lang="sv" />
+  <TrustBar lang="sv" />
+  <Problem lang="sv" />
+  <HowItWorks lang="sv" />
+  <Features lang="sv" />
+  <WhoItsFor lang="sv" />
+  <Materials lang="sv" />
+  <Finland lang="sv" />
+  <Kits lang="sv" />
+  <CTA lang="sv" />
+  <Footer lang="sv" />
+</Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

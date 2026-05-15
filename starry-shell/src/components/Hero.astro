@@ -1,4 +1,12 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].hero;
 ---
 
 <section class="relative min-h-screen bg-[#0F172A] flex items-center overflow-hidden pt-20">
@@ -24,42 +32,42 @@
       <div>
         <div class="inline-flex items-center gap-2 bg-brand/15 border border-brand/30 rounded-full px-4 py-1.5 mb-6">
           <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
-          <span class="text-brand text-sm font-semibold">Patented Technology · Made in Finland</span>
+          <span class="text-brand text-sm font-semibold">{t.badge}</span>
         </div>
 
         <h1 class="font-heading text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-6">
-          Insulate in a<br/>
-          <span class="text-gradient">New, Efficient</span><br/>
-          Way.
+          {t.h1line1}<br/>
+          <span class="text-gradient">{t.h1line2}</span><br/>
+          {t.h1line3}
         </h1>
 
         <p class="text-slate-300 text-lg lg:text-xl leading-relaxed mb-8 max-w-xl">
-          The Xtruder™ is the patented applicator that coats pipes, cables, hoses, ropes, and wires with any material — uniformly, around the full 360° circumference, every single time.
+          {t.body}
         </p>
 
         <div class="flex flex-wrap gap-4 mb-10">
           <a href="#cta" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-7 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer">
-            View Xtruder Kits
+            {t.cta1}
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#how-it-works" class="inline-flex items-center gap-2 text-white border border-white/25 hover:border-white/60 hover:bg-white/5 font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 cursor-pointer">
             <svg class="w-4 h-4 text-brand" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            See How It Works
+            {t.cta2}
           </a>
         </div>
 
         <div class="flex flex-wrap gap-6 text-sm text-slate-400">
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Patented design
+            {t.badge1}
           </span>
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            500+ sizes
+            {t.badge2}
           </span>
           <span class="flex items-center gap-2">
             <svg class="w-4 h-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            Family business
+            {t.badge3}
           </span>
         </div>
       </div>
@@ -110,7 +118,7 @@
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500">
-    <span class="text-xs">Scroll to explore</span>
+    <span class="text-xs">{t.scroll}</span>
     <div class="w-5 h-8 border border-slate-700 rounded-full flex items-start justify-center p-1">
       <div class="w-1 h-2 bg-brand rounded-full animate-bounce"></div>
     </div>

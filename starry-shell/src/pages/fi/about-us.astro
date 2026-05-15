@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Meistä — Xtruder Tools" description="Tarina Xtruder Tools AB:n takana — isä ja poika Suomen saaristosta rakentamassa parempaa tapaa eristää." lang="fi">
+  <Navbar lang="fi" />
+
+  <section class="bg-slate-950 pt-32 pb-14 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Tarinaamme</p>
+      <h1 class="text-white font-heading text-4xl md:text-5xl font-bold leading-tight">Tietoa Xtruder Toolsista</h1>
+      <p class="text-slate-400 mt-4 text-lg">Kaksi ihmistä. Yksi idea. Kuusi vuotta työtä.</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 px-4">
+    <div class="max-w-3xl mx-auto space-y-10 text-slate-600 leading-relaxed">
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+          <p class="font-heading font-bold text-slate-900 text-lg">Keitä me olemme?</p>
+          <p class="text-slate-500 text-sm mt-1">Patrik ja Rurik — isä ja poika, Etelä-Suomen saaristosta.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+          <p class="font-heading font-bold text-slate-900 text-lg">Missä me olemme?</p>
+          <p class="text-slate-500 text-sm mt-1">Etelä-Suomessa, missä kaikki alkoi.</p>
+        </div>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Alkuperä</h2>
+        <p>Patrik keksi Xtruder-työkalun vuonna 2012 eristäessään putkia heidän talonsa alla. Hän tunsi, että täytyy olla yksinkertaisempi, helpompi tapa tehdä se.</p>
+        <p class="mt-4">Patrik oli varma, että tällainen työkalu oli jo olemassa. Hän etsi verkosta eikä löytänyt mitään.</p>
+        <blockquote class="border-l-4 border-brand pl-5 my-6 italic text-slate-500">
+          "Olin täysin varma, että Xtruderin kaltainen työkalu olisi jo olemassa, mutta en löytänyt sitä."
+        </blockquote>
+        <p>Joten hän alkoi piirtää ratkaisua, jonka uskoi toimivan.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Vahakuuteista hartsikirjoittimiin</h2>
+        <p>Ensimmäinen versio rakennettiin vahakuuteella ja tinalla – sanotaan vain, että se ei täyttänyt tarkkoja standardeja, joita meillä on tänään.</p>
+        <p class="mt-4">Vuoteen 2018 mennessä kuluttaja-3D-kirjoittimet olivat tulleet edullisemmiksi. Ostimme Vertex K8400:n ja aloimme tuottaa parempia prototyyppejä. Siirryimme myöhemmin hartsi-3D-kirjoittimiin niiden paremman tarkkuuden ja läpäisykyvyn vuoksi, ja niin tuotamme Xtruderia tänäänkin.</p>
+        <p class="mt-4">Kun tuote toimi luotettavasti useilla materiaaleilla, haimme patenttia.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div>
+        <h2 class="font-heading text-2xl font-bold text-slate-900 mb-4">Yrityksen rakentaminen</h2>
+        <p>Xtruder Tools AB perustettiin vuonna 2022 Patrik ja Rurik Örtendahlin toimesta. Auttaakseen vision toteuttamisessa Rurik oppi kaiken tarvittavan: viipalointiohjelmistot, 3D-tulostuksen, verkkokehityksen, mainonnan ja paljon muuta.</p>
+        <p class="mt-4">Olemme työskennelleet tämän parissa yhdessä noin kuuden vuoden ajan. Parannamme jatkuvasti Xtruderia palautteesi perusteella ja kehitämme uusia versioita, jotka ovat yhteensopivia maalin ja polyuretaanivaahdon kanssa.</p>
+        <p class="mt-4">Saimme patentit. Nyt haluamme jakaa tämän tuotteen maailman kanssa.</p>
+      </div>
+
+      <hr class="border-slate-200" />
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
+        <p class="text-slate-700 text-lg leading-relaxed">Kiitos lukemisesta! — <strong class="text-slate-900">Rurik ja Patrik</strong></p>
+        <p class="text-slate-500 text-sm mt-2 italic">Kuvia varhaisista yrityksistä tulossa pian – pysykää kuulolla!</p>
+      </div>
+
+      <div class="text-center pt-4">
+        <a href="/fi/contact-us/" class="inline-block bg-brand hover:bg-brand-hover text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200">
+          Ota yhteyttä
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer lang="fi" />
+</Layout>

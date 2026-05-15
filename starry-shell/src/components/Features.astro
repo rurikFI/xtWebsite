@@ -1,52 +1,59 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].features;
+
 const features = [
   {
     bg: "bg-blue-50", iconColor: "text-blue-500",
     icon: `<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>`,
-    title: "Insulation",
-    body: "Apply thermal and cold insulation materials around pipes and cables with perfect, continuous coverage.",
-    tags: [{ label: "Thermal", style: "text-blue-600 bg-blue-50" }, { label: "Cold Protection", style: "text-blue-600 bg-blue-50" }],
+    title: t.items[0].title,
+    body: t.items[0].body,
+    tags: [{ label: t.items[0].tags[0], style: "text-blue-600 bg-blue-50" }, { label: t.items[0].tags[1], style: "text-blue-600 bg-blue-50" }],
   },
   {
     bg: "bg-green-50", iconColor: "text-green-500",
     icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
-    title: "Protection",
-    body: "Waterproof cables, protect pipes from corrosion, and add a durable barrier against environmental damage.",
-    tags: [{ label: "Waterproofing", style: "text-green-600 bg-green-50" }, { label: "Cable Repair", style: "text-green-600 bg-green-50" }],
+    title: t.items[1].title,
+    body: t.items[1].body,
+    tags: [{ label: t.items[1].tags[0], style: "text-green-600 bg-green-50" }, { label: t.items[1].tags[1], style: "text-green-600 bg-green-50" }],
   },
   {
     bg: "bg-purple-50", iconColor: "text-purple-500",
     icon: `<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>`,
-    title: "Restoration",
-    body: "Repair worn or damaged surfaces by applying restoration coatings uniformly. Bring old pipes back to life.",
-    tags: [{ label: "Surface Repair", style: "text-purple-600 bg-purple-50" }, { label: "Refurbishment", style: "text-purple-600 bg-purple-50" }],
+    title: t.items[2].title,
+    body: t.items[2].body,
+    tags: [{ label: t.items[2].tags[0], style: "text-purple-600 bg-purple-50" }, { label: t.items[2].tags[1], style: "text-purple-600 bg-purple-50" }],
   },
   {
     bg: "bg-orange-50", iconColor: "text-brand",
     icon: `<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>`,
-    title: "Reinforcement",
-    body: "Strengthen hoses, ropes, and cables with structural coatings. Add durability where it counts most.",
-    tags: [{ label: "Structural", style: "text-orange-600 bg-orange-50" }, { label: "Durability", style: "text-orange-600 bg-orange-50" }],
+    title: t.items[3].title,
+    body: t.items[3].body,
+    tags: [{ label: t.items[3].tags[0], style: "text-orange-600 bg-orange-50" }, { label: t.items[3].tags[1], style: "text-orange-600 bg-orange-50" }],
   },
   {
     bg: "bg-pink-50", iconColor: "text-pink-500",
     icon: `<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>`,
-    title: "Aesthetics",
-    body: "Create a professional, clean finish on any pipe or cable. Perfect appearance for visible installations.",
-    tags: [{ label: "Professional Finish", style: "text-pink-600 bg-pink-50" }, { label: "Pipe Painting", style: "text-pink-600 bg-pink-50" }],
+    title: t.items[4].title,
+    body: t.items[4].body,
+    tags: [{ label: t.items[4].tags[0], style: "text-pink-600 bg-pink-50" }, { label: t.items[4].tags[1], style: "text-pink-600 bg-pink-50" }],
   },
 ];
-
-const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more..."];
 ---
 
 <section id="features" class="py-24 bg-slate-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">What You Can Do</span>
-      <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">One Tool. Endless Applications.</h2>
-      <p class="text-slate-500 text-lg max-w-xl mx-auto">The Xtruder™ handles any task involving cylindrical surface coating.</p>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">{t.label}</span>
+      <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">{t.h2}</h2>
+      <p class="text-slate-500 text-lg max-w-xl mx-auto">{t.body}</p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -72,9 +79,9 @@ const worksOn = ["Pipes & Tubes", "Cables & Wires", "Hoses", "Ropes", "And more.
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
         </div>
-        <h3 class="font-heading font-bold text-white text-xl mb-4">Works On</h3>
+        <h3 class="font-heading font-bold text-white text-xl mb-4">{t.worksOn.title}</h3>
         <div class="space-y-2.5">
-          {worksOn.map(item => (
+          {t.worksOn.items.map(item => (
             <div class="flex items-center gap-2.5">
               <div class="w-1.5 h-1.5 bg-brand rounded-full flex-shrink-0"></div>
               <span class="text-slate-300 text-sm">{item}</span>

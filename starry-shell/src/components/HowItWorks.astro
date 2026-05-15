@@ -1,29 +1,18 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].howItWorks;
+
 const steps = [
-  {
-    n: "1",
-    accent: true,
-    title: "Select Material",
-    body: "Choose your coating — epoxy, silicone, latex, paint, or any compatible material.",
-  },
-  {
-    n: "2",
-    accent: false,
-    title: "Attach Xtruder",
-    body: "Twist the Xtruder™ onto your material tube. It locks in securely, ready for application.",
-  },
-  {
-    n: "3",
-    accent: false,
-    title: "Position & Lock",
-    body: "Clamp onto the object you want to coat — pipe, cable, hose, or rope.",
-  },
-  {
-    n: "4",
-    accent: true,
-    title: "Apply Evenly",
-    body: "Slide along the surface. The Xtruder™ applies coating uniformly around the full 360° circumference.",
-  },
+  { n: "1", accent: true,  title: t.steps[0].title, body: t.steps[0].body },
+  { n: "2", accent: false, title: t.steps[1].title, body: t.steps[1].body },
+  { n: "3", accent: false, title: t.steps[2].title, body: t.steps[2].body },
+  { n: "4", accent: true,  title: t.steps[3].title, body: t.steps[3].body },
 ];
 ---
 
@@ -31,12 +20,12 @@ const steps = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">How It Works</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">{t.label}</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 mb-4">
-        4 Simple Steps to<br/>Perfect Coverage
+        {t.h2}<br/>{t.h2sub}
       </h2>
       <p class="text-slate-500 text-lg max-w-xl mx-auto">
-        The Xtruder™ makes professional-grade coating accessible to everyone.
+        {t.body}
       </p>
     </div>
 
@@ -62,8 +51,8 @@ const steps = [
           <polyline points="20 6 9 17 4 12"/>
         </svg>
       </div>
-      <h3 class="font-heading text-3xl font-black text-white mb-3">360° Uniform Coverage</h3>
-      <p class="text-slate-400 text-lg max-w-xl mx-auto">No gaps. No drips. No waste. Just perfect, professional-grade coating — every time.</p>
+      <h3 class="font-heading text-3xl font-black text-white mb-3">{t.resultTitle}</h3>
+      <p class="text-slate-400 text-lg max-w-xl mx-auto">{t.resultBody}</p>
     </div>
 
   </div>

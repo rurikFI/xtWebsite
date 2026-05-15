@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Kontakta oss — Xtruder Tools" description="Kontakta Xtruder Tools AB. E-post, telefon eller skicka ett meddelande." lang="sv">
+  <Navbar lang="sv" />
+
+  <section class="bg-slate-950 pt-32 pb-14 px-4">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Kontakta oss</p>
+      <h1 class="text-white font-heading text-4xl md:text-5xl font-bold">Kontakta oss</h1>
+      <p class="text-slate-400 mt-4 text-lg">Vi pratar gärna med dig.</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="grid md:grid-cols-2 gap-8 mb-14">
+
+        <div class="space-y-6">
+          <h2 class="font-heading text-xl font-bold text-slate-900">Kontaktinformation</h2>
+
+          <div>
+            <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-1">E-post</p>
+            <a href="mailto:support@xtrudertools.com" class="text-brand hover:underline font-medium">support@xtrudertools.com</a>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-1">Telefon</p>
+            <a href="tel:+358503775332" class="text-slate-700 hover:text-brand transition-colors font-medium">+358 50 377 5332</a>
+            <p class="text-slate-400 text-xs mt-0.5">Normal taxa tillkommer</p>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-1">Affärsförfrågningar</p>
+            <a href="mailto:business@xtrudertools.com" class="text-brand hover:underline font-medium">business@xtrudertools.com</a>
+          </div>
+
+          <div>
+            <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-2">Adress</p>
+            <address class="not-italic text-slate-600 leading-relaxed text-sm space-y-0.5">
+              <p class="font-semibold text-slate-800">Xtruder Tools AB</p>
+              <p>Släten</p>
+              <p>25910 Dalsbruk</p>
+              <p>Finland</p>
+              <p class="text-slate-400 pt-1 text-xs">VAT: FI32733989 · Reg: 3273398-9</p>
+            </address>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-6">Skicka ett meddelande</h2>
+          <form
+            method="POST"
+            action="mailto:support@xtrudertools.com"
+            enctype="text/plain"
+            class="space-y-4"
+          >
+            <div>
+              <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Namn</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition-colors text-sm"
+                placeholder="Ditt namn"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-700 mb-1">E-post</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition-colors text-sm"
+                placeholder="du@exempel.se"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Ämne</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition-colors text-sm"
+                placeholder="Hur kan vi hjälpa?"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Meddelande</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:border-brand transition-colors text-sm resize-none"
+                placeholder="Berätta vad du tänker på..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-brand hover:bg-brand-hover text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+            >
+              Skicka meddelande
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <Footer lang="sv" />
+</Layout>

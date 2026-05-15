@@ -1,25 +1,12 @@
 ---
-const productLinks = [
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#features", label: "Features" },
-  { href: "#for-you", label: "Who It's For" },
-  { href: "#materials", label: "Compatible Materials" },
-];
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
 
-const companyLinks = [
-  { href: "https://www.xtrudertools.com", label: "Visit Store", external: true },
-  { href: "/about-us/", label: "About Us", external: false },
-  { href: "/contact-us/", label: "Contact Us", external: false },
-];
-
-const legalLinks = [
-  { href: "/privacy-policy/", label: "Privacy Policy" },
-  { href: "/terms-conditions/", label: "Terms & Conditions" },
-  { href: "/return-policy/", label: "Return Policy" },
-  { href: "/shipping-policy/", label: "Shipping Policy" },
-  { href: "/warranty/", label: "Warranty" },
-  { href: "/patent/", label: "Patent" },
-];
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].footer;
 ---
 
 <footer class="bg-black py-12 border-t border-slate-800/60">
@@ -33,16 +20,16 @@ const legalLinks = [
           <img src="/logo.png" alt="Xtruder™" class="h-8 w-auto" />
         </div>
         <p class="text-slate-500 text-sm leading-relaxed">
-          Innovation in insulation.<br/>Quality from Finland.
+          {t.tagline1}<br/>{t.tagline2}
         </p>
-        <p class="text-slate-700 text-xs mt-3">&copy; {new Date().getFullYear()} Xtruder Tools AB. All rights reserved.</p>
+        <p class="text-slate-700 text-xs mt-3">&copy; {new Date().getFullYear()} Xtruder Tools AB. {t.copyright}</p>
       </div>
 
       <!-- Product links -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Product</h4>
+        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.productLabel}</h4>
         <ul class="space-y-2">
-          {productLinks.map(({ href, label }) => (
+          {t.productLinks.map(({ href, label }) => (
             <li>
               <a href={href} class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
             </li>
@@ -52,9 +39,9 @@ const legalLinks = [
 
       <!-- Company -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Company</h4>
+        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.companyLabel}</h4>
         <ul class="space-y-2">
-          {companyLinks.map(({ href, label, external }) => (
+          {t.companyLinks.map(({ href, label, external }) => (
             <li>
               <a
                 href={href}
@@ -68,9 +55,9 @@ const legalLinks = [
 
       <!-- Legal -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">Legal</h4>
+        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.legalLabel}</h4>
         <ul class="space-y-2">
-          {legalLinks.map(({ href, label }) => (
+          {t.legalLinks.map(({ href, label }) => (
             <li>
               <a href={href} class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
             </li>
@@ -81,7 +68,7 @@ const legalLinks = [
 
     <!-- Bottom bar -->
     <div class="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-slate-700 text-xs">Patented technology. Unauthorized reproduction prohibited.</p>
+      <p class="text-slate-700 text-xs">{t.bottomText}</p>
       <div class="flex items-center gap-2">
         <div class="w-5 h-3.5 rounded-sm overflow-hidden flex-shrink-0">
           <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
@@ -90,7 +77,7 @@ const legalLinks = [
             <rect x="5" width="3" height="11" fill="#003580"/>
           </svg>
         </div>
-        <span class="text-slate-600 text-xs">Made in Finland</span>
+        <span class="text-slate-600 text-xs">{t.madeIn}</span>
       </div>
     </div>
 

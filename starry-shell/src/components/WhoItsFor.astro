@@ -1,22 +1,31 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].whoItsFor;
+
 const audiences = [
   {
     icon: `<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>`,
-    title: "Plumbers",
-    desc: "Speed up your pipe work with consistent, professional results on every job site.",
-    items: ["Pipe painting & finishing", "Water & corrosion protection", "Thermal insulation"],
+    title: t.audiences[0].title,
+    desc: t.audiences[0].desc,
+    items: t.audiences[0].items,
   },
   {
     icon: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
-    title: "Electricians",
-    desc: "Keep cables and wires properly coated, protected, and ready for any environment.",
-    items: ["Cable repair & reinforcement", "Wire covering & waterproofing", "Insulation application"],
+    title: t.audiences[1].title,
+    desc: t.audiences[1].desc,
+    items: t.audiences[1].items,
   },
   {
     icon: `<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
-    title: "DIY Enthusiasts",
-    desc: "Get professional results at home without any special skills or experience.",
-    items: ["Home plumbing projects", "Repair & restoration", "Creative projects & crafts"],
+    title: t.audiences[2].title,
+    desc: t.audiences[2].desc,
+    items: t.audiences[2].items,
   },
 ];
 ---
@@ -25,9 +34,9 @@ const audiences = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="text-center mb-16 reveal">
-      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">Who It's For</span>
+      <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-4 block">{t.label}</span>
       <h2 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
-        Built for the Professionals<br/><span class="text-[#64748B]">Who Get Things Done</span>
+        {t.h2}<br/><span class="text-[#64748B]">{t.h2sub}</span>
       </h2>
     </div>
 
