@@ -8,20 +8,15 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const t = translations[lang].materials;
 
-const materials = [
-  { bg: "bg-amber-100", iconColor: "text-amber-600", name: "Epoxies",
-    icon: `<path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12h8"/>` },
-  { bg: "bg-blue-100", iconColor: "text-blue-600", name: "Silicones",
-    icon: `<path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/>` },
-  { bg: "bg-green-100", iconColor: "text-green-600", name: "Acrylics",
-    icon: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>` },
-  { bg: "bg-teal-100", iconColor: "text-teal-600", name: "Latexes",
-    icon: `<path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/>` },
-  { bg: "bg-orange-100", iconColor: "text-brand", name: "Paints",
-    icon: `<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>` },
-  { bg: "bg-slate-100", iconColor: "text-slate-600", name: "Chemical Metals",
-    icon: `<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>` },
+const materialData = [
+  { bg: "bg-amber-100", iconColor: "text-amber-600", icon: `<path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12h8"/>` },
+  { bg: "bg-blue-100",  iconColor: "text-blue-600",  icon: `<path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/>` },
+  { bg: "bg-green-100", iconColor: "text-green-600", icon: `<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>` },
+  { bg: "bg-teal-100",  iconColor: "text-teal-600",  icon: `<path d="M12 22a7 7 0 007-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 007 7z"/>` },
+  { bg: "bg-orange-100",iconColor: "text-brand",     icon: `<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>` },
+  { bg: "bg-slate-100", iconColor: "text-slate-600", icon: `<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>` },
 ];
+const materials = materialData.map((d, i) => ({ ...d, name: t.names[i] }));
 ---
 
 <section id="materials" class="py-24 bg-white">

@@ -131,6 +131,7 @@ export const translations = {
       h2sub: "Coating Material",
       body: "The Xtruder™ is compatible with virtually any viscous coating material. Whatever your project demands, we have a size and configuration for it.",
       cta: "Find Your Size",
+      names: ["Epoxies", "Silicones", "Acrylics", "Latexes", "Paints", "Chemical Metals"],
     },
     finland: {
       label: "Our Story",
@@ -333,6 +334,7 @@ export const translations = {
       h2sub: "Vilket beläggnings­material som helst",
       body: "Xtruder™ är kompatibel med nästan alla viskosa beläggnings­material. Vad ditt projekt kräver, har vi en storlek och konfiguration för det.",
       cta: "Hitta din storlek",
+      names: ["Epoxi", "Silikoner", "Akrylater", "Latex", "Färger", "Kemiska metaller"],
     },
     finland: {
       label: "Vår historia",
@@ -535,6 +537,7 @@ export const translations = {
       h2sub: "Pinnoitemateriaalin kanssa",
       body: "Xtruder™ on yhteensopiva käytännössä minkä tahansa viskoottisen pinnoitemateriaalin kanssa. Mitä tahansa projektisi vaatii, meillä on siihen sopiva koko ja kokoonpano.",
       cta: "Löydä oma kokosi",
+      names: ["Epoksit", "Silikonit", "Akryylit", "Lateksit", "Maalit", "Kemialliset metallit"],
     },
     finland: {
       label: "Tarinaamme",
