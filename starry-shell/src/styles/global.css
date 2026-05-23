@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  h1, h2, h3, h4 { font-family: 'Racing Sans One', sans-serif; }
+}
+
 @theme {
-  --font-heading: "Rubik", sans-serif;
+  --font-heading: "Racing Sans One", sans-serif;
   --font-body: "Nunito Sans", sans-serif;
   --color-brand: #E8490C;
   --color-brand-hover: #CF400A;
