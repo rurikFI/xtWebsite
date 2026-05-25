@@ -89,13 +89,13 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
       <button
         id="menu-toggle"
         class="group md:hidden inline-flex items-center justify-center rounded-lg transition-colors duration-200 cursor-pointer"
-        style="background: none; border: none; padding: 6px; color: var(--at-ink); outline: none; -webkit-tap-highlight-color: transparent;"
+        style="background: none; border: none; padding: 9px; outline: none; -webkit-tap-highlight-color: transparent;"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
         <svg
           class="pointer-events-none"
-          width="20" height="20" viewBox="0 0 24 24"
+          width="26" height="26" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round"
         >
@@ -177,6 +177,10 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
 <style>
   :root { --logo-filter: none; }
   html:not(.dark) { --logo-filter: brightness(0) saturate(100%); }
+
+  /* Match hamburger colour to the theme-toggler icon */
+  #menu-toggle { color: rgba(255,255,255,0.82); }
+  html:not(.dark) #menu-toggle { color: rgba(15,23,42,0.82); }
 </style>
 
 <script>

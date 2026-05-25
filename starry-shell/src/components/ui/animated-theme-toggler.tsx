@@ -96,7 +96,7 @@ export function AnimatedThemeToggler({ sound = true }: AnimatedThemeTogglerProps
           background: "none",
           border: "none",
           cursor: "pointer",
-          padding: 6,
+          padding: 9,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -108,8 +108,8 @@ export function AnimatedThemeToggler({ sound = true }: AnimatedThemeTogglerProps
         aria-label="Toggle theme"
       >
         <motion.svg
-          width="20"
-          height="20"
+          width="26"
+          height="26"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
