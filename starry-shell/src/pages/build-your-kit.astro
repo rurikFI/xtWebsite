@@ -89,6 +89,41 @@ import '../styles/global.css';
             <p class="text-slate-500 text-xs mt-4">All prices in EUR. Tax calculated at checkout.</p>
           </div>
 
+          <!-- Email capture -->
+          <div id="email-capture-box" class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
+
+            <!-- Default: input state -->
+            <div id="email-capture-form">
+              <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-5">
+                <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
+                <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+              </div>
+              <p class="text-white font-semibold text-sm mb-4">Sign up for email to receive your discount!</p>
+              <div class="flex gap-2">
+                <input
+                  id="kit-email-input"
+                  type="email"
+                  placeholder="you@example.com"
+                  class="flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
+                />
+                <button
+                  id="kit-email-submit"
+                  class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer"
+                >
+                  Get deal
+                </button>
+              </div>
+            </div>
+
+            <!-- Success state (hidden) -->
+            <div id="email-capture-success" class="hidden text-center py-2">
+              <p class="text-4xl mb-3">🎉</p>
+              <p class="text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">You've got the deal!</p>
+              <p class="text-slate-400 text-sm mt-1">It will be automatically activated at checkout.</p>
+            </div>
+
+          </div>
+
           <!-- Trust -->
           <div class="grid grid-cols-3 gap-3">
             {[
@@ -153,7 +188,7 @@ import '../styles/global.css';
           <button
             id="checkout-btn"
             disabled
-            class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2"
+            class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2"
           >
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
@@ -172,6 +207,8 @@ import '../styles/global.css';
 
 <script>
   const BASE = 29.99;
+
+  type UnitType = 'mm' | 'in';
 
   function getUnitPrice(qty: number): number {
     if (qty >= 10) return parseFloat((BASE * 0.70).toFixed(2));
@@ -199,7 +236,7 @@ import '../styles/global.css';
       const need = 10 - qty;
       return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
     }
-    if (qty >= 10) return '🏆 Best deal unlocked! You\'re getting 30% off your entire order.';
+    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off your entire order.";
     return '';
   }
 
@@ -210,22 +247,45 @@ import '../styles/global.css';
   const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
   const persuasionEl = document.getElementById('persuasion')!;
 
-  function addInput() {
+  function getDefaultUnit(): UnitType {
+    const first = inputsList.querySelector<HTMLElement>('.unit-toggle');
+    return (first?.dataset.unit as UnitType) ?? 'mm';
+  }
+
+  function setUnitToggle(btn: HTMLElement, unit: UnitType) {
+    btn.dataset.unit = unit;
+    const mmEl = btn.querySelector('[data-label="mm"]')!;
+    const inEl = btn.querySelector('[data-label="in"]')!;
+    mmEl.className = unit === 'mm'
+      ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
+      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-200 flex items-center';
+    inEl.className = unit === 'in'
+      ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
+      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-200 flex items-center';
+  }
+
+  function addInput(value = '', unit: UnitType | null = null) {
     if (count >= 20) return;
     count++;
     const idx = count;
+    const resolvedUnit: UnitType = unit ?? getDefaultUnit();
 
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2';
     row.id = `size-row-${idx}`;
     row.innerHTML = `
-      <span class="text-slate-500 text-sm w-6 text-right flex-shrink-0">${idx}.</span>
+      <span class="text-slate-500 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
       <input
         type="text"
         id="size-input-${idx}"
-        placeholder='e.g. 25 mm or 1"'
-        class="size-field flex-1 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
+        inputmode="decimal"
+        placeholder="e.g. 25"
+        class="size-field flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
       />
+      <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-800 border border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
+        <span data-label="mm" class="">mm</span>
+        <span data-label="in" class="">in</span>
+      </button>
       ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-600 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>` : '<span class="w-4 flex-shrink-0"></span>'}
@@ -233,15 +293,38 @@ import '../styles/global.css';
 
     inputsList.appendChild(row);
 
+    // Set initial toggle appearance
+    const toggleBtn = row.querySelector<HTMLElement>('.unit-toggle')!;
+    setUnitToggle(toggleBtn, resolvedUnit);
+
+    // Toggle click
+    toggleBtn.addEventListener('click', () => {
+      const current = toggleBtn.dataset.unit as UnitType;
+      setUnitToggle(toggleBtn, current === 'mm' ? 'in' : 'mm');
+      update();
+    });
+
+    // Remove button
     row.querySelector('.remove-btn')?.addEventListener('click', (e) => {
       const btn = e.currentTarget as HTMLElement;
-      const rowId = btn.dataset.remove!;
-      document.getElementById(`size-row-${rowId}`)?.remove();
+      document.getElementById(`size-row-${btn.dataset.remove!}`)?.remove();
       recount();
       update();
     });
 
-    row.querySelector('input')!.addEventListener('input', update);
+    // Numeric-only input: allow digits, one separator (. or ,)
+    const inputEl = row.querySelector<HTMLInputElement>('input')!;
+    inputEl.value = value;
+    inputEl.addEventListener('input', () => {
+      let v = inputEl.value.replace(/[^0-9.,]/g, '');
+      // only one decimal separator
+      const firstSep = v.search(/[.,]/);
+      if (firstSep !== -1) {
+        v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
+      }
+      if (inputEl.value !== v) inputEl.value = v;
+      update();
+    });
 
     if (count >= 20) addBtn.classList.add('opacity-40', 'cursor-not-allowed');
     update();
@@ -259,16 +342,28 @@ import '../styles/global.css';
   }
 
   function getSizes(): string[] {
-    return Array.from(document.querySelectorAll<HTMLInputElement>('.size-field'))
-      .map(i => i.value.trim())
+    return Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'))
+      .map(row => {
+        const val = row.querySelector<HTMLInputElement>('.size-field')!.value.replace(',', '.').trim();
+        const unit = (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit) ?? 'mm';
+        return val ? `${val} ${unit}` : '';
+      })
       .filter(Boolean);
+  }
+
+  function saveKit() {
+    const rows = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'));
+    const data = rows.map(row => ({
+      value: row.querySelector<HTMLInputElement>('.size-field')!.value,
+      unit: (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm') as UnitType,
+    }));
+    localStorage.setItem('xt_kit', JSON.stringify(data));
   }
 
   function update() {
     const sizes = getSizes();
     const qty = sizes.length;
 
-    // Summary
     const unitPrice = getUnitPrice(qty);
     const total = (unitPrice * qty).toFixed(2);
     const pct = getDiscountPct(qty);
@@ -287,24 +382,16 @@ import '../styles/global.css';
       discRow.classList.add('hidden');
     }
 
-    // Persuasion
     const msg = persuasionText(qty);
-    if (msg && qty < 10) {
-      persuasionEl.textContent = msg;
-      persuasionEl.classList.remove('hidden');
-    } else if (qty >= 10) {
+    if (msg) {
       persuasionEl.textContent = msg;
       persuasionEl.classList.remove('hidden');
     } else {
       persuasionEl.classList.add('hidden');
     }
 
-    // Checkout button
     checkoutBtn.disabled = qty === 0;
-
-    // Persist all current values (including partially-filled fields)
-    const allValues = Array.from(document.querySelectorAll<HTMLInputElement>('.size-field')).map(i => i.value);
-    localStorage.setItem('xt_kit', JSON.stringify(allValues));
+    saveKit();
   }
 
   addBtn.addEventListener('click', () => {
@@ -337,16 +424,46 @@ import '../styles/global.css';
     }
   });
 
+  // Email capture
+  const kitEmailInput = document.getElementById('kit-email-input') as HTMLInputElement;
+  const kitEmailSubmit = document.getElementById('kit-email-submit') as HTMLButtonElement;
+
+  if (localStorage.getItem('xt_email_captured')) {
+    document.getElementById('email-capture-form')!.classList.add('hidden');
+    document.getElementById('email-capture-success')!.classList.remove('hidden');
+  }
+
+  kitEmailSubmit.addEventListener('click', async () => {
+    const email = kitEmailInput.value.trim();
+    if (!email || !email.includes('@')) { kitEmailInput.focus(); return; }
+
+    kitEmailSubmit.disabled = true;
+    kitEmailSubmit.textContent = '…';
+
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch { /* fail silently */ }
+
+    localStorage.setItem('xt_email_captured', '1');
+    document.getElementById('email-capture-form')!.classList.add('hidden');
+    document.getElementById('email-capture-success')!.classList.remove('hidden');
+  });
+
+  kitEmailInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') kitEmailSubmit.click();
+  });
+
   // Restore saved kit or start with one empty input
   const saved = localStorage.getItem('xt_kit');
-  const savedValues: string[] = saved ? JSON.parse(saved) : [];
+  let savedRows: { value: string; unit: UnitType }[] = [];
+  try { savedRows = saved ? JSON.parse(saved) : []; } catch { savedRows = []; }
 
-  if (savedValues.length > 0) {
-    savedValues.forEach(val => {
-      addInput();
-      const input = inputsList.querySelector<HTMLInputElement>(`#size-input-${count}`)!;
-      input.value = val;
-    });
+  if (savedRows.length > 0) {
+    savedRows.forEach(({ value, unit }) => addInput(value, unit));
     update();
   } else {
     addInput();
