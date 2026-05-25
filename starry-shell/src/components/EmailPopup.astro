@@ -1,0 +1,164 @@
+---
+---
+
+<!-- Backdrop -->
+<div id="popup-backdrop" class="fixed inset-0 z-[200] flex items-center justify-center p-4 hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="popup-overlay"></div>
+
+  <!-- Card -->
+  <div class="relative z-10 bg-slate-900 border border-white/10 rounded-2xl shadow-2xl w-full max-w-md p-8 flex flex-col items-center text-center">
+
+    <!-- Step 1: Question screen -->
+    <div id="popup-step1">
+      <!-- Logo -->
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
+      </div>
+
+      <!-- Offer -->
+      <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6">
+        <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
+        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+      </div>
+
+      <!-- Question -->
+      <p class="text-white font-semibold text-base mb-4">What problem are you trying to solve?</p>
+
+      <!-- Answer buttons -->
+      <div class="flex flex-col gap-2.5 w-full mb-5">
+        <button class="answer-btn w-full bg-slate-800 hover:bg-slate-700 border border-white/10 hover:border-brand/50 text-slate-200 text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
+          Insulating pipes or cables quickly
+        </button>
+        <button class="answer-btn w-full bg-slate-800 hover:bg-slate-700 border border-white/10 hover:border-brand/50 text-slate-200 text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
+          Getting a uniform coating on round surfaces
+        </button>
+        <button class="answer-btn w-full bg-slate-800 hover:bg-slate-700 border border-white/10 hover:border-brand/50 text-slate-200 text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
+          Reducing material waste on the job
+        </button>
+        <button class="answer-btn w-full bg-slate-800 hover:bg-slate-700 border border-white/10 hover:border-brand/50 text-slate-200 text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
+          Other…
+        </button>
+      </div>
+
+      <!-- Dismiss -->
+      <button id="popup-dismiss" class="text-slate-500 hover:text-slate-400 text-xs underline underline-offset-2 transition-colors duration-200 cursor-pointer">
+        I don't like saving money
+      </button>
+    </div>
+
+    <!-- Step 2: Email screen (hidden initially) -->
+    <div id="popup-step2" class="hidden w-full flex flex-col items-center">
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
+      </div>
+
+      <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 w-full">
+        <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
+        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+      </div>
+
+      <p class="text-white font-semibold text-base mb-5">Sign up for email to receive your discount!</p>
+
+      <div class="w-full flex flex-col gap-3">
+        <input
+          id="popup-email"
+          type="email"
+          placeholder="you@example.com"
+          class="w-full bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-3 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
+        />
+        <button
+          id="popup-submit"
+          class="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-3 transition-colors duration-200"
+        >
+          Continue
+        </button>
+      </div>
+
+      <!-- Step 2 dismiss -->
+      <button id="popup-dismiss2" class="mt-4 text-slate-500 hover:text-slate-400 text-xs underline underline-offset-2 transition-colors duration-200 cursor-pointer">
+        No thanks
+      </button>
+    </div>
+
+    <!-- Step 3: Thank you -->
+    <div id="popup-step3" class="hidden w-full flex flex-col items-center">
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
+      </div>
+      <p class="text-4xl mb-4">🎉</p>
+      <p class="text-white font-semibold text-lg mb-2">You're in!</p>
+      <p class="text-slate-400 text-sm">Check your inbox for your 30% off promo code.</p>
+      <button id="popup-close-final" class="mt-6 text-slate-500 hover:text-slate-400 text-xs underline underline-offset-2 transition-colors duration-200 cursor-pointer">
+        Close
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'xt_popup_dismissed_at';
+  const COOLDOWN_MS = 30 * 60 * 1000; // 30 minutes
+
+  function shouldShow(): boolean {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return true;
+    return Date.now() - parseInt(raw, 10) > COOLDOWN_MS;
+  }
+
+  function dismiss() {
+    localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    document.getElementById('popup-backdrop')!.classList.add('hidden');
+  }
+
+  function showStep(step: number) {
+    [1, 2, 3].forEach(n => {
+      const el = document.getElementById(`popup-step${n}`)!;
+      el.classList.toggle('hidden', n !== step);
+    });
+  }
+
+  if (shouldShow()) {
+    setTimeout(() => {
+      document.getElementById('popup-backdrop')!.classList.remove('hidden');
+    }, 2500);
+  }
+
+  document.getElementById('popup-overlay')!.addEventListener('click', dismiss);
+  document.getElementById('popup-dismiss')!.addEventListener('click', dismiss);
+  document.getElementById('popup-dismiss2')!.addEventListener('click', dismiss);
+  document.getElementById('popup-close-final')!.addEventListener('click', dismiss);
+
+  document.querySelectorAll('.answer-btn').forEach(btn => {
+    btn.addEventListener('click', () => showStep(2));
+  });
+
+  document.getElementById('popup-submit')!.addEventListener('click', async () => {
+    const input = document.getElementById('popup-email') as HTMLInputElement;
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      input.focus();
+      return;
+    }
+
+    const btn = document.getElementById('popup-submit') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    try {
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch {
+      // fail silently — still show thank you
+    }
+
+    localStorage.setItem(STORAGE_KEY, String(Date.now() + COOLDOWN_MS * 99));
+    showStep(3);
+  });
+</script>

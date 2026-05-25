@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# collected emails — never commit
+emails.csv
+
 # macOS-specific files
 .DS_Store
 
