@@ -88,13 +88,14 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
       <!-- Hamburger button (mobile only) — animates to ✕ via aria-expanded -->
       <button
         id="menu-toggle"
-        class="group md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-white/20 bg-white/60 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+        class="group md:hidden inline-flex items-center justify-center rounded-lg transition-colors duration-200 cursor-pointer"
+        style="background: none; border: none; padding: 6px; color: var(--at-ink); outline: none; -webkit-tap-highlight-color: transparent;"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
         <svg
-          class="pointer-events-none text-slate-700 dark:text-slate-300"
-          width="16" height="16" viewBox="0 0 24 24"
+          class="pointer-events-none"
+          width="20" height="20" viewBox="0 0 24 24"
           fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round"
         >
@@ -116,28 +117,16 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
   </div>
 </nav>
 
-<!-- Mobile menu overlay (z-[60] sits above the navbar z-50) -->
-<div id="mobile-menu" class="fixed inset-0 z-[60] pointer-events-none" aria-hidden="true">
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-40 pointer-events-none" aria-hidden="true">
   <!-- Backdrop -->
   <div id="menu-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300" style="opacity: 0"></div>
 
-  <!-- Slide-in panel -->
+  <!-- Slide-in panel (pt-20 clears the fixed navbar) -->
   <div id="menu-panel" class="absolute top-0 right-0 h-full w-72 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl flex flex-col transition-transform duration-300" style="transform: translateX(100%)">
-    <!-- Panel header -->
-    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-white/10">
-      <a href={homeUrl} class="flex items-center gap-2 mobile-close-trigger">
-        <img src="/favicon.webp" alt="" class="h-7 w-7 rounded-md object-cover" />
-        <img src="/logo.png" alt="Xtruder™" class="h-6 w-auto" style="filter: var(--logo-filter)" />
-      </a>
-      <button id="menu-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close menu">
-        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6L6 18M6 6l12 12"/>
-        </svg>
-      </button>
-    </div>
 
-    <!-- Nav links -->
-    <div class="flex-1 overflow-y-auto px-4 py-5 space-y-1">
+    <!-- Nav links (pt-20 pushes content below the navbar) -->
+    <div class="flex-1 overflow-y-auto px-4 pt-20 pb-5 space-y-1">
       {links.map(({ href, label }) => (
         <a
           href={href}
@@ -236,7 +225,6 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
 
   /* ── Mobile menu ── */
   const menuToggle = document.getElementById('menu-toggle')!;
-  const menuClose = document.getElementById('menu-close')!;
   const mobileMenu = document.getElementById('mobile-menu')!;
   const backdrop = document.getElementById('menu-backdrop') as HTMLElement;
   const panel = document.getElementById('menu-panel') as HTMLElement;
@@ -260,10 +248,9 @@ const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
   }
 
   menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    mobileMenu.getAttribute('aria-hidden') === 'false' ? closeMenu() : openMenu();
   });
 
-  menuClose.addEventListener('click', closeMenu);
   backdrop.addEventListener('click', closeMenu);
 
   document.querySelectorAll('.mobile-close-trigger').forEach(el => {
