@@ -1,0 +1,354 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Build Your Kit — Xtruder™">
+  <Navbar lang="en" />
+
+  <main class="min-h-screen bg-[#0F172A] pt-24 pb-20">
+    <!-- subtle grid -->
+    <div class="fixed inset-0 opacity-[0.04] pointer-events-none z-0">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid-byk" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#64748B" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid-byk)"/>
+      </svg>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page header -->
+      <div class="text-center mb-14">
+        <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Custom order</span>
+        <h1 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
+          Build Your <span class="text-gradient">Kit</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-xl mx-auto">
+          Tell us the exact sizes you need. Every Xtruder is made to your specification.
+        </p>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+        <!-- LEFT: Product info -->
+        <div class="space-y-6">
+
+          <!-- What is it -->
+          <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
+            <h2 class="font-heading text-xl text-white mb-4">What you're ordering</h2>
+            <p class="text-slate-300 text-sm leading-relaxed mb-5">
+              The Xtruder™ is a patented insulation and coating tool that applies materials uniformly around pipes, cables, and hoses of any size. Each unit is custom-sized to the diameter you specify — ensuring a perfect fit every time.
+            </p>
+            <div class="space-y-3">
+              {[
+                ['Patented Finnish engineering', 'Designed and manufactured in Finland to the highest standard.'],
+                ['Custom to your size', 'You specify the diameter in mm or inches — we build it exactly.'],
+                ['Works with any round surface', "Pipes, cables, hoses, conduits — if it's round, it fits."],
+                ['Volume discounts built in', 'The more you order, the better the price per unit.'],
+              ].map(([title, body]) => (
+                <div class="flex gap-3">
+                  <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <div>
+                    <p class="text-white text-sm font-semibold">{title}</p>
+                    <p class="text-slate-400 text-sm">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Pricing tiers -->
+          <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
+            <h2 class="font-heading text-xl text-white mb-4">Volume pricing</h2>
+            <div class="space-y-2.5">
+              {[
+                ['1–2 units',  '€29.99 / unit', false, false],
+                ['3–5 units',  '€26.99 / unit', true,  false],
+                ['6–9 units',  '€22.49 / unit', true,  false],
+                ['10–20 units','€20.99 / unit', true,  true ],
+              ].map(([range, price, disc, best]) => (
+                <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-white/[0.03] border border-white/[0.06]'}`}>
+                  <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-300'}`}>{range}</span>
+                  <div class="flex items-center gap-2">
+                    {disc && <span class="text-xs text-slate-500 line-through">€29.99</span>}
+                    <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-white'}`}>{price}</span>
+                    {best && <span class="text-xs bg-brand text-white font-bold px-2 py-0.5 rounded-full">BEST</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p class="text-slate-500 text-xs mt-4">All prices in EUR. Tax calculated at checkout.</p>
+          </div>
+
+          <!-- Trust -->
+          <div class="grid grid-cols-3 gap-3">
+            {[
+              ['🇫🇮', 'Made in Finland'],
+              ['🔒', 'Secure checkout'],
+              ['📦', 'Ships worldwide'],
+            ].map(([icon, label]) => (
+              <div class="bg-white/[0.03] border border-white/10 rounded-xl p-4 text-center">
+                <p class="text-2xl mb-1">{icon}</p>
+                <p class="text-slate-400 text-xs font-medium">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- RIGHT: Kit builder -->
+        <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7 lg:sticky lg:top-28">
+
+          <h2 class="font-heading text-xl text-white mb-1">Your Xtruders</h2>
+          <p class="text-slate-400 text-sm mb-6">Enter the diameter for each Xtruder you need.</p>
+
+          <!-- Size inputs list -->
+          <div id="size-inputs" class="space-y-3 mb-4">
+            <!-- injected by JS -->
+          </div>
+
+          <!-- Add button -->
+          <button
+            id="add-xtruder"
+            class="w-full flex items-center justify-center gap-2 border border-dashed border-white/20 hover:border-brand/50 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 mb-6"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            ADD XTRUDER
+          </button>
+
+          <!-- Persuasion message -->
+          <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-200 leading-relaxed"></div>
+
+          <!-- Price summary -->
+          <div class="bg-white/[0.04] border border-white/10 rounded-xl p-4 mb-5 space-y-2">
+            <div class="flex justify-between text-sm text-slate-400">
+              <span>Units</span>
+              <span id="summary-qty">0</span>
+            </div>
+            <div class="flex justify-between text-sm text-slate-400">
+              <span>Price per unit</span>
+              <span id="summary-unit">€29.99</span>
+            </div>
+            <div id="summary-discount-row" class="hidden flex justify-between text-sm text-green-400">
+              <span id="summary-discount-label">Discount</span>
+              <span id="summary-discount-amt"></span>
+            </div>
+            <div class="border-t border-white/10 pt-2 flex justify-between text-white font-bold">
+              <span>Total</span>
+              <span id="summary-total">€0.00</span>
+            </div>
+          </div>
+
+          <!-- Checkout button -->
+          <button
+            id="checkout-btn"
+            disabled
+            class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+            </svg>
+            Proceed to Checkout
+          </button>
+          <p class="text-slate-600 text-xs text-center mt-3">Powered by Stripe · 256-bit SSL</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer lang="en" />
+</Layout>
+
+<script>
+  const BASE = 29.99;
+
+  function getUnitPrice(qty: number): number {
+    if (qty >= 10) return parseFloat((BASE * 0.70).toFixed(2));
+    if (qty >= 6)  return parseFloat((BASE * 0.75).toFixed(2));
+    if (qty >= 3)  return parseFloat((BASE * 0.90).toFixed(2));
+    return BASE;
+  }
+
+  function getDiscountPct(qty: number): number {
+    if (qty >= 10) return 30;
+    if (qty >= 6)  return 25;
+    if (qty >= 3)  return 10;
+    return 0;
+  }
+
+  function persuasionText(qty: number): string {
+    if (qty === 0) return '';
+    if (qty === 1) return '💡 Add a second Xtruder to cover more sizes — still at full price. Or add one more and unlock 10% off your entire order!';
+    if (qty === 2) return '🔥 Add just one more Xtruder and unlock 10% off your entire order!';
+    if (qty >= 3 && qty <= 5) {
+      const need = 6 - qty;
+      return `🔥 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 25% off your entire order — you're almost there!`;
+    }
+    if (qty >= 6 && qty <= 9) {
+      const need = 10 - qty;
+      return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
+    }
+    if (qty >= 10) return '🏆 Best deal unlocked! You\'re getting 30% off your entire order.';
+    return '';
+  }
+
+  let count = 0;
+
+  const inputsList = document.getElementById('size-inputs')!;
+  const addBtn = document.getElementById('add-xtruder') as HTMLButtonElement;
+  const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
+  const persuasionEl = document.getElementById('persuasion')!;
+
+  function addInput() {
+    if (count >= 20) return;
+    count++;
+    const idx = count;
+
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-2';
+    row.id = `size-row-${idx}`;
+    row.innerHTML = `
+      <span class="text-slate-500 text-sm w-6 text-right flex-shrink-0">${idx}.</span>
+      <input
+        type="text"
+        id="size-input-${idx}"
+        placeholder='e.g. 25 mm or 1"'
+        class="size-field flex-1 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
+      />
+      ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-600 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>` : '<span class="w-4 flex-shrink-0"></span>'}
+    `;
+
+    inputsList.appendChild(row);
+
+    row.querySelector('.remove-btn')?.addEventListener('click', (e) => {
+      const btn = e.currentTarget as HTMLElement;
+      const rowId = btn.dataset.remove!;
+      document.getElementById(`size-row-${rowId}`)?.remove();
+      recount();
+      update();
+    });
+
+    row.querySelector('input')!.addEventListener('input', update);
+
+    if (count >= 20) addBtn.classList.add('opacity-40', 'cursor-not-allowed');
+    update();
+  }
+
+  function recount() {
+    const rows = inputsList.querySelectorAll('[id^="size-row-"]');
+    rows.forEach((row, i) => {
+      const num = row.querySelector('span:first-child');
+      if (num) num.textContent = String(i + 1) + '.';
+    });
+    count = rows.length;
+    addBtn.classList.toggle('opacity-40', count >= 20);
+    addBtn.classList.toggle('cursor-not-allowed', count >= 20);
+  }
+
+  function getSizes(): string[] {
+    return Array.from(document.querySelectorAll<HTMLInputElement>('.size-field'))
+      .map(i => i.value.trim())
+      .filter(Boolean);
+  }
+
+  function update() {
+    const sizes = getSizes();
+    const qty = sizes.length;
+
+    // Summary
+    const unitPrice = getUnitPrice(qty);
+    const total = (unitPrice * qty).toFixed(2);
+    const pct = getDiscountPct(qty);
+
+    document.getElementById('summary-qty')!.textContent = String(qty);
+    document.getElementById('summary-unit')!.textContent = `€${unitPrice.toFixed(2)}`;
+    document.getElementById('summary-total')!.textContent = qty > 0 ? `€${total}` : '€0.00';
+
+    const discRow = document.getElementById('summary-discount-row')!;
+    if (pct > 0 && qty > 0) {
+      const saved = ((BASE - unitPrice) * qty).toFixed(2);
+      document.getElementById('summary-discount-label')!.textContent = `${pct}% off`;
+      document.getElementById('summary-discount-amt')!.textContent = `-€${saved}`;
+      discRow.classList.remove('hidden');
+    } else {
+      discRow.classList.add('hidden');
+    }
+
+    // Persuasion
+    const msg = persuasionText(qty);
+    if (msg && qty < 10) {
+      persuasionEl.textContent = msg;
+      persuasionEl.classList.remove('hidden');
+    } else if (qty >= 10) {
+      persuasionEl.textContent = msg;
+      persuasionEl.classList.remove('hidden');
+    } else {
+      persuasionEl.classList.add('hidden');
+    }
+
+    // Checkout button
+    checkoutBtn.disabled = qty === 0;
+
+    // Persist all current values (including partially-filled fields)
+    const allValues = Array.from(document.querySelectorAll<HTMLInputElement>('.size-field')).map(i => i.value);
+    localStorage.setItem('xt_kit', JSON.stringify(allValues));
+  }
+
+  addBtn.addEventListener('click', () => {
+    if (count < 20) addInput();
+  });
+
+  checkoutBtn.addEventListener('click', async () => {
+    const sizes = getSizes();
+    if (!sizes.length) return;
+
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = 'Redirecting to checkout…';
+
+    try {
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sizes }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No URL');
+      }
+    } catch {
+      checkoutBtn.disabled = false;
+      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Checkout`;
+      alert('Something went wrong. Please try again.');
+    }
+  });
+
+  // Restore saved kit or start with one empty input
+  const saved = localStorage.getItem('xt_kit');
+  const savedValues: string[] = saved ? JSON.parse(saved) : [];
+
+  if (savedValues.length > 0) {
+    savedValues.forEach(val => {
+      addInput();
+      const input = inputsList.querySelector<HTMLInputElement>(`#size-input-${count}`)!;
+      input.value = val;
+    });
+    update();
+  } else {
+    addInput();
+  }
+</script>
