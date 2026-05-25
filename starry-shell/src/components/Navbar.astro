@@ -1,6 +1,7 @@
 ---
 import { translations } from '../i18n/translations';
 import type { Lang } from '../i18n/translations';
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler';
 
 interface Props {
   lang?: Lang;
@@ -8,26 +9,28 @@ interface Props {
 
 const { lang = 'en' } = Astro.props;
 const links = translations[lang].navbar.links;
+const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
+const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4 bg-slate-900/60 backdrop-blur-md border-b border-white/[0.07]">
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200 dark:border-white/[0.07] transition-colors duration-300">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <!-- Logo -->
-    <a href="#" class="flex items-center gap-2 cursor-pointer">
+    <a href={homeUrl} class="flex items-center gap-2 cursor-pointer">
       <img src="/favicon.webp" alt="" class="h-6 w-6 md:h-8 md:w-8 rounded-md object-cover flex-shrink-0 self-center" />
-      <img src="/logo.png" alt="Xtruder™" class="h-6 md:h-8 w-auto" />
+      <img src="/logo.png" alt="Xtruder™" class="h-6 md:h-8 w-auto dark:invert-0" style="filter: var(--logo-filter)" />
     </a>
 
-    <!-- Desktop links -->
+    <!-- Desktop nav links -->
     <div class="hidden md:flex items-center gap-8">
       {links.map(({ href, label }) => (
-        <a href={href} class="text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">
+        <a href={href} class="nav-link text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm font-medium cursor-pointer">
           {label}
         </a>
       ))}
     </div>
 
-    <!-- Language switcher (desktop) -->
+    <!-- Desktop language switcher -->
     <div class="hidden md:flex items-center gap-2">
       {(['en', 'sv', 'fi'] as const).map((l) => (
         <a
@@ -36,8 +39,8 @@ const links = translations[lang].navbar.links;
           title={l === 'en' ? 'English' : l === 'sv' ? 'Svenska' : 'Suomi'}
           class={`w-7 h-[18px] rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
             lang === l
-              ? 'border-white/60 ring-2 ring-white/40 opacity-100'
-              : 'border-white/20 opacity-60 hover:opacity-100'
+              ? 'border-slate-500/60 dark:border-white/60 ring-2 ring-slate-400/40 dark:ring-white/40 opacity-100'
+              : 'border-slate-300 dark:border-white/20 opacity-60 hover:opacity-100'
           }`}
         >
           {l === 'en' && (
@@ -69,19 +72,91 @@ const links = translations[lang].navbar.links;
       ))}
     </div>
 
-    <!-- CTA -->
-    <div class="flex items-center gap-3">
-      <!-- Mobile language switcher -->
-      <div class="flex md:hidden items-center gap-1.5">
+    <!-- Right side: desktop CTA + theme toggle + hamburger -->
+    <div class="flex items-center gap-2">
+      <!-- Desktop only CTA links -->
+      <a href={kitUrl} class="hidden lg:block text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium cursor-pointer">
+        {translations[lang].navbar.viewKits}
+      </a>
+      <a href={kitUrl} class="hidden md:block bg-brand hover:bg-brand-hover text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer whitespace-nowrap">
+        {translations[lang].navbar.buyNow}
+      </a>
+
+      <!-- Theme toggle (always visible) -->
+      <AnimatedThemeToggler client:load />
+
+      <!-- Hamburger button (mobile only) -->
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span class="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center" id="hb1"></span>
+        <span class="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300 mt-1.5" id="hb2"></span>
+        <span class="block w-5 h-0.5 bg-slate-700 dark:bg-slate-300 transition-all duration-300 origin-center mt-1.5" id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-40 pointer-events-none" aria-hidden="true">
+  <!-- Backdrop -->
+  <div id="menu-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Slide-in panel -->
+  <div id="menu-panel" class="absolute top-0 right-0 h-full w-72 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl flex flex-col translate-x-full transition-transform duration-300">
+    <!-- Panel header -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-white/10">
+      <a href={homeUrl} class="flex items-center gap-2 mobile-close-trigger">
+        <img src="/favicon.webp" alt="" class="h-7 w-7 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-6 w-auto" style="filter: var(--logo-filter)" />
+      </a>
+      <button id="menu-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer" aria-label="Close menu">
+        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Nav links -->
+    <div class="flex-1 overflow-y-auto px-4 py-5 space-y-1">
+      {links.map(({ href, label }) => (
+        <a
+          href={href}
+          class="mobile-close-trigger nav-link flex items-center px-3 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors duration-200 font-medium cursor-pointer"
+        >
+          {label}
+        </a>
+      ))}
+
+      <div class="pt-4 pb-2 px-3">
+        <div class="h-px bg-slate-100 dark:bg-white/10"></div>
+      </div>
+
+      <a
+        href={kitUrl}
+        class="mobile-close-trigger flex items-center justify-center gap-2 bg-brand hover:bg-brand-hover text-white font-bold px-5 py-3.5 rounded-xl transition-colors duration-200 cursor-pointer"
+      >
+        {translations[lang].navbar.buyNow}
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Language switcher at bottom -->
+    <div class="px-5 py-4 border-t border-slate-100 dark:border-white/10">
+      <p class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase tracking-widest mb-3">Language</p>
+      <div class="flex items-center gap-3">
         {(['en', 'sv', 'fi'] as const).map((l) => (
           <a
             id={`lang-mob-${l}`}
             href="#"
             title={l === 'en' ? 'English' : l === 'sv' ? 'Svenska' : 'Suomi'}
-            class={`w-6 h-[15px] rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
+            class={`mobile-close-trigger w-9 h-[22px] rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
               lang === l
-                ? 'border-white/60 ring-1 ring-white/40 opacity-100'
-                : 'border-white/20 opacity-60 hover:opacity-100'
+                ? 'border-slate-500/60 dark:border-white/60 ring-2 ring-slate-400/40 dark:ring-white/40 opacity-100'
+                : 'border-slate-300 dark:border-white/20 opacity-60 hover:opacity-100'
             }`}
           >
             {l === 'en' && (<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="white" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="30" fill="white"/><rect y="10" width="60" height="10" fill="white"/><rect x="27" width="6" height="30" fill="#C8102E"/><rect y="12" width="60" height="6" fill="#C8102E"/></svg>)}
@@ -90,32 +165,52 @@ const links = translations[lang].navbar.links;
           </a>
         ))}
       </div>
-
-      <a href="#kits" class="hidden sm:block text-sm text-slate-300 hover:text-white transition-colors duration-200 font-medium cursor-pointer">
-        {translations[lang].navbar.viewKits}
-      </a>
-      <a href="#kits" class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer whitespace-nowrap">
-        {translations[lang].navbar.buyNow}
-      </a>
     </div>
   </div>
-</nav>
+</div>
+
+<style>
+  :root { --logo-filter: none; }
+  html:not(.dark) { --logo-filter: brightness(0) saturate(100%); }
+
+  #mobile-menu.open {
+    pointer-events: auto;
+  }
+  #mobile-menu.open #menu-backdrop {
+    opacity: 1;
+  }
+  #mobile-menu.open #menu-panel {
+    transform: translateX(0);
+  }
+</style>
 
 <script>
+  /* ── Scroll spy / smooth scroll ── */
   const navbar = document.getElementById('navbar')!;
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a.nav-link').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = (anchor as HTMLAnchorElement).getAttribute('href')!;
-      const target = document.querySelector(href);
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      const hashIdx = href.indexOf('#');
+      if (hashIdx === -1) return;
+      const hash = href.slice(hashIdx);
+      const basePath = href.slice(0, hashIdx);
+      const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+      const targetPath = (basePath || '/').replace(/\/$/, '') || '/';
+      if (currentPath === targetPath || targetPath === '/') {
+        const target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     });
   });
 
-  // Language switcher URL logic
+  /* ── Language switcher URLs ── */
   (function() {
     const path = window.location.pathname;
     let basePath = path;
@@ -132,4 +227,35 @@ const links = translations[lang].navbar.links;
       if (mob) mob.href = urls[l];
     });
   })();
+
+  /* ── Mobile menu ── */
+  const menuToggle = document.getElementById('menu-toggle')!;
+  const menuClose = document.getElementById('menu-close')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const backdrop = document.getElementById('menu-backdrop')!;
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  menuClose.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.mobile-close-trigger').forEach(el => {
+    el.addEventListener('click', closeMenu);
+  });
 </script>

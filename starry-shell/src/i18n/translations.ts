@@ -4,13 +4,13 @@ export const translations = {
   en: {
     navbar: {
       links: [
-        { href: "#how-it-works", label: "How It Works" },
-        { href: "#features", label: "Features" },
-        { href: "#for-you", label: "Who It's For" },
-        { href: "#materials", label: "Materials" },
+        { href: "/#how-it-works", label: "How It Works" },
+        { href: "/#features", label: "Features" },
+        { href: "/#for-you", label: "Who It's For" },
+        { href: "/#materials", label: "Materials" },
       ],
       viewKits: "View Kits",
-      buyNow: "Buy Now",
+      buyNow: "Build Kit Now",
     },
     hero: {
       badge: "Patented Technology · Made in Finland",
@@ -18,7 +18,7 @@ export const translations = {
       h1line2: "New, Efficient",
       h1line3: "Way.",
       body: "The Xtruder™ is the patented applicator that coats pipes, cables, hoses, ropes, and wires with any material — uniformly, around the full 360° circumference, every single time.",
-      cta1: "View Xtruder Kits",
+      cta1: "Build Your Kit",
       cta2: "See How It Works",
       badge1: "Patented design",
       badge2: "Custom sizes from 1–54 mm",
@@ -181,10 +181,10 @@ export const translations = {
       companyLabel: "Company",
       legalLabel: "Legal",
       productLinks: [
-        { href: "#how-it-works", label: "How It Works" },
-        { href: "#features", label: "Features" },
-        { href: "#for-you", label: "Who It's For" },
-        { href: "#materials", label: "Compatible Materials" },
+        { href: "/#how-it-works", label: "How It Works" },
+        { href: "/#features", label: "Features" },
+        { href: "/#for-you", label: "Who It's For" },
+        { href: "/#materials", label: "Compatible Materials" },
       ],
       companyLinks: [
         { href: "https://www.xtrudertools.com", label: "Visit Store", external: true },
@@ -207,13 +207,13 @@ export const translations = {
   sv: {
     navbar: {
       links: [
-        { href: "#how-it-works", label: "Hur det fungerar" },
-        { href: "#features", label: "Funktioner" },
-        { href: "#for-you", label: "För vem" },
-        { href: "#materials", label: "Material" },
+        { href: "/sv/#how-it-works", label: "Hur det fungerar" },
+        { href: "/sv/#features", label: "Funktioner" },
+        { href: "/sv/#for-you", label: "För vem" },
+        { href: "/sv/#materials", label: "Material" },
       ],
       viewKits: "Se kit",
-      buyNow: "Köp nu",
+      buyNow: "Bygg kit nu",
     },
     hero: {
       badge: "Patenterad teknologi · Tillverkad i Finland",
@@ -221,7 +221,7 @@ export const translations = {
       h1line2: "Nytt, Effektivt",
       h1line3: "Sätt.",
       body: "Xtruder™ är det patenterade verktyget som belägger rör, kablar, slangar, rep och trådar med vilket material som helst – jämnt, runt hela 360° omkretsen, varje gång.",
-      cta1: "Se Xtruder-kit",
+      cta1: "Bygg ditt kit",
       cta2: "Se hur det fungerar",
       badge1: "Patenterad design",
       badge2: "Anpassade storlekar 1–54 mm",
@@ -384,10 +384,10 @@ export const translations = {
       companyLabel: "Företag",
       legalLabel: "Juridiskt",
       productLinks: [
-        { href: "#how-it-works", label: "Hur det fungerar" },
-        { href: "#features", label: "Funktioner" },
-        { href: "#for-you", label: "För vem" },
-        { href: "#materials", label: "Kompatibla material" },
+        { href: "/sv/#how-it-works", label: "Hur det fungerar" },
+        { href: "/sv/#features", label: "Funktioner" },
+        { href: "/sv/#for-you", label: "För vem" },
+        { href: "/sv/#materials", label: "Kompatibla material" },
       ],
       companyLinks: [
         { href: "https://www.xtrudertools.com", label: "Besök butiken", external: true },
@@ -410,13 +410,13 @@ export const translations = {
   fi: {
     navbar: {
       links: [
-        { href: "#how-it-works", label: "Miten se toimii" },
-        { href: "#features", label: "Ominaisuudet" },
-        { href: "#for-you", label: "Kenelle" },
-        { href: "#materials", label: "Materiaalit" },
+        { href: "/fi/#how-it-works", label: "Miten se toimii" },
+        { href: "/fi/#features", label: "Ominaisuudet" },
+        { href: "/fi/#for-you", label: "Kenelle" },
+        { href: "/fi/#materials", label: "Materiaalit" },
       ],
       viewKits: "Katso paketit",
-      buyNow: "Osta nyt",
+      buyNow: "Rakenna kit nyt",
     },
     hero: {
       badge: "Patentoitu teknologia · Valmistettu Suomessa",
@@ -424,7 +424,7 @@ export const translations = {
       h1line2: "Tehokkaalla",
       h1line3: "Tavalla.",
       body: "Xtruder™ on patentoitu levitystyökalu, joka päällystää putket, kaapelit, letkut, köydet ja johdot millä tahansa materiaalilla – tasaisesti, täyden 360° ympärysmitan ympäri, joka kerta.",
-      cta1: "Katso Xtruder-paketit",
+      cta1: "Rakenna pakettisi",
       cta2: "Katso miten se toimii",
       badge1: "Patentoitu muotoilu",
       badge2: "Räätälöidyt koot 1–54 mm",
@@ -587,10 +587,10 @@ export const translations = {
       companyLabel: "Yritys",
       legalLabel: "Juridinen",
       productLinks: [
-        { href: "#how-it-works", label: "Miten se toimii" },
-        { href: "#features", label: "Ominaisuudet" },
-        { href: "#for-you", label: "Kenelle" },
-        { href: "#materials", label: "Yhteensopivat materiaalit" },
+        { href: "/fi/#how-it-works", label: "Miten se toimii" },
+        { href: "/fi/#features", label: "Ominaisuudet" },
+        { href: "/fi/#for-you", label: "Kenelle" },
+        { href: "/fi/#materials", label: "Yhteensopivat materiaalit" },
       ],
       companyLinks: [
         { href: "https://www.xtrudertools.com", label: "Vieraile kaupassa", external: true },

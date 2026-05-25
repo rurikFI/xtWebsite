@@ -8,7 +8,7 @@ import '../../styles/global.css';
 <Layout title="Bygg ditt kit — Xtruder™" lang="sv">
   <Navbar lang="sv" />
 
-  <main class="min-h-screen bg-[#0F172A] pt-24 pb-20">
+  <main class="min-h-screen bg-slate-50 dark:bg-[#0F172A] pt-24 pb-20 transition-colors duration-300">
     <div class="fixed inset-0 opacity-[0.04] pointer-events-none z-0">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -24,10 +24,10 @@ import '../../styles/global.css';
 
       <div class="text-center mb-14">
         <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Anpassad beställning</span>
-        <h1 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
+        <h1 class="font-heading text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">
           Bygg ditt <span class="text-gradient">Kit</span>
         </h1>
-        <p class="text-slate-400 text-lg max-w-xl mx-auto">
+        <p class="text-slate-500 dark:text-slate-400 text-lg max-w-xl mx-auto">
           Berätta vilka exakta storlekar du behöver. Varje Xtruder tillverkas efter dina specifikationer.
         </p>
       </div>
@@ -37,9 +37,9 @@ import '../../styles/global.css';
         <!-- LEFT: Produktinfo -->
         <div class="space-y-6 order-2 lg:order-1">
 
-          <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
-            <h2 class="font-heading text-xl text-white mb-4">Vad du beställer</h2>
-            <p class="text-slate-300 text-sm leading-relaxed mb-5">
+          <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
+            <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-4">Vad du beställer</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
               Xtruder™ är ett patenterat isolerings- och beläggningsverktyg som applicerar material jämnt runt rör, kablar och slangar i alla storlekar. Varje enhet är anpassad till den diameter du anger — för en perfekt passform varje gång.
             </p>
             <div class="space-y-3">
@@ -54,16 +54,16 @@ import '../../styles/global.css';
                     <polyline points="20 6 9 17 4 12"/>
                   </svg>
                   <div>
-                    <p class="text-white text-sm font-semibold">{title}</p>
-                    <p class="text-slate-400 text-sm">{body}</p>
+                    <p class="text-slate-800 dark:text-white text-sm font-semibold">{title}</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">{body}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
-            <h2 class="font-heading text-xl text-white mb-4">Volymprissättning</h2>
+          <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
+            <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
             <div class="space-y-2.5">
               {[
                 ['1–2 enheter',   '€29.99 / enhet', false, false, 'FULLPRIS', false],
@@ -71,34 +71,34 @@ import '../../styles/global.css';
                 ['6–9 enheter',   '€22.49 / enhet', true,  false, '-25%',     false],
                 ['10–20 enheter', '€20.99 / enhet', true,  true,  '-30%',     true ],
               ].map(([range, price, disc, best, label, isBest]) => (
-                <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-white/[0.03] border border-white/[0.06]'}`}>
+                <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.06]'}`}>
                   <div class="flex items-center gap-2">
-                    <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-300'}`}>{range}</span>
-                    <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-400' : 'text-slate-500'}`}>{label}</span>
+                    <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-600 dark:text-slate-300'}`}>{range}</span>
+                    <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-500'}`}>{label}</span>
                   </div>
                   <div class="flex items-center gap-2">
-                    {disc && <span class="text-xs text-slate-500 line-through">€29.99</span>}
-                    <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-white'}`}>{price}</span>
+                    {disc && <span class="text-xs text-slate-400 dark:text-slate-500 line-through">€29.99</span>}
+                    <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-slate-800 dark:text-white'}`}>{price}</span>
                   </div>
                 </div>
               ))}
             </div>
-            <p class="text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
+            <p class="text-slate-400 dark:text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
           </div>
 
-          <div id="email-capture-box" class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
+          <div id="email-capture-box" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
             <div id="email-capture-form">
               <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-5">
                 <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% RABATT</p>
-                <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exklusiv rabatt <span class="normal-case text-xs font-normal">— endast för nya kunder</span></p>
+                <p class="text-slate-600 dark:text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exklusiv rabatt <span class="normal-case text-xs font-normal">— endast för nya kunder</span></p>
               </div>
-              <p class="text-white font-semibold text-sm mb-4">Registrera din e-post och få din rabatt!</p>
+              <p class="text-slate-800 dark:text-white font-semibold text-sm mb-4">Registrera din e-post och få din rabatt!</p>
               <div class="flex gap-2">
                 <input
                   id="kit-email-input"
                   type="email"
                   placeholder="du@exempel.com"
-                  class="flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
+                  class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"
                 />
                 <button id="kit-email-submit" class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer">
                   Få erbjudandet
@@ -107,8 +107,8 @@ import '../../styles/global.css';
             </div>
             <div id="email-capture-success" class="hidden text-center py-2">
               <p class="text-4xl mb-3">🎉</p>
-              <p class="text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">Du har fått erbjudandet!</p>
-              <p class="text-slate-400 text-sm mt-1">Det aktiveras automatiskt vid kassan.</p>
+              <p class="text-slate-800 dark:text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">Du har fått erbjudandet!</p>
+              <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Det aktiveras automatiskt vid kassan.</p>
             </div>
           </div>
 
@@ -118,25 +118,25 @@ import '../../styles/global.css';
               ['🔒', 'Säker kassa'],
               ['📦', 'Levererar världen över'],
             ].map(([icon, label]) => (
-              <div class="bg-white/[0.03] border border-white/10 rounded-xl p-4 text-center">
+              <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-xl p-4 text-center shadow-sm dark:shadow-none">
                 <p class="text-2xl mb-1">{icon}</p>
-                <p class="text-slate-400 text-xs font-medium">{label}</p>
+                <p class="text-slate-500 dark:text-slate-400 text-xs font-medium">{label}</p>
               </div>
             ))}
           </div>
         </div>
 
         <!-- RIGHT: Kitbyggaren -->
-        <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2">
+        <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2 shadow-sm dark:shadow-none">
 
-          <h2 class="font-heading text-xl text-white mb-1">Dina Xtruders</h2>
-          <p class="text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
+          <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
 
           <div id="size-inputs" class="space-y-3 mb-4"></div>
 
           <div class="relative w-full mb-6">
             <svg class="add-xtruder-border absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <rect class="add-xtruder-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="6 4"/>
+              <rect class="add-xtruder-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5" fill="none" style="stroke: var(--dash-stroke)" stroke-width="1" stroke-dasharray="6 4"/>
             </svg>
             <button
               id="add-xtruder"
@@ -149,22 +149,22 @@ import '../../styles/global.css';
             </button>
           </div>
 
-          <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-200 leading-relaxed"></div>
+          <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-700 dark:text-slate-200 leading-relaxed"></div>
 
-          <div class="bg-white/[0.04] border border-white/10 rounded-xl p-4 mb-5 space-y-2">
-            <div class="flex justify-between text-sm text-slate-400">
+          <div class="bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl p-4 mb-5 space-y-2">
+            <div class="flex justify-between text-sm text-slate-500 dark:text-slate-400">
               <span>Enheter</span>
               <span id="summary-qty">0</span>
             </div>
-            <div class="flex justify-between text-sm text-slate-400">
+            <div class="flex justify-between text-sm text-slate-500 dark:text-slate-400">
               <span>Pris per enhet</span>
               <span id="summary-unit">€29.99</span>
             </div>
-            <div id="summary-discount-row" class="hidden flex justify-between text-sm text-green-400">
+            <div id="summary-discount-row" class="hidden flex justify-between text-sm text-green-600 dark:text-green-400">
               <span id="summary-discount-label">Rabatt</span>
               <span id="summary-discount-amt"></span>
             </div>
-            <div class="border-t border-white/10 pt-2 flex justify-between text-white font-bold">
+            <div class="border-t border-slate-200 dark:border-white/10 pt-2 flex justify-between text-slate-900 dark:text-white font-bold">
               <span>Totalt</span>
               <span id="summary-total">€0.00</span>
             </div>
@@ -176,7 +176,7 @@ import '../../styles/global.css';
             </svg>
             Gå till kassan
           </button>
-          <p class="text-slate-600 text-xs text-center mt-3">Drivs av Stripe · 256-bitars SSL</p>
+          <p class="text-slate-400 dark:text-slate-600 text-xs text-center mt-3">Drivs av Stripe · 256-bitars SSL</p>
         </div>
 
       </div>
@@ -237,10 +237,10 @@ import '../../styles/global.css';
     const inEl = btn.querySelector('[data-label="in"]')!;
     mmEl.className = unit === 'mm'
       ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
-      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-200 flex items-center';
+      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-600 flex items-center';
     inEl.className = unit === 'in'
       ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
-      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-200 flex items-center';
+      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-600 flex items-center';
   }
 
   function addInput(value = '', unit: UnitType | null = null) {
@@ -252,14 +252,14 @@ import '../../styles/global.css';
     row.className = 'flex items-center gap-2';
     row.id = `size-row-${idx}`;
     row.innerHTML = `
-      <span class="text-slate-500 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
+      <span class="text-slate-400 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
       <input type="text" id="size-input-${idx}" inputmode="decimal" placeholder="t.ex. 25"
-        class="size-field flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"/>
-      <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-800 border border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
+        class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"/>
+      <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
         <span data-label="mm" class="">mm</span>
         <span data-label="in" class="">in</span>
       </button>
-      ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-600 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
+      ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-400 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>` : '<span class="w-4 flex-shrink-0"></span>'}
     `;
@@ -388,6 +388,6 @@ import '../../styles/global.css';
     transition: stroke 0.2s;
   }
   div:has(#add-xtruder:hover) .add-xtruder-rect {
-    stroke: rgba(232, 73, 12, 0.5);
+    stroke: rgba(232, 73, 12, 0.5) !important;
   }
 </style>

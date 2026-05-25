@@ -9,7 +9,7 @@ const { lang = 'en' } = Astro.props;
 const t = translations[lang].footer;
 ---
 
-<footer class="bg-black py-12 border-t border-slate-800/60">
+<footer class="bg-white dark:bg-black py-12 border-t border-slate-200 dark:border-slate-800/60 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-x-16 gap-y-10 mb-10">
@@ -17,21 +17,21 @@ const t = translations[lang].footer;
       <div>
         <div class="flex items-center gap-2 mb-4">
           <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover flex-shrink-0 self-center" />
-          <img src="/logo.png" alt="Xtruder™" class="h-8 w-auto" />
+          <img src="/logo.png" alt="Xtruder™" class="h-8 w-auto" style="filter: var(--logo-filter)" />
         </div>
-        <p class="text-slate-500 text-sm leading-relaxed">
+        <p class="text-slate-400 dark:text-slate-500 text-sm leading-relaxed">
           {t.tagline1}<br/>{t.tagline2}
         </p>
-        <p class="text-slate-700 text-xs mt-3">&copy; {new Date().getFullYear()} Xtruder Tools AB. {t.copyright}</p>
+        <p class="text-slate-400 dark:text-slate-700 text-xs mt-3">&copy; {new Date().getFullYear()} Xtruder Tools AB. {t.copyright}</p>
       </div>
 
       <!-- Product links -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.productLabel}</h4>
+        <h4 class="font-heading font-bold text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest mb-4">{t.productLabel}</h4>
         <ul class="space-y-2">
           {t.productLinks.map(({ href, label }) => (
             <li>
-              <a href={href} class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
+              <a href={href} class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
             </li>
           ))}
         </ul>
@@ -39,13 +39,13 @@ const t = translations[lang].footer;
 
       <!-- Company -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.companyLabel}</h4>
+        <h4 class="font-heading font-bold text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest mb-4">{t.companyLabel}</h4>
         <ul class="space-y-2">
           {t.companyLinks.map(({ href, label, external }) => (
             <li>
               <a
                 href={href}
-                class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer"
+                class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm cursor-pointer"
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >{label}</a>
             </li>
@@ -55,11 +55,11 @@ const t = translations[lang].footer;
 
       <!-- Legal -->
       <div>
-        <h4 class="font-heading font-bold text-slate-500 text-xs uppercase tracking-widest mb-4">{t.legalLabel}</h4>
+        <h4 class="font-heading font-bold text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest mb-4">{t.legalLabel}</h4>
         <ul class="space-y-2">
           {t.legalLinks.map(({ href, label }) => (
             <li>
-              <a href={href} class="text-slate-500 hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
+              <a href={href} class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
             </li>
           ))}
         </ul>
@@ -67,8 +67,8 @@ const t = translations[lang].footer;
     </div>
 
     <!-- Bottom bar -->
-    <div class="border-t border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-slate-700 text-xs">{t.bottomText}</p>
+    <div class="border-t border-slate-200 dark:border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-slate-400 dark:text-slate-700 text-xs">{t.bottomText}</p>
       <div class="flex items-center gap-2">
         <div class="w-5 h-3.5 rounded-sm overflow-hidden flex-shrink-0">
           <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
@@ -77,7 +77,7 @@ const t = translations[lang].footer;
             <rect x="5" width="3" height="11" fill="#003580"/>
           </svg>
         </div>
-        <span class="text-slate-600 text-xs">{t.madeIn}</span>
+        <span class="text-slate-400 dark:text-slate-600 text-xs">{t.madeIn}</span>
       </div>
     </div>
 

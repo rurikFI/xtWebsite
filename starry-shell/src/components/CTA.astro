@@ -9,7 +9,7 @@ const { lang = 'en' } = Astro.props;
 const t = translations[lang].cta;
 ---
 
-<section id="cta" class="py-24 bg-[#0F172A] relative overflow-hidden">
+<section id="cta" class="py-24 bg-slate-50 dark:bg-[#0F172A] relative overflow-hidden transition-colors duration-300">
   <!-- Grid texture -->
   <div class="absolute inset-0 opacity-[0.07] pointer-events-none">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -30,11 +30,11 @@ const t = translations[lang].cta;
         <span class="text-brand text-sm font-semibold">{t.badge}</span>
       </div>
 
-      <h2 class="font-heading text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+      <h2 class="font-heading text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
         {t.h2}<br/><span class="text-gradient">{t.h2accent}</span>
       </h2>
 
-      <p class="text-slate-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+      <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
         {t.body}
       </p>
 
@@ -54,13 +54,13 @@ const t = translations[lang].cta;
           href="https://www.xtrudertools.com"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-white border border-white/20 hover:border-white/50 hover:bg-white/5 font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-lg cursor-pointer"
+          class="inline-flex items-center gap-2 text-slate-800 dark:text-white border border-slate-300 dark:border-white/20 hover:border-slate-500 dark:hover:border-white/50 hover:bg-slate-100 dark:hover:bg-white/5 font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-lg cursor-pointer"
         >
           {t.cta2}
         </a>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-6 text-slate-500 text-sm">
+      <div class="flex flex-wrap justify-center gap-6 text-slate-400 dark:text-slate-500 text-sm">
         <span class="flex items-center gap-2">
           <svg class="w-4 h-4 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           {t.trust1}
