@@ -406,7 +406,7 @@ import '../styles/global.css';
     checkoutBtn.textContent = 'Redirecting to checkout…';
 
     try {
-      const res = await fetch('/api/create-checkout', {
+      const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sizes }),
@@ -441,7 +441,7 @@ import '../styles/global.css';
     kitEmailSubmit.textContent = '…';
 
     try {
-      await fetch('/api/subscribe', {
+      await fetch('/api/subscribe.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

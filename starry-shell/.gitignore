@@ -20,6 +20,9 @@ pnpm-debug.log*
 # collected emails — never commit
 emails.csv
 
+# API secrets — never commit
+public/api/config.php
+
 # macOS-specific files
 .DS_Store
 
