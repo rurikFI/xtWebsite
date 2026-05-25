@@ -7,6 +7,7 @@ interface Props {
 }
 const { lang = 'en' } = Astro.props;
 const t = translations[lang].materials;
+const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
 
 const materialData = [
   { bg: "bg-amber-100", iconColor: "text-amber-600", icon: `<path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v8M8 12h8"/>` },
@@ -31,7 +32,7 @@ const materials = materialData.map((d, i) => ({ ...d, name: t.names[i] }));
         <p class="text-slate-500 text-lg leading-relaxed mb-8">
           {t.body}
         </p>
-        <a href="#cta" class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200 cursor-pointer">
+        <a href={kitUrl} class="inline-flex items-center gap-2 bg-brand text-white font-semibold px-6 py-3 rounded-xl border-[3px] border-black shadow-[6px_6px_0px_0px_#000] hover:translate-x-[6px] hover:translate-y-[6px] hover:shadow-none transition-all duration-150 cursor-pointer">
           {t.cta}
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7"/>

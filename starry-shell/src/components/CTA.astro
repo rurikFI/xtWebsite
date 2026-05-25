@@ -7,6 +7,8 @@ interface Props {
 }
 const { lang = 'en' } = Astro.props;
 const t = translations[lang].cta;
+const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
+const contactUrl = lang === 'en' ? '/contact-us/' : `/${lang}/contact-us/`;
 ---
 
 <section id="cta" class="py-24 bg-slate-50 dark:bg-[#0F172A] relative overflow-hidden transition-colors duration-300">
@@ -25,11 +27,6 @@ const t = translations[lang].cta;
 
   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
     <div class="reveal">
-      <div class="inline-flex items-center gap-2 bg-brand/15 border border-brand/30 rounded-full px-4 py-1.5 mb-6">
-        <span class="w-2 h-2 bg-brand rounded-full animate-pulse"></span>
-        <span class="text-brand text-sm font-semibold">{t.badge}</span>
-      </div>
-
       <h2 class="font-heading text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
         {t.h2}<br/><span class="text-gradient">{t.h2accent}</span>
       </h2>
@@ -40,10 +37,8 @@ const t = translations[lang].cta;
 
       <div class="flex flex-wrap gap-4 justify-center mb-10">
         <a
-          href="https://www.xtrudertools.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-bold px-8 py-4 rounded-xl transition-colors duration-200 text-lg cursor-pointer shadow-xl shadow-orange-900/30"
+          href={kitUrl}
+          class="inline-flex items-center gap-2 bg-brand text-white font-bold px-8 py-4 rounded-xl border-[3px] btn-neo-border shadow-[6px_6px_0px_0px_var(--neo-shadow)] hover:translate-x-[6px] hover:translate-y-[6px] hover:shadow-none transition-all duration-150 text-lg cursor-pointer"
         >
           {t.cta1}
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -51,12 +46,11 @@ const t = translations[lang].cta;
           </svg>
         </a>
         <a
-          href="https://www.xtrudertools.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-slate-800 dark:text-white border border-slate-300 dark:border-white/20 hover:border-slate-500 dark:hover:border-white/50 hover:bg-slate-100 dark:hover:bg-white/5 font-semibold px-8 py-4 rounded-xl transition-all duration-200 text-lg cursor-pointer"
+          href={contactUrl}
+          class="inline-flex flex-col items-center justify-center text-slate-800 dark:text-white border border-slate-300 dark:border-white/20 hover:border-slate-500 dark:hover:border-white/50 hover:bg-slate-100 dark:hover:bg-white/5 px-8 py-4 rounded-xl transition-all duration-200 cursor-pointer"
         >
-          {t.cta2}
+          <span class="font-semibold text-lg leading-tight">{t.cta2}</span>
+          <span class="text-sm text-slate-500 dark:text-slate-400 leading-tight">{t.cta2sub}</span>
         </a>
       </div>
 

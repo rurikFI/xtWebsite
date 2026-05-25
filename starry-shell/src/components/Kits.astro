@@ -1,11 +1,16 @@
 ---
 import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
 
 interface Props {
   lang?: Lang;
 }
 const { lang = 'en' } = Astro.props;
-const kitUrl = lang === 'sv' ? '/sv/build-your-kit' : lang === 'fi' ? '/fi/build-your-kit' : '/build-your-kit';
+const t = translations[lang].kits;
+const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
+
+const tierPrices = ['€29.99/u', '€26.99/u', '€22.49/u', '€20.99/u'];
+const tierBadges = ['', t.tierBadgeOff10, t.tierBadgeOff25, t.tierBestDeal];
 ---
 
 <section id="kits" class="py-24 bg-slate-50 dark:bg-[#0F172A] relative overflow-hidden transition-colors duration-300">
@@ -25,26 +30,21 @@ const kitUrl = lang === 'sv' ? '/sv/build-your-kit' : lang === 'fi' ? '/fi/build
 
   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
 
-    <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block reveal">Order</span>
+    <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block reveal">{t.orderLabel}</span>
     <h2 class="font-heading text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight reveal">
-      Every kit is <span class="text-gradient">built for you</span>
+      {t.orderH2} <span class="text-gradient">{t.orderH2accent}</span>
     </h2>
     <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto mb-10 reveal reveal-d1">
-      No standard sizes. No guesswork. You tell us the exact diameters you need — we build each Xtruder to match. Order as many as you need and unlock volume pricing along the way.
+      {t.orderBody}
     </p>
 
     <!-- Tier summary -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12 reveal reveal-d2">
-      {[
-        ['1–2 units',   '€29.99/u', ''],
-        ['3–5 units',   '€26.99/u', '10% off'],
-        ['6–9 units',   '€22.49/u', '25% off'],
-        ['10–20 units', '€20.99/u', 'Best deal'],
-      ].map(([range, price, badge]) => (
-        <div class={`rounded-xl border p-4 text-center ${badge === 'Best deal' ? 'bg-brand/10 border-brand/40' : 'bg-white dark:bg-white/[0.03] border-slate-200 dark:border-white/10'}`}>
-          <p class={`text-xs font-semibold mb-1 ${badge === 'Best deal' ? 'text-brand' : 'text-slate-500 dark:text-slate-400'}`}>{range}</p>
-          <p class={`font-bold text-lg ${badge === 'Best deal' ? 'text-brand' : 'text-slate-800 dark:text-white'}`}>{price}</p>
-          {badge && <p class={`text-xs mt-1 ${badge === 'Best deal' ? 'text-brand font-semibold' : 'text-green-400'}`}>{badge}</p>}
+      {t.tierRanges.map((range, i) => (
+        <div class={`rounded-xl border p-4 text-center ${tierBadges[i] === t.tierBestDeal ? 'bg-brand/10 border-brand/40' : 'bg-white dark:bg-white/[0.03] border-slate-200 dark:border-white/10'}`}>
+          <p class={`text-xs font-semibold mb-1 ${tierBadges[i] === t.tierBestDeal ? 'text-brand' : 'text-slate-500 dark:text-slate-400'}`}>{range}</p>
+          <p class={`font-bold text-lg ${tierBadges[i] === t.tierBestDeal ? 'text-brand' : 'text-slate-800 dark:text-white'}`}>{tierPrices[i]}</p>
+          {tierBadges[i] && <p class={`text-xs mt-1 ${tierBadges[i] === t.tierBestDeal ? 'text-brand font-semibold' : 'text-green-400'}`}>{tierBadges[i]}</p>}
         </div>
       ))}
     </div>
@@ -53,17 +53,17 @@ const kitUrl = lang === 'sv' ? '/sv/build-your-kit' : lang === 'fi' ? '/fi/build
     <div class="reveal reveal-d3">
       <a
         href={kitUrl}
-        class="inline-flex items-center gap-3 bg-brand hover:bg-brand-hover text-white font-bold text-lg px-10 py-5 rounded-2xl transition-all duration-200 shadow-xl shadow-orange-900/30 hover:shadow-orange-900/50 hover:-translate-y-0.5"
+        class="inline-flex items-center gap-3 bg-brand text-white font-bold text-lg px-10 py-5 rounded-xl border-[3px] btn-neo-border shadow-[6px_6px_0px_0px_var(--neo-shadow)] hover:translate-x-[6px] hover:translate-y-[6px] hover:shadow-none transition-all duration-150 cursor-pointer"
       >
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
-        Build Your Kit
+        {t.orderCta}
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <p class="text-slate-400 dark:text-slate-600 text-sm mt-4">Secure checkout via Stripe · Ships worldwide</p>
+      <p class="text-slate-400 dark:text-slate-600 text-sm mt-4">{t.orderFootnote}</p>
     </div>
 
   </div>
