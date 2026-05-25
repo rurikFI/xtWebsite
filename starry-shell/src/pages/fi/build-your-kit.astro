@@ -66,17 +66,19 @@ import '../../styles/global.css';
             <h2 class="font-heading text-xl text-white mb-4">Volyymihinnasto</h2>
             <div class="space-y-2.5">
               {[
-                ['1–2 yksikköä',   '€29.99 / yksikkö', false, false],
-                ['3–5 yksikköä',   '€26.99 / yksikkö', true,  false],
-                ['6–9 yksikköä',   '€22.49 / yksikkö', true,  false],
-                ['10–20 yksikköä', '€20.99 / yksikkö', true,  true ],
-              ].map(([range, price, disc, best]) => (
+                ['1–2 yksikköä',   '€29.99 / yksikkö', false, false, 'TÄYSI HINTA', false],
+                ['3–5 yksikköä',   '€26.99 / yksikkö', true,  false, '-10%',        false],
+                ['6–9 yksikköä',   '€22.49 / yksikkö', true,  false, '-25%',        false],
+                ['10–20 yksikköä', '€20.99 / yksikkö', true,  true,  '-30%',        true ],
+              ].map(([range, price, disc, best, label, isBest]) => (
                 <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-white/[0.03] border border-white/[0.06]'}`}>
-                  <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-300'}`}>{range}</span>
+                  <div class="flex items-center gap-2">
+                    <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-300'}`}>{range}</span>
+                    <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-400' : 'text-slate-500'}`}>{label}</span>
+                  </div>
                   <div class="flex items-center gap-2">
                     {disc && <span class="text-xs text-slate-500 line-through">€29.99</span>}
                     <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-white'}`}>{price}</span>
-                    {best && <span class="text-xs bg-brand text-white font-bold px-2 py-0.5 rounded-full">PARAS</span>}
                   </div>
                 </div>
               ))}
@@ -132,12 +134,20 @@ import '../../styles/global.css';
 
           <div id="size-inputs" class="space-y-3 mb-4"></div>
 
-          <button id="add-xtruder" class="w-full flex items-center justify-center gap-2 border border-dashed border-white/20 hover:border-brand/50 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 mb-6">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          <div class="relative w-full mb-6">
+            <svg class="add-xtruder-border absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+              <rect class="add-xtruder-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="6 4"/>
             </svg>
-            LISÄÄ XTRUDER
-          </button>
+            <button
+              id="add-xtruder"
+              class="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-colors duration-200 cursor-pointer"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              LISÄÄ XTRUDER
+            </button>
+          </div>
 
           <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-200 leading-relaxed"></div>
 
@@ -337,11 +347,11 @@ import '../../styles/global.css';
         body: JSON.stringify({ sizes, lang: 'fi' }),
       });
       const data = await res.json();
-      if (data.url) { window.location.href = data.url; } else { throw new Error(data.error ?? 'No URL'); }
-    } catch (err: any) {
+      if (data.url) { window.location.href = data.url; } else { throw new Error(); }
+    } catch {
       checkoutBtn.disabled = false;
       checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Siirry kassalle`;
-      alert('Virhe: ' + (err?.message ?? 'Jotain meni pieleen. Yritä uudelleen.'));
+      alert('Jotain meni pieleen. Yritä uudelleen.');
     }
   });
 
@@ -368,3 +378,16 @@ import '../../styles/global.css';
   if (savedRows.length > 0) { savedRows.forEach(({ value, unit }) => addInput(value, unit)); update(); }
   else { addInput(); }
 </script>
+
+<style>
+  @keyframes march-dashes {
+    to { stroke-dashoffset: -20; }
+  }
+  .add-xtruder-rect {
+    animation: march-dashes 3s linear infinite;
+    transition: stroke 0.2s;
+  }
+  div:has(#add-xtruder:hover) .add-xtruder-rect {
+    stroke: rgba(232, 73, 12, 0.5);
+  }
+</style>
