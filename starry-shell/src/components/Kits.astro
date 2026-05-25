@@ -5,6 +5,7 @@ interface Props {
   lang?: Lang;
 }
 const { lang = 'en' } = Astro.props;
+const kitUrl = lang === 'sv' ? '/sv/build-your-kit' : lang === 'fi' ? '/fi/build-your-kit' : '/build-your-kit';
 ---
 
 <section id="kits" class="py-24 bg-[#0F172A] relative overflow-hidden">
@@ -51,7 +52,7 @@ const { lang = 'en' } = Astro.props;
     <!-- CTA -->
     <div class="reveal reveal-d3">
       <a
-        href="/build-your-kit"
+        href={kitUrl}
         class="inline-flex items-center gap-3 bg-brand hover:bg-brand-hover text-white font-bold text-lg px-10 py-5 rounded-2xl transition-all duration-200 shadow-xl shadow-orange-900/30 hover:shadow-orange-900/50 hover:-translate-y-0.5"
       >
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

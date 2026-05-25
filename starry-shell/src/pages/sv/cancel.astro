@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Order avbruten — Xtruder™" lang="sv">
+  <main class="min-h-screen bg-[#0F172A] flex items-center justify-center px-4">
+    <div class="text-center max-w-lg">
+      <div class="flex items-center justify-center gap-2 mb-10">
+        <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
+      </div>
+
+      <div class="text-6xl mb-6">↩️</div>
+
+      <h1 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
+        Order <span class="text-slate-400">Avbruten</span>
+      </h1>
+
+      <p class="text-slate-300 text-lg mb-3">
+        Inga problem — din order slutfördes inte och du har inte debiterats.
+      </p>
+      <p class="text-slate-500 text-sm mb-10">
+        Gå tillbaka och bygg ditt kit när du är redo.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="/sv/build-your-kit" class="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-hover text-white font-bold px-8 py-4 rounded-xl transition-colors duration-200">
+          Tillbaka till kitbyggaren
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/sv/" class="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/50 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-200">
+          Startsida
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

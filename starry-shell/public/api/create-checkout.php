@@ -38,6 +38,8 @@ function discountLabel(int $qty): string {
 }
 
 $origin = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+$lang = in_array($body['lang'] ?? '', ['sv', 'fi']) ? $body['lang'] : '';
+$prefix = $lang ? "/$lang" : '';
 $sizesStr = implode(', ', $sizes);
 
 $params = [
@@ -51,9 +53,15 @@ $params = [
     'line_items[0][price_data][product_data][description]' => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
     'metadata[sizes]'                               => $sizesStr,
     'metadata[qty]'                                 => $qty,
-    'success_url'                                   => $origin . '/success?session_id={CHECKOUT_SESSION_ID}',
-    'cancel_url'                                    => $origin . '/cancel',
+    'success_url'                                   => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
+    'cancel_url'                                    => $origin . $prefix . '/cancel',
 ];
+
+if (!STRIPE_SECRET) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Stripe key not configured on server']);
+    exit;
+}
 
 $ch = curl_init('https://api.stripe.com/v1/checkout/sessions');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -61,16 +69,24 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET . ':');
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Stripe-Version: 2024-06-20']);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
 $response = curl_exec($ch);
+$curlError = curl_error($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
+
+if ($curlError) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Network error: ' . $curlError]);
+    exit;
+}
 
 $data = json_decode($response, true);
 
 if ($httpCode !== 200 || empty($data['url'])) {
     http_response_code(500);
-    echo json_encode(['error' => $data['error']['message'] ?? 'Stripe error']);
+    echo json_encode(['error' => $data['error']['message'] ?? 'Stripe error (HTTP ' . $httpCode . ')']);
     exit;
 }
 

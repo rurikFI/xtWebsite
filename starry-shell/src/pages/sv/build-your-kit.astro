@@ -1,15 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
 ---
 
-<Layout title="Build Your Kit — Xtruder™">
-  <Navbar lang="en" />
+<Layout title="Bygg ditt kit — Xtruder™" lang="sv">
+  <Navbar lang="sv" />
 
   <main class="min-h-screen bg-[#0F172A] pt-24 pb-20">
-    <!-- subtle grid -->
     <div class="fixed inset-0 opacity-[0.04] pointer-events-none z-0">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -23,35 +22,32 @@ import '../styles/global.css';
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Page header -->
       <div class="text-center mb-14">
-        <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Custom order</span>
+        <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Anpassad beställning</span>
         <h1 class="font-heading text-4xl md:text-5xl font-black text-white mb-4">
-          Build Your <span class="text-gradient">Kit</span>
+          Bygg ditt <span class="text-gradient">Kit</span>
         </h1>
         <p class="text-slate-400 text-lg max-w-xl mx-auto">
-          Tell us the exact sizes you need. Every Xtruder is made to your specification.
+          Berätta vilka exakta storlekar du behöver. Varje Xtruder tillverkas efter dina specifikationer.
         </p>
       </div>
 
-      <!-- Two-column layout -->
       <div class="grid lg:grid-cols-2 gap-10 items-start">
 
-        <!-- LEFT: Product info -->
+        <!-- LEFT: Produktinfo -->
         <div class="space-y-6 order-2 lg:order-1">
 
-          <!-- What is it -->
           <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
-            <h2 class="font-heading text-xl text-white mb-4">What you're ordering</h2>
+            <h2 class="font-heading text-xl text-white mb-4">Vad du beställer</h2>
             <p class="text-slate-300 text-sm leading-relaxed mb-5">
-              The Xtruder™ is a patented insulation and coating tool that applies materials uniformly around pipes, cables, and hoses of any size. Each unit is custom-sized to the diameter you specify — ensuring a perfect fit every time.
+              Xtruder™ är ett patenterat isolerings- och beläggningsverktyg som applicerar material jämnt runt rör, kablar och slangar i alla storlekar. Varje enhet är anpassad till den diameter du anger — för en perfekt passform varje gång.
             </p>
             <div class="space-y-3">
               {[
-                ['Patented Finnish engineering', 'Designed and manufactured in Finland to the highest standard.'],
-                ['Custom to your size', 'You specify the diameter in mm or inches — we build it exactly.'],
-                ['Works with any round surface', "Pipes, cables, hoses, conduits — if it's round, it fits."],
-                ['Volume discounts built in', 'The more you order, the better the price per unit.'],
+                ['Patenterad finsk ingenjörskonst', 'Designad och tillverkad i Finland enligt högsta standard.'],
+                ['Anpassad till din storlek', 'Du anger diametern i mm eller tum — vi bygger den exakt.'],
+                ['Fungerar på alla runda ytor', 'Rör, kablar, slangar, ledningar — om det är runt passar det.'],
+                ['Volymrabatter ingår', 'Ju mer du beställer, desto bättre pris per enhet.'],
               ].map(([title, body]) => (
                 <div class="flex gap-3">
                   <svg class="w-5 h-5 text-brand flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -66,70 +62,59 @@ import '../styles/global.css';
             </div>
           </div>
 
-          <!-- Pricing tiers -->
           <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
-            <h2 class="font-heading text-xl text-white mb-4">Volume pricing</h2>
+            <h2 class="font-heading text-xl text-white mb-4">Volymprissättning</h2>
             <div class="space-y-2.5">
               {[
-                ['1–2 units',  '€29.99 / unit', false, false],
-                ['3–5 units',  '€26.99 / unit', true,  false],
-                ['6–9 units',  '€22.49 / unit', true,  false],
-                ['10–20 units','€20.99 / unit', true,  true ],
+                ['1–2 enheter',   '€29.99 / enhet', false, false],
+                ['3–5 enheter',   '€26.99 / enhet', true,  false],
+                ['6–9 enheter',   '€22.49 / enhet', true,  false],
+                ['10–20 enheter', '€20.99 / enhet', true,  true ],
               ].map(([range, price, disc, best]) => (
                 <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-white/[0.03] border border-white/[0.06]'}`}>
                   <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-300'}`}>{range}</span>
                   <div class="flex items-center gap-2">
                     {disc && <span class="text-xs text-slate-500 line-through">€29.99</span>}
                     <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-white'}`}>{price}</span>
-                    {best && <span class="text-xs bg-brand text-white font-bold px-2 py-0.5 rounded-full">BEST</span>}
+                    {best && <span class="text-xs bg-brand text-white font-bold px-2 py-0.5 rounded-full">BÄST</span>}
                   </div>
                 </div>
               ))}
             </div>
-            <p class="text-slate-500 text-xs mt-4">All prices in EUR. Tax calculated at checkout.</p>
+            <p class="text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
           </div>
 
-          <!-- Email capture -->
           <div id="email-capture-box" class="bg-white/[0.03] border border-white/10 rounded-2xl p-7">
-
-            <!-- Default: input state -->
             <div id="email-capture-form">
               <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-5">
-                <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
-                <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+                <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% RABATT</p>
+                <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exklusiv rabatt <span class="normal-case text-xs font-normal">— endast för nya kunder</span></p>
               </div>
-              <p class="text-white font-semibold text-sm mb-4">Sign up for email to receive your discount!</p>
+              <p class="text-white font-semibold text-sm mb-4">Registrera din e-post och få din rabatt!</p>
               <div class="flex gap-2">
                 <input
                   id="kit-email-input"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="du@exempel.com"
                   class="flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
                 />
-                <button
-                  id="kit-email-submit"
-                  class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer"
-                >
-                  Get deal
+                <button id="kit-email-submit" class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer">
+                  Få erbjudandet
                 </button>
               </div>
             </div>
-
-            <!-- Success state (hidden) -->
             <div id="email-capture-success" class="hidden text-center py-2">
               <p class="text-4xl mb-3">🎉</p>
-              <p class="text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">You've got the deal!</p>
-              <p class="text-slate-400 text-sm mt-1">It will be automatically activated at checkout.</p>
+              <p class="text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">Du har fått erbjudandet!</p>
+              <p class="text-slate-400 text-sm mt-1">Det aktiveras automatiskt vid kassan.</p>
             </div>
-
           </div>
 
-          <!-- Trust -->
           <div class="grid grid-cols-3 gap-3">
             {[
-              ['🇫🇮', 'Made in Finland'],
-              ['🔒', 'Secure checkout'],
-              ['📦', 'Ships worldwide'],
+              ['🇫🇮', 'Tillverkad i Finland'],
+              ['🔒', 'Säker kassa'],
+              ['📦', 'Levererar världen över'],
             ].map(([icon, label]) => (
               <div class="bg-white/[0.03] border border-white/10 rounded-xl p-4 text-center">
                 <p class="text-2xl mb-1">{icon}</p>
@@ -139,75 +124,60 @@ import '../styles/global.css';
           </div>
         </div>
 
-        <!-- RIGHT: Kit builder -->
+        <!-- RIGHT: Kitbyggaren -->
         <div class="bg-white/[0.03] border border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2">
 
-          <h2 class="font-heading text-xl text-white mb-1">Your Xtruders</h2>
-          <p class="text-slate-400 text-sm mb-6">Enter the diameter for each Xtruder you need.</p>
+          <h2 class="font-heading text-xl text-white mb-1">Dina Xtruders</h2>
+          <p class="text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
 
-          <!-- Size inputs list -->
-          <div id="size-inputs" class="space-y-3 mb-4">
-            <!-- injected by JS -->
-          </div>
+          <div id="size-inputs" class="space-y-3 mb-4"></div>
 
-          <!-- Add button -->
-          <button
-            id="add-xtruder"
-            class="w-full flex items-center justify-center gap-2 border border-dashed border-white/20 hover:border-brand/50 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 mb-6"
-          >
+          <button id="add-xtruder" class="w-full flex items-center justify-center gap-2 border border-dashed border-white/20 hover:border-brand/50 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 mb-6">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
-            ADD XTRUDER
+            LÄGG TILL XTRUDER
           </button>
 
-          <!-- Persuasion message -->
           <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-200 leading-relaxed"></div>
 
-          <!-- Price summary -->
           <div class="bg-white/[0.04] border border-white/10 rounded-xl p-4 mb-5 space-y-2">
             <div class="flex justify-between text-sm text-slate-400">
-              <span>Units</span>
+              <span>Enheter</span>
               <span id="summary-qty">0</span>
             </div>
             <div class="flex justify-between text-sm text-slate-400">
-              <span>Price per unit</span>
+              <span>Pris per enhet</span>
               <span id="summary-unit">€29.99</span>
             </div>
             <div id="summary-discount-row" class="hidden flex justify-between text-sm text-green-400">
-              <span id="summary-discount-label">Discount</span>
+              <span id="summary-discount-label">Rabatt</span>
               <span id="summary-discount-amt"></span>
             </div>
             <div class="border-t border-white/10 pt-2 flex justify-between text-white font-bold">
-              <span>Total</span>
+              <span>Totalt</span>
               <span id="summary-total">€0.00</span>
             </div>
           </div>
 
-          <!-- Checkout button -->
-          <button
-            id="checkout-btn"
-            disabled
-            class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2"
-          >
+          <button id="checkout-btn" disabled class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
             </svg>
-            Proceed to Checkout
+            Gå till kassan
           </button>
-          <p class="text-slate-600 text-xs text-center mt-3">Powered by Stripe · 256-bit SSL</p>
+          <p class="text-slate-600 text-xs text-center mt-3">Drivs av Stripe · 256-bitars SSL</p>
         </div>
 
       </div>
     </div>
   </main>
 
-  <Footer lang="en" />
+  <Footer lang="sv" />
 </Layout>
 
 <script>
   const BASE = 29.99;
-
   type UnitType = 'mm' | 'in';
 
   function getUnitPrice(qty: number): number {
@@ -226,22 +196,21 @@ import '../styles/global.css';
 
   function persuasionText(qty: number): string {
     if (qty === 0) return '';
-    if (qty === 1) return '💡 Add a second Xtruder to cover more sizes — still at full price. Or add one more and unlock 10% off your entire order!';
-    if (qty === 2) return '🔥 Add just one more Xtruder and unlock 10% off your entire order!';
+    if (qty === 1) return '💡 Lägg till en andra Xtruder för att täcka fler storlekar — fortfarande till fullt pris. Eller lägg till en till och få 10% rabatt på hela din order!';
+    if (qty === 2) return '🔥 Lägg till bara en till Xtruder och få 10% rabatt på hela din order!';
     if (qty >= 3 && qty <= 5) {
       const need = 6 - qty;
-      return `🔥 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 25% off your entire order — you're almost there!`;
+      return `🔥 Lägg till ${need} till Xtruder${need > 1 ? '' : ''} och få 25% rabatt på hela din order — du är nästan framme!`;
     }
     if (qty >= 6 && qty <= 9) {
       const need = 10 - qty;
-      return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
+      return `🏆 Lägg till ${need} till och få vårt BÄSTA erbjudande — 30% rabatt på hela din order!`;
     }
-    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off your entire order.";
+    if (qty >= 10) return '🏆 Bästa erbjudandet upplåst! Du får 30% rabatt på hela din order.';
     return '';
   }
 
   let count = 0;
-
   const inputsList = document.getElementById('size-inputs')!;
   const addBtn = document.getElementById('add-xtruder') as HTMLButtonElement;
   const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
@@ -269,19 +238,13 @@ import '../styles/global.css';
     count++;
     const idx = count;
     const resolvedUnit: UnitType = unit ?? getDefaultUnit();
-
     const row = document.createElement('div');
     row.className = 'flex items-center gap-2';
     row.id = `size-row-${idx}`;
     row.innerHTML = `
       <span class="text-slate-500 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
-      <input
-        type="text"
-        id="size-input-${idx}"
-        inputmode="decimal"
-        placeholder="e.g. 25"
-        class="size-field flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
-      />
+      <input type="text" id="size-input-${idx}" inputmode="decimal" placeholder="t.ex. 25"
+        class="size-field flex-1 min-w-0 bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"/>
       <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-800 border border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
         <span data-label="mm" class="">mm</span>
         <span data-label="in" class="">in</span>
@@ -290,52 +253,33 @@ import '../styles/global.css';
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>` : '<span class="w-4 flex-shrink-0"></span>'}
     `;
-
     inputsList.appendChild(row);
-
-    // Set initial toggle appearance
     const toggleBtn = row.querySelector<HTMLElement>('.unit-toggle')!;
     setUnitToggle(toggleBtn, resolvedUnit);
-
-    // Toggle click
     toggleBtn.addEventListener('click', () => {
-      const current = toggleBtn.dataset.unit as UnitType;
-      setUnitToggle(toggleBtn, current === 'mm' ? 'in' : 'mm');
+      setUnitToggle(toggleBtn, (toggleBtn.dataset.unit as UnitType) === 'mm' ? 'in' : 'mm');
       update();
     });
-
-    // Remove button
     row.querySelector('.remove-btn')?.addEventListener('click', (e) => {
-      const btn = e.currentTarget as HTMLElement;
-      document.getElementById(`size-row-${btn.dataset.remove!}`)?.remove();
-      recount();
-      update();
+      document.getElementById(`size-row-${(e.currentTarget as HTMLElement).dataset.remove!}`)?.remove();
+      recount(); update();
     });
-
-    // Numeric-only input: allow digits, one separator (. or ,)
     const inputEl = row.querySelector<HTMLInputElement>('input')!;
     inputEl.value = value;
     inputEl.addEventListener('input', () => {
       let v = inputEl.value.replace(/[^0-9.,]/g, '');
-      // only one decimal separator
       const firstSep = v.search(/[.,]/);
-      if (firstSep !== -1) {
-        v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
-      }
+      if (firstSep !== -1) v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
       if (inputEl.value !== v) inputEl.value = v;
       update();
     });
-
     if (count >= 20) addBtn.classList.add('opacity-40', 'cursor-not-allowed');
     update();
   }
 
   function recount() {
     const rows = inputsList.querySelectorAll('[id^="size-row-"]');
-    rows.forEach((row, i) => {
-      const num = row.querySelector('span:first-child');
-      if (num) num.textContent = String(i + 1) + '.';
-    });
+    rows.forEach((row, i) => { const n = row.querySelector('span:first-child'); if (n) n.textContent = String(i + 1) + '.'; });
     count = rows.length;
     addBtn.classList.toggle('opacity-40', count >= 20);
     addBtn.classList.toggle('cursor-not-allowed', count >= 20);
@@ -345,15 +289,13 @@ import '../styles/global.css';
     return Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'))
       .map(row => {
         const val = row.querySelector<HTMLInputElement>('.size-field')!.value.replace(',', '.').trim();
-        const unit = (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit) ?? 'mm';
+        const unit = row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm';
         return val ? `${val} ${unit}` : '';
-      })
-      .filter(Boolean);
+      }).filter(Boolean);
   }
 
   function saveKit() {
-    const rows = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'));
-    const data = rows.map(row => ({
+    const data = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]')).map(row => ({
       value: row.querySelector<HTMLInputElement>('.size-field')!.value,
       unit: (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm') as UnitType,
     }));
@@ -363,109 +305,66 @@ import '../styles/global.css';
   function update() {
     const sizes = getSizes();
     const qty = sizes.length;
-
     const unitPrice = getUnitPrice(qty);
-    const total = (unitPrice * qty).toFixed(2);
     const pct = getDiscountPct(qty);
-
     document.getElementById('summary-qty')!.textContent = String(qty);
     document.getElementById('summary-unit')!.textContent = `€${unitPrice.toFixed(2)}`;
-    document.getElementById('summary-total')!.textContent = qty > 0 ? `€${total}` : '€0.00';
-
+    document.getElementById('summary-total')!.textContent = qty > 0 ? `€${(unitPrice * qty).toFixed(2)}` : '€0.00';
     const discRow = document.getElementById('summary-discount-row')!;
     if (pct > 0 && qty > 0) {
-      const saved = ((BASE - unitPrice) * qty).toFixed(2);
-      document.getElementById('summary-discount-label')!.textContent = `${pct}% off`;
-      document.getElementById('summary-discount-amt')!.textContent = `-€${saved}`;
+      document.getElementById('summary-discount-label')!.textContent = `${pct}% rabatt`;
+      document.getElementById('summary-discount-amt')!.textContent = `-€${((BASE - unitPrice) * qty).toFixed(2)}`;
       discRow.classList.remove('hidden');
-    } else {
-      discRow.classList.add('hidden');
-    }
-
+    } else { discRow.classList.add('hidden'); }
     const msg = persuasionText(qty);
-    if (msg) {
-      persuasionEl.textContent = msg;
-      persuasionEl.classList.remove('hidden');
-    } else {
-      persuasionEl.classList.add('hidden');
-    }
-
+    if (msg) { persuasionEl.textContent = msg; persuasionEl.classList.remove('hidden'); }
+    else { persuasionEl.classList.add('hidden'); }
     checkoutBtn.disabled = qty === 0;
     saveKit();
   }
 
-  addBtn.addEventListener('click', () => {
-    if (count < 20) addInput();
-  });
+  addBtn.addEventListener('click', () => { if (count < 20) addInput(); });
 
   checkoutBtn.addEventListener('click', async () => {
     const sizes = getSizes();
     if (!sizes.length) return;
-
     checkoutBtn.disabled = true;
-    checkoutBtn.textContent = 'Redirecting to checkout…';
-
+    checkoutBtn.textContent = 'Omdirigerar till kassan…';
     try {
       const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sizes, lang: '' }),
+        body: JSON.stringify({ sizes, lang: 'sv' }),
       });
       const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error ?? 'No URL returned');
-      }
+      if (data.url) { window.location.href = data.url; } else { throw new Error(data.error ?? 'No URL'); }
     } catch (err: any) {
       checkoutBtn.disabled = false;
-      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Checkout`;
-      alert('Error: ' + (err?.message ?? 'Something went wrong. Please try again.'));
+      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Gå till kassan`;
+      alert('Fel: ' + (err?.message ?? 'Något gick fel. Försök igen.'));
     }
   });
 
-  // Email capture
   const kitEmailInput = document.getElementById('kit-email-input') as HTMLInputElement;
   const kitEmailSubmit = document.getElementById('kit-email-submit') as HTMLButtonElement;
-
   if (localStorage.getItem('xt_email_captured')) {
     document.getElementById('email-capture-form')!.classList.add('hidden');
     document.getElementById('email-capture-success')!.classList.remove('hidden');
   }
-
   kitEmailSubmit.addEventListener('click', async () => {
     const email = kitEmailInput.value.trim();
     if (!email || !email.includes('@')) { kitEmailInput.focus(); return; }
-
-    kitEmailSubmit.disabled = true;
-    kitEmailSubmit.textContent = '…';
-
-    try {
-      await fetch('/api/subscribe.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-    } catch { /* fail silently */ }
-
+    kitEmailSubmit.disabled = true; kitEmailSubmit.textContent = '…';
+    try { await fetch('/api/subscribe.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) }); } catch {}
     localStorage.setItem('xt_email_captured', '1');
     document.getElementById('email-capture-form')!.classList.add('hidden');
     document.getElementById('email-capture-success')!.classList.remove('hidden');
   });
+  kitEmailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') kitEmailSubmit.click(); });
 
-  kitEmailInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') kitEmailSubmit.click();
-  });
-
-  // Restore saved kit or start with one empty input
   const saved = localStorage.getItem('xt_kit');
   let savedRows: { value: string; unit: UnitType }[] = [];
   try { savedRows = saved ? JSON.parse(saved) : []; } catch { savedRows = []; }
-
-  if (savedRows.length > 0) {
-    savedRows.forEach(({ value, unit }) => addInput(value, unit));
-    update();
-  } else {
-    addInput();
-  }
+  if (savedRows.length > 0) { savedRows.forEach(({ value, unit }) => addInput(value, unit)); update(); }
+  else { addInput(); }
 </script>
