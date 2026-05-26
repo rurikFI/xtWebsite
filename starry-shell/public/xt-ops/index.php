@@ -3,13 +3,14 @@ require __DIR__ . '/../api/config.php';
 
 session_start();
 
+define('ADMIN_PW_HASH', '7ed8d8f3d621006774646fc24fafe0a12bae7bbbb64d784b8c5d55830a8afd05');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['secret'])) {
-    if (!ADMIN_SECRET) {
-        $loginError = 'ADMIN_SECRET env var is not set on the server. Add it in Hostinger → Hosting → PHP Config or .htaccess.';
-    } elseif ($_POST['secret'] === ADMIN_SECRET) {
+    $entered = hash('sha256', $_POST['secret']);
+    if (hash_equals(ADMIN_PW_HASH, $entered)) {
         $_SESSION['admin'] = true;
     } else {
-        $loginError = 'Wrong password. Server expects a ' . strlen(ADMIN_SECRET) . '-character value starting with "' . htmlspecialchars(substr(ADMIN_SECRET, 0, 2)) . '".';
+        $loginError = 'Wrong password.';
     }
 }
 if (isset($_POST['logout'])) {
