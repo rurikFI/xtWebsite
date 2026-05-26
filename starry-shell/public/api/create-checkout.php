@@ -26,14 +26,14 @@ $qty = count($sizes);
 function unitPriceCents(int $qty): int {
     if ($qty >= 10) return (int) round(2999 * 0.70);
     if ($qty >= 6)  return (int) round(2999 * 0.75);
-    if ($qty >= 3)  return (int) round(2999 * 0.90);
+    if ($qty >= 6)  return (int) round(2999 * 0.90);
     return 2999;
 }
 
 function discountLabel(int $qty): string {
     if ($qty >= 10) return '30% off — best deal';
     if ($qty >= 6)  return '25% off';
-    if ($qty >= 3)  return '10% off';
+    if ($qty >= 6)  return '10% off';
     return 'Standard price';
 }
 
@@ -60,25 +60,25 @@ $params = [
     'success_url'                                                        => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
     'cancel_url'                                                         => $origin . $prefix . '/build-your-kit',
     // Free shipping for orders of 3+ Xtruders, otherwise standard rates
-    'shipping_options[0][shipping_rate_data][display_name]'              => $qty >= 3 ? 'Posti Pickup Point (Finland) — Free' : 'Posti Pickup Point (Finland)',
+    'shipping_options[0][shipping_rate_data][display_name]'              => $qty >= 6 ? 'Posti Pickup Point (Finland) — Free' : 'Posti Pickup Point (Finland)',
     'shipping_options[0][shipping_rate_data][type]'                      => 'fixed_amount',
-    'shipping_options[0][shipping_rate_data][fixed_amount][amount]'      => $qty >= 3 ? 0 : 490,
+    'shipping_options[0][shipping_rate_data][fixed_amount][amount]'      => $qty >= 6 ? 0 : 490,
     'shipping_options[0][shipping_rate_data][fixed_amount][currency]'    => 'eur',
     'shipping_options[0][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
     'shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]' => 2,
     'shipping_options[0][shipping_rate_data][delivery_estimate][maximum][unit]'  => 'business_day',
     'shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]' => 4,
-    'shipping_options[1][shipping_rate_data][display_name]'              => $qty >= 3 ? 'Home Delivery (Finland) — Free' : 'Home Delivery (Finland)',
+    'shipping_options[1][shipping_rate_data][display_name]'              => $qty >= 6 ? 'Home Delivery (Finland) — Free' : 'Home Delivery (Finland)',
     'shipping_options[1][shipping_rate_data][type]'                      => 'fixed_amount',
-    'shipping_options[1][shipping_rate_data][fixed_amount][amount]'      => $qty >= 3 ? 0 : 690,
+    'shipping_options[1][shipping_rate_data][fixed_amount][amount]'      => $qty >= 6 ? 0 : 690,
     'shipping_options[1][shipping_rate_data][fixed_amount][currency]'    => 'eur',
     'shipping_options[1][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
     'shipping_options[1][shipping_rate_data][delivery_estimate][minimum][value]' => 2,
     'shipping_options[1][shipping_rate_data][delivery_estimate][maximum][unit]'  => 'business_day',
     'shipping_options[1][shipping_rate_data][delivery_estimate][maximum][value]' => 4,
-    'shipping_options[2][shipping_rate_data][display_name]'              => $qty >= 3 ? 'EU & International — Free' : 'EU & International',
+    'shipping_options[2][shipping_rate_data][display_name]'              => $qty >= 6 ? 'EU & International — Free' : 'EU & International',
     'shipping_options[2][shipping_rate_data][type]'                      => 'fixed_amount',
-    'shipping_options[2][shipping_rate_data][fixed_amount][amount]'      => $qty >= 3 ? 0 : 1490,
+    'shipping_options[2][shipping_rate_data][fixed_amount][amount]'      => $qty >= 6 ? 0 : 1490,
     'shipping_options[2][shipping_rate_data][fixed_amount][currency]'    => 'eur',
     'shipping_options[2][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
     'shipping_options[2][shipping_rate_data][delivery_estimate][minimum][value]' => 5,
