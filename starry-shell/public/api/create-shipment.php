@@ -86,9 +86,10 @@ if ($orderRef)      $shipment['senderReference']    = substr($orderRef, 0, 35);
 if ($pickupPointId) $shipment['agent']              = ['quickId' => $pickupPointId];
 
 $shipment['parcels'] = [[
-    'copies'      => $copies,
-    'weight'      => $weightKg,
-    'packageCode' => 'PKT',
+    'copies'         => $copies,
+    'weight'         => $weightKg,
+    'packageCode'    => 'PKT',
+    'valuePerParcel' => true,
 ]];
 
 $payload = [

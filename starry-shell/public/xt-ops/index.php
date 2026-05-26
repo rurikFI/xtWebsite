@@ -78,9 +78,10 @@ function createPostiLabel(array $p): array {
     if (!empty($p['order_ref'])) $shipment['senderReference']    = substr($p['order_ref'], 0, 35);
 
     $shipment['parcels'] = [[
-        'copies'      => max(1, (int)($p['copies'] ?? 1)),
-        'weight'      => max(0.1, (float)($p['weight'] ?? 0.25)),
-        'packageCode' => 'PKT',
+        'copies'        => max(1, (int)($p['copies'] ?? 1)),
+        'weight'        => max(0.1, (float)($p['weight'] ?? 0.25)),
+        'packageCode'   => 'PKT',
+        'valuePerParcel'=> true,
     ]];
 
     $payload = [
