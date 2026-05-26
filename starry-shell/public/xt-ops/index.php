@@ -2,11 +2,11 @@
 require __DIR__ . '/../api/config.php';
 session_start();
 
-define('ADMIN_PW_HASH', '7ed8d8f3d621006774646fc24fafe0a12bae7bbbb64d784b8c5d55830a8afd05');
-
 // --- Auth ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['secret'])) {
-    if (hash_equals(ADMIN_PW_HASH, hash('sha256', $_POST['secret']))) {
+    if (!ADMIN_SECRET) {
+        $loginError = 'ADMIN_SECRET env var not set on server.';
+    } elseif (hash_equals(hash('sha256', ADMIN_SECRET), hash('sha256', $_POST['secret']))) {
         $_SESSION['admin'] = true;
     } else {
         $loginError = 'Wrong password.';

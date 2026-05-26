@@ -2,7 +2,6 @@
 require __DIR__ . '/../api/config.php';
 session_start();
 
-define('ADMIN_PW_HASH', '7ed8d8f3d621006774646fc24fafe0a12bae7bbbb64d784b8c5d55830a8afd05');
 if (empty($_SESSION['admin'])) {
     http_response_code(401);
     exit('Unauthorized');
