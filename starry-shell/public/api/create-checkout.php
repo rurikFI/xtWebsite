@@ -41,25 +41,29 @@ $origin = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP
 $lang = in_array($body['lang'] ?? '', ['sv', 'fi']) ? $body['lang'] : '';
 $prefix = $lang ? "/$lang" : '';
 $sizesStr      = implode(', ', $sizes);
-$pickupPointId = trim($body['pickupPointId'] ?? '');
-$pickupLabel   = trim($body['pickupLabel']   ?? '');
 
 $countries = ['FI','SE','NO','DK','DE','GB','US','EE','LV','LT','PL','NL','BE','FR','AT','CH','IT','ES','PT'];
 
 $params = [
-    'mode'                                          => 'payment',
-    'currency'                                      => 'eur',
-    'automatic_tax[enabled]'                        => 'true',
-    'phone_number_collection[enabled]'              => 'true',
-    'line_items[0][quantity]'                       => $qty,
-    'line_items[0][price_data][currency]'           => 'eur',
-    'line_items[0][price_data][unit_amount]'        => unitPriceCents($qty),
-    'line_items[0][price_data][product_data][name]' => "Xtruder™ Custom Kit — $qty unit" . ($qty > 1 ? 's' : ''),
-    'line_items[0][price_data][product_data][description]' => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
-    'metadata[sizes]'           => $sizesStr,
-    'metadata[qty]'             => $qty,
-    'success_url'               => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
-    'cancel_url'                => $origin . $prefix . '/cancel',
+    'ui_mode'                                                            => 'embedded_page',
+    'mode'                                                               => 'payment',
+    'currency'                                                           => 'eur',
+    'automatic_tax[enabled]'                                             => 'true',
+    'phone_number_collection[enabled]'                                   => 'true',
+    'permissions[update_shipping_details]'                               => 'server_only',
+    'line_items[0][quantity]'                                            => $qty,
+    'line_items[0][price_data][currency]'                                => 'eur',
+    'line_items[0][price_data][unit_amount]'                             => unitPriceCents($qty),
+    'line_items[0][price_data][product_data][name]'                      => "Xtruder™ Custom Kit — $qty unit" . ($qty > 1 ? 's' : ''),
+    'line_items[0][price_data][product_data][description]'               => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
+    'metadata[sizes]'                                                    => $sizesStr,
+    'metadata[qty]'                                                      => $qty,
+    'return_url'                                                         => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
+    // Placeholder rate — calculate-shipping.php replaces this after customer enters address
+    'shipping_options[0][shipping_rate_data][display_name]'              => 'Calculating shipping…',
+    'shipping_options[0][shipping_rate_data][type]'                      => 'fixed_amount',
+    'shipping_options[0][shipping_rate_data][fixed_amount][amount]'      => 0,
+    'shipping_options[0][shipping_rate_data][fixed_amount][currency]'    => 'eur',
 ];
 
 foreach ($countries as $i => $code) {
@@ -93,10 +97,10 @@ if ($curlError) {
 
 $data = json_decode($response, true);
 
-if ($httpCode !== 200 || empty($data['url'])) {
+if ($httpCode !== 200 || empty($data['client_secret'])) {
     http_response_code(500);
     echo json_encode(['error' => $data['error']['message'] ?? 'Stripe error (HTTP ' . $httpCode . ')']);
     exit;
 }
 
-echo json_encode(['url' => $data['url']]);
+echo json_encode(['clientSecret' => $data['client_secret']]);
