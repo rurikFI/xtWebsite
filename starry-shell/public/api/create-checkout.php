@@ -81,7 +81,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_USERPWD, STRIPE_SECRET . ':');
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Stripe-Version: 2025-03-31.basil']);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Stripe-Version: 2026-03-25.dahlia']);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
 $response = curl_exec($ch);
