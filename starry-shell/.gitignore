@@ -26,3 +26,6 @@ emails.csv
 
 # jetbrains setting folder
 .idea/
+
+# server secrets — upload manually, never commit
+public/api/secrets.php
