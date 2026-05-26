@@ -44,10 +44,13 @@ $sizesStr      = implode(', ', $sizes);
 $pickupPointId = trim($body['pickupPointId'] ?? '');
 $pickupLabel   = trim($body['pickupLabel']   ?? '');
 
+$countries = ['FI','SE','NO','DK','DE','GB','US','EE','LV','LT','PL','NL','BE','FR','AT','CH','IT','ES','PT'];
+
 $params = [
     'mode'                                          => 'payment',
     'currency'                                      => 'eur',
     'automatic_tax[enabled]'                        => 'true',
+    'phone_number_collection[enabled]'              => 'true',
     'line_items[0][quantity]'                       => $qty,
     'line_items[0][price_data][currency]'           => 'eur',
     'line_items[0][price_data][unit_amount]'        => unitPriceCents($qty),
@@ -55,11 +58,13 @@ $params = [
     'line_items[0][price_data][product_data][description]' => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
     'metadata[sizes]'           => $sizesStr,
     'metadata[qty]'             => $qty,
-    'metadata[pickupPointId]'   => $pickupPointId ?: '',
-    'metadata[pickupLabel]'     => $pickupLabel   ?: '',
-    'success_url'                                   => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
-    'cancel_url'                                    => $origin . $prefix . '/cancel',
+    'success_url'               => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
+    'cancel_url'                => $origin . $prefix . '/cancel',
 ];
+
+foreach ($countries as $i => $code) {
+    $params["shipping_address_collection[allowed_countries][$i]"] = $code;
+}
 
 if (!STRIPE_SECRET) {
     http_response_code(500);
