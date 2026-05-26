@@ -1,0 +1,154 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Kassa — Xtruder™" lang="sv">
+  <main class="min-h-screen bg-slate-50 dark:bg-[#0F172A] transition-colors duration-300 pb-16">
+    <div class="max-w-2xl mx-auto px-4 pt-10">
+
+      <div class="flex items-center justify-center gap-2 mb-8">
+        <img src="/favicon.webp" alt="" class="h-7 w-7 rounded-md object-cover" />
+        <img src="/logo.png" alt="Xtruder™" class="h-6 w-auto" />
+      </div>
+
+      <div id="order-summary" class="hidden bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl px-5 py-4 mb-6">
+        <p class="text-slate-400 dark:text-slate-500 text-xs uppercase tracking-wide mb-1">Din beställning</p>
+        <p id="order-details" class="text-slate-800 dark:text-white text-sm font-semibold"></p>
+      </div>
+
+      <div id="checkout-error" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-2xl px-5 py-4 mb-6 text-red-700 dark:text-red-300 text-sm">
+        <p id="checkout-error-msg"></p>
+        <a href="/sv/build-your-kit" class="inline-block mt-3 text-xs font-semibold underline">← Tillbaka till kit-byggaren</a>
+      </div>
+
+      <div id="checkout-loading" class="text-center py-20 text-slate-400 dark:text-slate-500 text-sm">
+        Laddar kassan…
+      </div>
+
+      <div id="checkout-mount"></div>
+
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const BASE = 29.99;
+
+  function getUnitPrice(qty: number): number {
+    if (qty >= 10) return parseFloat((BASE * 0.70).toFixed(2));
+    if (qty >= 6)  return parseFloat((BASE * 0.75).toFixed(2));
+    if (qty >= 3)  return parseFloat((BASE * 0.90).toFixed(2));
+    return BASE;
+  }
+
+  function showError(msg: string) {
+    document.getElementById('checkout-loading')!.classList.add('hidden');
+    document.getElementById('checkout-error-msg')!.textContent = msg;
+    document.getElementById('checkout-error')!.classList.remove('hidden');
+  }
+
+  function loadStripeJs(): Promise<void> {
+    if ((window as any).Stripe) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://js.stripe.com/dahlia/stripe.js';
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('Stripe.js failed to load'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function init() {
+    let kit: { value: string; unit: string }[] = [];
+    try {
+      const raw = localStorage.getItem('xt_kit');
+      kit = raw ? JSON.parse(raw) : [];
+    } catch { kit = []; }
+
+    const sizes = kit.map(r => r.value ? `${r.value} ${r.unit}` : '').filter(Boolean);
+    if (!sizes.length) {
+      window.location.href = '/sv/build-your-kit';
+      return;
+    }
+
+    const qty = sizes.length;
+    const unitPrice = getUnitPrice(qty);
+    const subtotal = (unitPrice * qty).toFixed(2);
+    document.getElementById('order-details')!.textContent =
+      `${qty} Xtruder${qty > 1 ? 's' : ''} — €${subtotal} + frakt`;
+    document.getElementById('order-summary')!.classList.remove('hidden');
+
+    let publishableKey = '';
+    try {
+      const configRes = await fetch('/api/stripe-config.php');
+      if (!configRes.ok) throw new Error('HTTP ' + configRes.status);
+      const config = await configRes.json();
+      publishableKey = config.publishableKey ?? '';
+    } catch {
+      showError('Kunde inte ladda betalningskonfigurationen. Försök igen senare.');
+      return;
+    }
+    if (!publishableKey) {
+      showError('Betalning är inte konfigurerad. Kontakta support.');
+      return;
+    }
+
+    let clientSecret = '';
+    try {
+      const res = await fetch('/api/create-checkout.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sizes, lang: 'sv' }), // SV page: lang routes success to /sv/success
+      });
+      const data = await res.json();
+      if (!data.clientSecret) throw new Error(data.error ?? 'Ingen client secret returnerades');
+      clientSecret = data.clientSecret;
+    } catch (e: any) {
+      showError(e.message ?? 'Kunde inte starta kassan. Försök igen.');
+      return;
+    }
+
+    try {
+      await loadStripeJs();
+    } catch {
+      showError('Kunde inte ladda Stripe. Kontrollera din anslutning och försök igen.');
+      return;
+    }
+
+    document.getElementById('checkout-loading')!.classList.add('hidden');
+
+    // Stripe.js is loaded dynamically; no @types package covers window.Stripe here
+    const stripe = (window as any).Stripe(publishableKey);
+
+    const onShippingDetailsChange = async (event: any) => {
+      const { checkoutSessionId, shippingDetails } = event;
+      try {
+        const res = await fetch('/api/calculate-shipping.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            checkout_session_id: checkoutSessionId,
+            shipping_details: shippingDetails,
+          }),
+        });
+        const data = await res.json();
+        if (data.type === 'error') {
+          return { type: 'reject', errorMessage: data.message };
+        }
+        return { type: 'accept' };
+      } catch {
+        return { type: 'reject', errorMessage: 'Kunde inte beräkna frakt. Försök igen.' };
+      }
+    };
+
+    const checkout = await stripe.createEmbeddedCheckoutPage({
+      fetchClientSecret: () => Promise.resolve(clientSecret),
+      onShippingDetailsChange,
+    });
+
+    checkout.mount('#checkout-mount');
+  }
+
+  init();
+</script>
