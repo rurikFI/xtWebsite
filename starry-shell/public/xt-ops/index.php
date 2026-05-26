@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['secret'])) {
     } elseif ($_POST['secret'] === ADMIN_SECRET) {
         $_SESSION['admin'] = true;
     } else {
-        $loginError = 'Wrong password.';
+        $loginError = 'Wrong password. Server expects a ' . strlen(ADMIN_SECRET) . '-character value starting with "' . htmlspecialchars(substr(ADMIN_SECRET, 0, 2)) . '".';
     }
 }
 if (isset($_POST['logout'])) {
     session_destroy();
-    header('Location: /admin/');
+    header('Location: /xt-ops/');
     exit;
 }
 
