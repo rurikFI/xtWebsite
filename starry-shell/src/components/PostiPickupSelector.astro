@@ -156,8 +156,11 @@ const t = {
 
     try {
       const res = await fetch('/api/posti-pickup-points.php?zip=' + encodeURIComponent(zip));
-      if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
+      if (!res.ok) {
+        console.error('Posti pickup point error:', data);
+        throw new Error(data.error || 'HTTP ' + res.status);
+      }
 
       const locations = data.locations || data || [];
 
@@ -177,7 +180,8 @@ const t = {
           resultsList.appendChild(btn);
         });
       }
-    } catch {
+    } catch (e) {
+      console.error('Posti pickup selector failed:', e);
       errorMsg.classList.remove('hidden');
     } finally {
       searchBtn.disabled = false;
