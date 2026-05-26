@@ -85,17 +85,15 @@ if ($receiverEmail) $shipment['receiver']['email']  = $receiverEmail;
 if ($orderRef)      $shipment['senderReference']    = substr($orderRef, 0, 35);
 if ($pickupPointId) $shipment['agent']              = ['quickId' => $pickupPointId];
 
+$shipment['parcels'] = [[
+    'copies'      => $copies,
+    'weight'      => $weightKg,
+    'packageCode' => 'PKT',
+]];
+
 $payload = [
-    'pdfConfig' => [
-        'target1Media' => 'laser-a5',
-        'target2Media' => 'laser-a4',
-    ],
-    'shipment' => $shipment,
-    'parcels'  => [[
-        'copies'      => $copies,
-        'weight'      => $weightKg,
-        'packageCode' => 'PKT',
-    ]],
+    'pdfConfig' => ['target1Media' => 'laser-a5', 'target2Media' => 'laser-a4'],
+    'shipment'  => $shipment,
 ];
 
 $ch = curl_init('https://gateway.posti.fi/shippingapi/api/v1/shipping/order');
