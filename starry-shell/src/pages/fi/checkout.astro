@@ -95,6 +95,7 @@ import '../../styles/global.css';
     }
 
     let clientSecret = '';
+    let shippingToken = '';
     try {
       const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
@@ -104,6 +105,7 @@ import '../../styles/global.css';
       const data = await res.json();
       if (!data.clientSecret) throw new Error(data.error ?? 'Ei client secretiä');
       clientSecret = data.clientSecret;
+      shippingToken = data.shippingToken ?? '';
     } catch (e: any) {
       showError(e.message ?? 'Kassan aloittaminen epäonnistui. Yritä uudelleen.');
       return;
@@ -129,6 +131,7 @@ import '../../styles/global.css';
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             checkout_session_id: checkoutSessionId,
+            shipping_token: shippingToken,
             shipping_details: shippingDetails,
           }),
         });

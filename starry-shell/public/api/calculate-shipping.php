@@ -21,12 +21,19 @@ if (!STRIPE_SECRET) {
 
 $body            = json_decode(file_get_contents('php://input'), true);
 $sessionId       = trim($body['checkout_session_id'] ?? '');
+$token           = trim($body['shipping_token'] ?? '');
 $shippingDetails = $body['shipping_details'] ?? [];
 $address         = $shippingDetails['address'] ?? [];
 $country         = strtoupper(trim($address['country'] ?? ''));
 
 if (!$sessionId || !$country) {
     echo json_encode(['type' => 'error', 'message' => 'Missing session ID or country']);
+    exit;
+}
+
+$expectedToken = hash_hmac('sha256', $sessionId, STRIPE_SECRET);
+if (!hash_equals($expectedToken, $token)) {
+    echo json_encode(['type' => 'error', 'message' => 'Invalid shipping token']);
     exit;
 }
 
@@ -100,6 +107,12 @@ if ($httpCode < 200 || $httpCode >= 300) {
     http_response_code(502);
     $msg = $data['error']['message'] ?? ('Stripe error (HTTP ' . $httpCode . ')');
     echo json_encode(['type' => 'error', 'message' => $msg]);
+    exit;
+}
+
+if (isset($data['error'])) {
+    http_response_code(502);
+    echo json_encode(['type' => 'error', 'message' => $data['error']['message'] ?? 'Stripe error']);
     exit;
 }
 

@@ -103,4 +103,6 @@ if ($httpCode !== 200 || empty($data['client_secret'])) {
     exit;
 }
 
-echo json_encode(['clientSecret' => $data['client_secret']]);
+$sessionId = $data['id'];
+$shippingToken = hash_hmac('sha256', $sessionId, STRIPE_SECRET);
+echo json_encode(['clientSecret' => $data['client_secret'], 'shippingToken' => $shippingToken]);
