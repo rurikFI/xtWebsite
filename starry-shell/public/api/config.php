@@ -9,8 +9,9 @@ if (file_exists($_secretsFile)) {
     require $_secretsFile;
 }
 
-define('STRIPE_SECRET',  defined('_STRIPE_SECRET') && _STRIPE_SECRET ? _STRIPE_SECRET : _env('STRIPE_SECRET'));
-define('POSTI_API_KEY',  defined('_POSTI_API_KEY') ? _POSTI_API_KEY : _env('POSTI_API_KEY'));
-define('POSTI_CUST_NO',  defined('_POSTI_CUST_NO') ? _POSTI_CUST_NO : _env('POSTI_CUST_NO'));
-define('ADMIN_SECRET',   defined('_ADMIN_SECRET')  ? _ADMIN_SECRET  : _env('ADMIN_SECRET'));
-define('EMAILS_CSV',     __DIR__ . '/../../emails.csv');
+define('STRIPE_SECRET',     defined('_STRIPE_SECRET') && _STRIPE_SECRET ? _STRIPE_SECRET : _env('STRIPE_SECRET'));
+define('STRIPE_PUBLISHABLE', defined('_STRIPE_PUBLISHABLE') && _STRIPE_PUBLISHABLE ? _STRIPE_PUBLISHABLE : _env('STRIPE_PUBLISHABLE'));
+define('POSTI_API_KEY',     defined('_POSTI_API_KEY') ? _POSTI_API_KEY : _env('POSTI_API_KEY'));
+define('POSTI_CUST_NO',     defined('_POSTI_CUST_NO') ? _POSTI_CUST_NO : _env('POSTI_CUST_NO'));
+define('ADMIN_SECRET',      defined('_ADMIN_SECRET')  ? _ADMIN_SECRET  : _env('ADMIN_SECRET'));
+define('EMAILS_CSV',        __DIR__ . '/../../emails.csv');
