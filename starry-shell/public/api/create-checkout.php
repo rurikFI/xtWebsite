@@ -48,6 +48,7 @@ $params = [
     'mode'                                                               => 'payment',
     'currency'                                                           => 'eur',
     'automatic_tax[enabled]'                                             => 'true',
+    'tax_id_collection[enabled]'                                         => 'true',
     'phone_number_collection[enabled]'                                   => 'true',
     'line_items[0][quantity]'                                            => $qty,
     'line_items[0][price_data][currency]'                                => 'eur',
