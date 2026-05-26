@@ -23,7 +23,7 @@ $body            = json_decode(file_get_contents('php://input'), true);
 $sessionId       = trim($body['checkout_session_id'] ?? '');
 $shippingDetails = $body['shipping_details'] ?? [];
 $address         = $shippingDetails['address'] ?? [];
-$country         = $address['country'] ?? '';
+$country         = strtoupper(trim($address['country'] ?? ''));
 
 if (!$sessionId || !$country) {
     echo json_encode(['type' => 'error', 'message' => 'Missing session ID or country']);
@@ -89,6 +89,7 @@ $httpCode  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($curlError) {
+    http_response_code(502);
     echo json_encode(['type' => 'error', 'message' => 'Network error: ' . $curlError]);
     exit;
 }
@@ -96,6 +97,7 @@ if ($curlError) {
 $data = json_decode($response, true);
 
 if ($httpCode < 200 || $httpCode >= 300) {
+    http_response_code(502);
     $msg = $data['error']['message'] ?? ('Stripe error (HTTP ' . $httpCode . ')');
     echo json_encode(['type' => 'error', 'message' => $msg]);
     exit;
