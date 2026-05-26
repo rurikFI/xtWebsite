@@ -400,11 +400,30 @@ import '../styles/global.css';
     if (count < 20) addInput();
   });
 
-  checkoutBtn.addEventListener('click', () => {
+  checkoutBtn.addEventListener('click', async () => {
     const sizes = getSizes();
     if (!sizes.length) return;
-    saveKit();
-    window.location.href = '/checkout';
+
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = 'Redirecting to checkout…';
+
+    try {
+      const res = await fetch('/api/create-checkout.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sizes, lang: '' }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error();
+      }
+    } catch {
+      checkoutBtn.disabled = false;
+      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Checkout`;
+      alert('Something went wrong. Please try again.');
+    }
   });
 
   const kitEmailInput = document.getElementById('kit-email-input') as HTMLInputElement;

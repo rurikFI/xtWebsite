@@ -40,17 +40,15 @@ function discountLabel(int $qty): string {
 $origin = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 $lang = in_array($body['lang'] ?? '', ['sv', 'fi']) ? $body['lang'] : '';
 $prefix = $lang ? "/$lang" : '';
-$sizesStr      = implode(', ', $sizes);
+$sizesStr = implode(', ', $sizes);
 
 $countries = ['FI','SE','NO','DK','DE','GB','US','EE','LV','LT','PL','NL','BE','FR','AT','CH','IT','ES','PT'];
 
 $params = [
-    'ui_mode'                                                            => 'embedded_page',
     'mode'                                                               => 'payment',
     'currency'                                                           => 'eur',
     'automatic_tax[enabled]'                                             => 'true',
     'phone_number_collection[enabled]'                                   => 'true',
-    'permissions[update_shipping_details]'                               => 'server_only',
     'line_items[0][quantity]'                                            => $qty,
     'line_items[0][price_data][currency]'                                => 'eur',
     'line_items[0][price_data][unit_amount]'                             => unitPriceCents($qty),
@@ -58,12 +56,33 @@ $params = [
     'line_items[0][price_data][product_data][description]'               => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
     'metadata[sizes]'                                                    => $sizesStr,
     'metadata[qty]'                                                      => $qty,
-    'return_url'                                                         => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
-    // Placeholder rate — calculate-shipping.php replaces this after customer enters address
-    'shipping_options[0][shipping_rate_data][display_name]'              => 'Calculating shipping…',
+    'success_url'                                                        => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
+    'cancel_url'                                                         => $origin . $prefix . '/build-your-kit',
+    // Shipping options — customer selects the one that matches their location
+    'shipping_options[0][shipping_rate_data][display_name]'              => 'Posti Pickup Point (Finland)',
     'shipping_options[0][shipping_rate_data][type]'                      => 'fixed_amount',
-    'shipping_options[0][shipping_rate_data][fixed_amount][amount]'      => 0,
+    'shipping_options[0][shipping_rate_data][fixed_amount][amount]'      => 490,
     'shipping_options[0][shipping_rate_data][fixed_amount][currency]'    => 'eur',
+    'shipping_options[0][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
+    'shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]' => 2,
+    'shipping_options[0][shipping_rate_data][delivery_estimate][maximum][unit]'  => 'business_day',
+    'shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]' => 4,
+    'shipping_options[1][shipping_rate_data][display_name]'              => 'Home Delivery (Finland)',
+    'shipping_options[1][shipping_rate_data][type]'                      => 'fixed_amount',
+    'shipping_options[1][shipping_rate_data][fixed_amount][amount]'      => 690,
+    'shipping_options[1][shipping_rate_data][fixed_amount][currency]'    => 'eur',
+    'shipping_options[1][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
+    'shipping_options[1][shipping_rate_data][delivery_estimate][minimum][value]' => 2,
+    'shipping_options[1][shipping_rate_data][delivery_estimate][maximum][unit]'  => 'business_day',
+    'shipping_options[1][shipping_rate_data][delivery_estimate][maximum][value]' => 4,
+    'shipping_options[2][shipping_rate_data][display_name]'              => 'EU & International',
+    'shipping_options[2][shipping_rate_data][type]'                      => 'fixed_amount',
+    'shipping_options[2][shipping_rate_data][fixed_amount][amount]'      => 1490,
+    'shipping_options[2][shipping_rate_data][fixed_amount][currency]'    => 'eur',
+    'shipping_options[2][shipping_rate_data][delivery_estimate][minimum][unit]'  => 'business_day',
+    'shipping_options[2][shipping_rate_data][delivery_estimate][minimum][value]' => 5,
+    'shipping_options[2][shipping_rate_data][delivery_estimate][maximum][unit]'  => 'business_day',
+    'shipping_options[2][shipping_rate_data][delivery_estimate][maximum][value]' => 10,
 ];
 
 foreach ($countries as $i => $code) {
@@ -97,12 +116,10 @@ if ($curlError) {
 
 $data = json_decode($response, true);
 
-if ($httpCode !== 200 || empty($data['client_secret'])) {
+if ($httpCode !== 200 || empty($data['url'])) {
     http_response_code(500);
     echo json_encode(['error' => $data['error']['message'] ?? 'Stripe error (HTTP ' . $httpCode . ')']);
     exit;
 }
 
-$sessionId = $data['id'];
-$shippingToken = hash_hmac('sha256', $sessionId, STRIPE_SECRET);
-echo json_encode(['clientSecret' => $data['client_secret'], 'shippingToken' => $shippingToken]);
+echo json_encode(['url' => $data['url']]);
