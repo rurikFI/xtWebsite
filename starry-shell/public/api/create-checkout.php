@@ -40,7 +40,9 @@ function discountLabel(int $qty): string {
 $origin = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 $lang = in_array($body['lang'] ?? '', ['sv', 'fi']) ? $body['lang'] : '';
 $prefix = $lang ? "/$lang" : '';
-$sizesStr = implode(', ', $sizes);
+$sizesStr      = implode(', ', $sizes);
+$pickupPointId = trim($body['pickupPointId'] ?? '');
+$pickupLabel   = trim($body['pickupLabel']   ?? '');
 
 $params = [
     'mode'                                          => 'payment',
@@ -51,8 +53,10 @@ $params = [
     'line_items[0][price_data][unit_amount]'        => unitPriceCents($qty),
     'line_items[0][price_data][product_data][name]' => "Xtruder™ Custom Kit — $qty unit" . ($qty > 1 ? 's' : ''),
     'line_items[0][price_data][product_data][description]' => discountLabel($qty) . ' | Sizes: ' . $sizesStr,
-    'metadata[sizes]'                               => $sizesStr,
-    'metadata[qty]'                                 => $qty,
+    'metadata[sizes]'           => $sizesStr,
+    'metadata[qty]'             => $qty,
+    'metadata[pickupPointId]'   => $pickupPointId ?: '',
+    'metadata[pickupLabel]'     => $pickupLabel   ?: '',
     'success_url'                                   => $origin . $prefix . '/success?session_id={CHECKOUT_SESSION_ID}',
     'cancel_url'                                    => $origin . $prefix . '/cancel',
 ];

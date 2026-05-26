@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import PostiPickupSelector from '../../components/PostiPickupSelector.astro';
 import '../../styles/global.css';
 ---
 
@@ -168,6 +169,11 @@ import '../../styles/global.css';
               <span>Totalt</span>
               <span id="summary-total">€0.00</span>
             </div>
+          </div>
+
+          <!-- Posti pickup point selector -->
+          <div class="mb-5">
+            <PostiPickupSelector lang="sv" />
           </div>
 
           <button id="checkout-btn" disabled class="w-full bg-brand hover:bg-brand-hover disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-white font-bold text-base rounded-xl px-6 py-4 transition-colors duration-200 flex items-center justify-center gap-2">
@@ -340,11 +346,12 @@ import '../../styles/global.css';
     if (!sizes.length) return;
     checkoutBtn.disabled = true;
     checkoutBtn.textContent = 'Omdirigerar till kassan…';
+    const pickup = (window as any).getPostiPickupPoint?.() ?? null;
     try {
       const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sizes, lang: 'sv' }),
+        body: JSON.stringify({ sizes, lang: 'sv', pickupPointId: pickup?.id ?? '', pickupLabel: pickup?.name ?? '' }),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; } else { throw new Error(); }

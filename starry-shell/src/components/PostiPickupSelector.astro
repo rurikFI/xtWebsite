@@ -1,0 +1,192 @@
+---
+interface Props {
+  lang?: 'en' | 'sv' | 'fi';
+}
+const { lang = 'en' } = Astro.props;
+
+const t = {
+  en: {
+    title:       'Delivery to Posti pickup point',
+    subtitle:    'Optional — or we ship to your address at checkout',
+    zipLabel:    'Enter your zip code to find nearby pickup points',
+    zipPlaceholder: '00100',
+    search:      'Search',
+    searching:   'Searching…',
+    selected:    'Selected:',
+    change:      'Change',
+    noResults:   'No pickup points found for this zip code.',
+    error:       'Could not load pickup points. Try again.',
+    clear:       'Remove selection',
+  },
+  sv: {
+    title:       'Leverans till Postis utlämningsställe',
+    subtitle:    'Valfritt — eller så skickar vi till din adress vid kassan',
+    zipLabel:    'Ange ditt postnummer för att hitta närmaste utlämningsställen',
+    zipPlaceholder: '00100',
+    search:      'Sök',
+    searching:   'Söker…',
+    selected:    'Valt:',
+    change:      'Ändra',
+    noResults:   'Inga utlämningsställen hittades för detta postnummer.',
+    error:       'Kunde inte ladda utlämningsställen. Försök igen.',
+    clear:       'Ta bort val',
+  },
+  fi: {
+    title:       'Toimitus Postin noutopisteeseen',
+    subtitle:    'Vapaaehtoinen — tai lähetämme osoitteeseesi kassalla',
+    zipLabel:    'Syötä postinumerosi löytääksesi lähimmät noutopisteet',
+    zipPlaceholder: '00100',
+    search:      'Hae',
+    searching:   'Haetaan…',
+    selected:    'Valittu:',
+    change:      'Vaihda',
+    noResults:   'Postinumerolla ei löydy noutopisteitä.',
+    error:       'Noutopisteiden lataus epäonnistui. Yritä uudelleen.',
+    clear:       'Poista valinta',
+  },
+}[lang];
+---
+
+<div id="posti-selector" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-none">
+  <div class="flex items-center gap-2 mb-1">
+    <svg class="w-5 h-5 text-brand flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+    </svg>
+    <p class="text-slate-900 dark:text-white font-semibold text-sm">{t.title}</p>
+  </div>
+  <p class="text-slate-400 dark:text-slate-500 text-xs mb-4">{t.subtitle}</p>
+
+  <!-- Selected state -->
+  <div id="posti-selected-state" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 flex items-start justify-between gap-3">
+    <div>
+      <p class="text-brand text-xs font-semibold uppercase tracking-wide mb-0.5">{t.selected}</p>
+      <p id="posti-selected-name" class="text-slate-800 dark:text-white font-medium text-sm"></p>
+      <p id="posti-selected-addr" class="text-slate-500 dark:text-slate-400 text-xs mt-0.5"></p>
+    </div>
+    <button id="posti-change-btn" class="text-xs text-slate-400 hover:text-brand whitespace-nowrap mt-0.5 cursor-pointer transition-colors duration-200">{t.change}</button>
+  </div>
+
+  <!-- Search state -->
+  <div id="posti-search-state">
+    <p class="text-slate-500 dark:text-slate-400 text-xs mb-2">{t.zipLabel}</p>
+    <div class="flex gap-2 mb-3">
+      <input
+        id="posti-zip-input"
+        type="text"
+        inputmode="numeric"
+        maxlength="5"
+        placeholder={t.zipPlaceholder}
+        class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"
+      />
+      <button
+        id="posti-search-btn"
+        class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer"
+      >
+        {t.search}
+      </button>
+    </div>
+
+    <div id="posti-results" class="space-y-2 max-h-56 overflow-y-auto pr-0.5"></div>
+    <p id="posti-no-results" class="hidden text-slate-400 dark:text-slate-500 text-xs text-center py-3">{t.noResults}</p>
+    <p id="posti-error" class="hidden text-red-400 text-xs text-center py-3">{t.error}</p>
+  </div>
+</div>
+
+<script define:vars={{ searchText: t.search, searchingText: t.searching }}>
+  const LS_KEY = 'xt_pickup_point';
+
+  const selector       = document.getElementById('posti-selector');
+  const searchState    = document.getElementById('posti-search-state');
+  const selectedState  = document.getElementById('posti-selected-state');
+  const selectedName   = document.getElementById('posti-selected-name');
+  const selectedAddr   = document.getElementById('posti-selected-addr');
+  const changeBtn      = document.getElementById('posti-change-btn');
+  const zipInput       = document.getElementById('posti-zip-input');
+  const searchBtn      = document.getElementById('posti-search-btn');
+  const resultsList    = document.getElementById('posti-results');
+  const noResults      = document.getElementById('posti-no-results');
+  const errorMsg       = document.getElementById('posti-error');
+
+  function showSelected(point) {
+    selectedName.textContent = point.name;
+    selectedAddr.textContent = (point.address || '') + (point.address && point.city ? ', ' : '') + (point.city || '');
+    selectedState.classList.remove('hidden');
+    searchState.classList.add('hidden');
+  }
+
+  function showSearch() {
+    selectedState.classList.add('hidden');
+    searchState.classList.remove('hidden');
+    resultsList.innerHTML = '';
+    noResults.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+  }
+
+  function selectPoint(point) {
+    localStorage.setItem(LS_KEY, JSON.stringify(point));
+    showSelected(point);
+  }
+
+  function clearSelection() {
+    localStorage.removeItem(LS_KEY);
+    showSearch();
+  }
+
+  // Restore from localStorage
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved) {
+    try { showSelected(JSON.parse(saved)); } catch { clearSelection(); }
+  }
+
+  changeBtn.addEventListener('click', clearSelection);
+
+  zipInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') searchBtn.click();
+  });
+
+  searchBtn.addEventListener('click', async () => {
+    const zip = zipInput.value.replace(/\D/g, '').slice(0, 5);
+    if (zip.length < 3) { zipInput.focus(); return; }
+
+    searchBtn.disabled = true;
+    searchBtn.textContent = searchingText;
+    resultsList.innerHTML = '';
+    noResults.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    try {
+      const res = await fetch('/api/posti-pickup-points.php?zip=' + encodeURIComponent(zip));
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+
+      const locations = data.locations || data || [];
+
+      if (!locations.length) {
+        noResults.classList.remove('hidden');
+      } else {
+        locations.slice(0, 20).forEach((loc) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'w-full text-left bg-slate-50 dark:bg-slate-800/60 hover:bg-brand/10 hover:border-brand/40 border border-slate-200 dark:border-white/[0.06] rounded-xl px-4 py-2.5 transition-all duration-150 cursor-pointer';
+          const name = loc.name || loc.publicName || 'Pickup point';
+          const addr = [loc.streetAddress, loc.city].filter(Boolean).join(', ')
+                     || [loc.address, loc.city].filter(Boolean).join(', ');
+          const id   = loc.pupCode || loc.locationCode || loc.id || '';
+          btn.innerHTML = `<p class="text-slate-800 dark:text-white text-xs font-semibold">${name}</p><p class="text-slate-400 text-xs mt-0.5">${addr}</p>`;
+          btn.addEventListener('click', () => selectPoint({ id, name, address: loc.streetAddress || loc.address || '', city: loc.city || '' }));
+          resultsList.appendChild(btn);
+        });
+      }
+    } catch {
+      errorMsg.classList.remove('hidden');
+    } finally {
+      searchBtn.disabled = false;
+      searchBtn.textContent = searchText;
+    }
+  });
+
+  // Expose selected point for checkout
+  window.getPostiPickupPoint = () => {
+    try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch { return null; }
+  };
+</script>
