@@ -45,7 +45,7 @@ $sizesStr      = implode(', ', $sizes);
 $countries = ['FI','SE','NO','DK','DE','GB','US','EE','LV','LT','PL','NL','BE','FR','AT','CH','IT','ES','PT'];
 
 $params = [
-    'ui_mode'                                                            => 'embedded',
+    'ui_mode'                                                            => 'embedded_page',
     'mode'                                                               => 'payment',
     'currency'                                                           => 'eur',
     'automatic_tax[enabled]'                                             => 'true',
