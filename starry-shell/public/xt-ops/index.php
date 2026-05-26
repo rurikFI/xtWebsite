@@ -292,7 +292,7 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
           <div>Tracking: <span class="mono"><?= htmlspecialchars($parcelNo) ?></span></div>
         <?php endif; ?>
         <?php foreach ($pdfs as $pdf): ?>
-          <a href="<?= htmlspecialchars($pdf['href'] ?? '#') ?>" target="_blank">
+          <a href="/xt-ops/pdf.php?url=<?= urlencode($pdf['href'] ?? '') ?>" target="_blank">
             📄 <?= htmlspecialchars($pdf['description'] ?? 'Label') ?>
           </a>
         <?php endforeach; ?>
