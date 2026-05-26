@@ -4,7 +4,9 @@ require __DIR__ . '/../api/config.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['secret'])) {
-    if (ADMIN_SECRET && $_POST['secret'] === ADMIN_SECRET) {
+    if (!ADMIN_SECRET) {
+        $loginError = 'ADMIN_SECRET env var is not set on the server. Add it in Hostinger → Hosting → PHP Config or .htaccess.';
+    } elseif ($_POST['secret'] === ADMIN_SECRET) {
         $_SESSION['admin'] = true;
     } else {
         $loginError = 'Wrong password.';
