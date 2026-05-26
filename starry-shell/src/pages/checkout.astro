@@ -90,6 +90,7 @@ import '../styles/global.css';
     let publishableKey = '';
     try {
       const configRes = await fetch('/api/stripe-config.php');
+      if (!configRes.ok) throw new Error('HTTP ' + configRes.status);
       const config = await configRes.json();
       publishableKey = config.publishableKey ?? '';
     } catch {
@@ -107,7 +108,7 @@ import '../styles/global.css';
       const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sizes, lang: '' }),
+        body: JSON.stringify({ sizes, lang: '' }), // EN page: empty lang routes success to /success
       });
       const data = await res.json();
       if (!data.clientSecret) throw new Error(data.error ?? 'No client secret returned');
@@ -127,6 +128,7 @@ import '../styles/global.css';
 
     document.getElementById('checkout-loading')!.classList.add('hidden');
 
+    // Stripe.js is loaded dynamically; no @types package covers window.Stripe here
     const stripe = (window as any).Stripe(publishableKey);
 
     const onShippingDetailsChange = async (event: any) => {
