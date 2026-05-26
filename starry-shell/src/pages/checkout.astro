@@ -57,7 +57,7 @@ import '../styles/global.css';
     if ((window as any).Stripe) return Promise.resolve();
     return new Promise((resolve, reject) => {
       const s = document.createElement('script');
-      s.src = 'https://js.stripe.com/dahlia/stripe.js';
+      s.src = 'https://js.stripe.com/v3/';
       s.onload = () => resolve();
       s.onerror = () => reject(new Error('Stripe.js failed to load'));
       document.head.appendChild(s);
@@ -155,8 +155,8 @@ import '../styles/global.css';
       }
     };
 
-    const checkout = await stripe.createEmbeddedCheckoutPage({
-      fetchClientSecret: () => Promise.resolve(clientSecret),
+    const checkout = await stripe.initEmbeddedCheckout({
+      clientSecret,
       onShippingDetailsChange,
     });
 
