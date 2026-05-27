@@ -133,6 +133,18 @@ export const translations = {
       cta: "Choose your sizes now",
       names: ["Epoxies", "Silicones", "Acrylics", "Latexes", "Paints", "Chemical Metals"],
     },
+    founderStrip: {
+      headline: "This started under a housefloor in the Finnish archipelago.",
+      quote: "I was completely sure that there would exist a tool like the Xtruder already, but I could not find it.",
+      attribution: "— Patrik Örtendahl, co-founder",
+      grounding: "That thought came to him in 2012, while insulating pipes under his house in southern Finland. Six years later, the Xtruder exists.",
+      cta: "Read our full story",
+      ctaHref: "/about-us/",
+      founders: [
+        { name: "Patrik Örtendahl", role: "Co-founder & Inventor" },
+        { name: "Rurik Örtendahl",  role: "Co-founder & Builder"  },
+      ],
+    },
     finland: {
       label: "Our Story",
       h2: "Innovation in Insulation.",
@@ -347,6 +359,18 @@ export const translations = {
       cta: "Välj dina storlekar nu",
       names: ["Epoxi", "Silikoner", "Akrylater", "Latex", "Färger", "Kemiska metaller"],
     },
+    founderStrip: {
+      headline: "Det började under ett golvbjälklag i den finska skärgården.",
+      quote: "Jag var helt säker på att ett sådant verktyg redan existerade, men jag kunde inte hitta det.",
+      attribution: "— Patrik Örtendahl, medgrundare",
+      grounding: "Den tanken fick han 2012, när han isolerade rör under sitt hus i södra Finland. Sex år senare finns Xtruder.",
+      cta: "Läs vår historia",
+      ctaHref: "/sv/about-us/",
+      founders: [
+        { name: "Patrik Örtendahl", role: "Medgrundare & Uppfinnare" },
+        { name: "Rurik Örtendahl",  role: "Medgrundare & Byggare"    },
+      ],
+    },
     finland: {
       label: "Vår historia",
       h2: "Innovation inom isolering.",
@@ -560,6 +584,18 @@ export const translations = {
       body: "Xtruder™ on yhteensopiva käytännössä minkä tahansa viskoottisen pinnoitemateriaalin kanssa. Mitä tahansa projektisi vaatii, meillä on siihen sopiva koko ja kokoonpano.",
       cta: "Valitse kokosi nyt",
       names: ["Epoksit", "Silikonit", "Akryylit", "Lateksit", "Maalit", "Kemialliset metallit"],
+    },
+    founderStrip: {
+      headline: "Tämä sai alkunsa lattianrajan alta Suomen saaristossa.",
+      quote: "Olin täysin varma, että tällainen työkalu oli jo olemassa – mutta en löytänyt sitä mistään.",
+      attribution: "— Patrik Örtendahl, perustaja",
+      grounding: "Ajatus tuli vuonna 2012, kun hän eristeli putkia talonsa alla Etelä-Suomessa. Kuusi vuotta myöhemmin Xtruder on olemassa.",
+      cta: "Lue tarinaamme",
+      ctaHref: "/fi/about-us/",
+      founders: [
+        { name: "Patrik Örtendahl", role: "Perustaja & Keksijä" },
+        { name: "Rurik Örtendahl",  role: "Perustaja & Rakentaja" },
+      ],
     },
     finland: {
       label: "Tarinaamme",
