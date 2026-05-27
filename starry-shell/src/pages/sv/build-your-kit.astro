@@ -20,7 +20,7 @@ import '../../styles/global.css';
       </svg>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
 
       <div class="text-center mb-14">
         <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Anpassad beställning</span>
@@ -38,7 +38,7 @@ import '../../styles/global.css';
         <div class="space-y-6 order-2 lg:order-1">
 
           <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
-            <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-4">Vad du beställer</h2>
+            <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Vad du beställer</h2>
             <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
               Xtruder™ är ett patenterat isolerings- och beläggningsverktyg som applicerar material jämnt runt rör, kablar och slangar i alla storlekar. Varje enhet är anpassad till den diameter du anger — för en perfekt passform varje gång.
             </p>
@@ -63,7 +63,7 @@ import '../../styles/global.css';
           </div>
 
           <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
-            <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
+            <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
             <div class="space-y-2.5">
               {[
                 ['1–2 enheter',   '€29.99 / enhet', false, false, 'FULLPRIS', false],
@@ -129,7 +129,7 @@ import '../../styles/global.css';
         <!-- RIGHT: Kitbyggaren -->
         <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2 shadow-sm dark:shadow-none">
 
-          <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
+          <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
           <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
 
           <div id="size-inputs" class="space-y-3 mb-4"></div>
@@ -264,7 +264,7 @@ import '../../styles/global.css';
           id="size-input-${idx}"
           inputmode="decimal"
           placeholder="e.g. 25"
-          class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
+          class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
         />
         <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
           <span data-label="mm" class="">mm</span>
