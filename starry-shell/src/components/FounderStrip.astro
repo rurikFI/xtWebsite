@@ -17,7 +17,7 @@ const t = translations[lang].founderStrip;
       <!-- LEFT: headline + quote + grounding + CTA -->
       <div>
         <!-- Headline -->
-        <p class="text-brand font-extrabold text-sm uppercase tracking-widest mb-6 leading-snug max-w-xs">
+        <p class="text-slate-900 dark:text-white font-extrabold text-lg md:text-xl mb-6 leading-snug">
           {t.headline}
         </p>
 
@@ -52,12 +52,12 @@ const t = translations[lang].founderStrip;
 
       <!-- RIGHT: founder cards -->
       <div class="flex gap-5 justify-center lg:justify-end">
-        {t.founders.map(({ name, role }) => (
-          <div class="flex flex-col items-center gap-3 bg-white dark:bg-white/[0.04] border border-orange-100 dark:border-white/[0.08] rounded-2xl px-6 py-7 shadow-sm w-40 sm:w-44">
+        {t.founders.map(({ name, role, relation }) => (
+          <div class="flex flex-col items-center gap-4 bg-white dark:bg-white/[0.04] border border-orange-100 dark:border-white/[0.08] rounded-2xl px-8 py-9 shadow-sm w-48 sm:w-52">
 
             <!-- Avatar placeholder -->
-            <div class="w-20 h-20 rounded-full bg-orange-50 dark:bg-white/[0.06] border-2 border-orange-200 dark:border-white/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-10 h-10 text-brand/40 dark:text-brand/30" viewBox="0 0 24 24" fill="currentColor">
+            <div class="w-24 h-24 rounded-full bg-orange-50 dark:bg-white/[0.06] border-2 border-orange-200 dark:border-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-12 h-12 text-brand/40 dark:text-brand/30" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
               </svg>
             </div>
@@ -66,6 +66,7 @@ const t = translations[lang].founderStrip;
             <div class="text-center">
               <p class="font-heading font-black text-slate-900 dark:text-white text-sm leading-tight">{name}</p>
               <p class="text-slate-500 dark:text-slate-400 text-xs mt-1 leading-snug">{role}</p>
+              <p class="text-brand font-bold text-xs mt-1">{relation}</p>
             </div>
 
           </div>
