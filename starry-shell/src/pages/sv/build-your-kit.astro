@@ -27,7 +27,7 @@ import '../../styles/global.css';
         <h1 class="font-heading text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">
           Bygg ditt <span class="text-gradient">Kit</span>
         </h1>
-        <p class="text-slate-500 dark:text-slate-400 text-lg max-w-xl mx-auto">
+        <p class="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto">
           Berätta vilka exakta storlekar du behöver. Varje Xtruder tillverkas efter dina specifikationer.
         </p>
       </div>
@@ -55,7 +55,7 @@ import '../../styles/global.css';
                   </svg>
                   <div>
                     <p class="text-slate-800 dark:text-white text-sm font-semibold">{title}</p>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">{body}</p>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">{body}</p>
                   </div>
                 </div>
               ))}
@@ -77,13 +77,13 @@ import '../../styles/global.css';
                     <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-500'}`}>{label}</span>
                   </div>
                   <div class="flex items-center gap-2">
-                    {disc && <span class="text-xs text-slate-400 dark:text-slate-500 line-through">€29.99</span>}
+                    {disc && <span class="text-xs text-slate-500 dark:text-slate-500 line-through">€29.99</span>}
                     <span class={`text-sm font-bold ${best ? 'text-brand' : 'text-slate-800 dark:text-white'}`}>{price}</span>
                   </div>
                 </div>
               ))}
             </div>
-            <p class="text-slate-400 dark:text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
+            <p class="text-slate-500 dark:text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
           </div>
 
           <div id="email-capture-box" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
@@ -98,7 +98,7 @@ import '../../styles/global.css';
                   id="kit-email-input"
                   type="email"
                   placeholder="du@exempel.com"
-                  class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"
+                  class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand dark:focus:border-brand rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"
                 />
                 <button id="kit-email-submit" class="bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-2.5 transition-colors duration-200 whitespace-nowrap cursor-pointer">
                   Få erbjudandet
@@ -108,7 +108,7 @@ import '../../styles/global.css';
             <div id="email-capture-success" class="hidden text-center py-2">
               <p class="text-4xl mb-3">🎉</p>
               <p class="text-slate-800 dark:text-white font-semibold text-lg" style="font-family:'Racing Sans One',sans-serif;">Du har fått erbjudandet!</p>
-              <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Det aktiveras automatiskt vid kassan.</p>
+              <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Det aktiveras automatiskt vid kassan.</p>
             </div>
           </div>
 
@@ -120,7 +120,7 @@ import '../../styles/global.css';
             ].map(([icon, label]) => (
               <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-xl p-4 text-center shadow-sm dark:shadow-none">
                 <p class="text-2xl mb-1">{icon}</p>
-                <p class="text-slate-500 dark:text-slate-400 text-xs font-medium">{label}</p>
+                <p class="text-slate-600 dark:text-slate-400 text-xs font-medium">{label}</p>
               </div>
             ))}
           </div>
@@ -130,17 +130,17 @@ import '../../styles/global.css';
         <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2 shadow-sm dark:shadow-none">
 
           <h2 class="font-heading text-xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
-          <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
+          <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
 
           <div id="size-inputs" class="space-y-3 mb-4"></div>
 
           <div class="relative w-full mb-6">
             <svg class="add-xtruder-border absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <rect class="add-xtruder-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5" fill="none" style="stroke: var(--dash-stroke)" stroke-width="1" stroke-dasharray="6 4"/>
+              <rect class="add-xtruder-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="11.5" ry="11.5" fill="none" style="stroke: var(--dash-stroke)" stroke-width="2.5" stroke-dasharray="6 4"/>
             </svg>
             <button
               id="add-xtruder"
-              class="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-brand text-sm font-medium rounded-xl px-4 py-3 transition-colors duration-200 cursor-pointer"
+              class="w-full flex items-center justify-center gap-2 text-brand/70 dark:text-brand/70 hover:text-brand dark:hover:text-brand bg-brand/[0.05] dark:bg-transparent hover:bg-brand/[0.18] dark:hover:bg-brand/[0.15] text-sm font-extrabold rounded-xl px-4 py-3 transition-all duration-200 cursor-pointer"
             >
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -152,11 +152,11 @@ import '../../styles/global.css';
           <div id="persuasion" class="hidden bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 text-sm text-slate-700 dark:text-slate-200 leading-relaxed"></div>
 
           <div class="bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl p-4 mb-5 space-y-2">
-            <div class="flex justify-between text-sm text-slate-500 dark:text-slate-400">
+            <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
               <span>Enheter</span>
               <span id="summary-qty">0</span>
             </div>
-            <div class="flex justify-between text-sm text-slate-500 dark:text-slate-400">
+            <div class="flex justify-between text-sm text-slate-600 dark:text-slate-400">
               <span>Pris per enhet</span>
               <span id="summary-unit">€29.99</span>
             </div>
@@ -176,7 +176,7 @@ import '../../styles/global.css';
             </svg>
             Gå till kassan
           </button>
-          <p class="text-slate-400 dark:text-slate-600 text-xs text-center mt-3">Drivs av Stripe · 256-bitars SSL</p>
+          <p class="text-slate-500 dark:text-slate-600 text-xs text-center mt-3">Drivs av Stripe · 256-bitars SSL</p>
         </div>
 
       </div>
@@ -188,6 +188,9 @@ import '../../styles/global.css';
 
 <script>
   const BASE = 29.99;
+  const MAX_MM = 54;
+  const MAX_IN = 2.12;
+
   type UnitType = 'mm' | 'in';
 
   function getUnitPrice(qty: number): number {
@@ -206,21 +209,22 @@ import '../../styles/global.css';
 
   function persuasionText(qty: number): string {
     if (qty === 0) return '';
-    if (qty === 1) return '💡 Lägg till en andra Xtruder för att täcka fler storlekar — fortfarande till fullt pris. Eller lägg till en till och få 10% rabatt på hela din order!';
-    if (qty === 2) return '🔥 Lägg till bara en till Xtruder och få 10% rabatt på hela din order!';
+    if (qty === 1) return '💡 Add a second Xtruder to cover more sizes — still at full price. Or add one more and unlock 10% off your entire order!';
+    if (qty === 2) return '🔥 Add just one more Xtruder and unlock 10% off your entire order!';
     if (qty >= 3 && qty <= 5) {
       const need = 6 - qty;
-      return `🔥 Lägg till ${need} till Xtruder${need > 1 ? '' : ''} och få 25% rabatt på hela din order — du är nästan framme!`;
+      return `🔥 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 25% off your entire order — you're almost there!`;
     }
     if (qty >= 6 && qty <= 9) {
       const need = 10 - qty;
-      return `🏆 Lägg till ${need} till och få vårt BÄSTA erbjudande — 30% rabatt på hela din order!`;
+      return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
     }
-    if (qty >= 10) return '🏆 Bästa erbjudandet upplåst! Du får 30% rabatt på hela din order.';
+    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off your entire order.";
     return '';
   }
 
   let count = 0;
+
   const inputsList = document.getElementById('size-inputs')!;
   const addBtn = document.getElementById('add-xtruder') as HTMLButtonElement;
   const checkoutBtn = document.getElementById('checkout-btn') as HTMLButtonElement;
@@ -237,10 +241,10 @@ import '../../styles/global.css';
     const inEl = btn.querySelector('[data-label="in"]')!;
     mmEl.className = unit === 'mm'
       ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
-      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-600 flex items-center';
+      : 'px-1.5 rounded-lg text-slate-500 dark:text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-700 dark:hover:text-slate-200 flex items-center';
     inEl.className = unit === 'in'
       ? 'px-1.5 rounded-lg bg-brand text-white text-xs font-bold transition-all duration-150 flex items-center'
-      : 'px-1.5 rounded-lg text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-600 flex items-center';
+      : 'px-1.5 rounded-lg text-slate-500 dark:text-slate-400 text-xs font-medium transition-all duration-150 hover:text-slate-700 dark:hover:text-slate-200 flex items-center';
   }
 
   function addInput(value = '', unit: UnitType | null = null) {
@@ -248,48 +252,71 @@ import '../../styles/global.css';
     count++;
     const idx = count;
     const resolvedUnit: UnitType = unit ?? getDefaultUnit();
+
     const row = document.createElement('div');
-    row.className = 'flex items-center gap-2';
+    row.className = 'space-y-1';
     row.id = `size-row-${idx}`;
     row.innerHTML = `
-      <span class="text-slate-400 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
-      <input type="text" id="size-input-${idx}" inputmode="decimal" placeholder="t.ex. 25"
-        class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 focus:border-brand/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-colors duration-200"/>
-      <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
-        <span data-label="mm" class="">mm</span>
-        <span data-label="in" class="">in</span>
-      </button>
-      ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-400 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>` : '<span class="w-4 flex-shrink-0"></span>'}
+      <div class="flex items-center gap-2">
+        <span class="row-num text-slate-500 dark:text-slate-500 text-sm w-5 text-right flex-shrink-0">${idx}.</span>
+        <input
+          type="text"
+          id="size-input-${idx}"
+          inputmode="decimal"
+          placeholder="e.g. 25"
+          class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
+        />
+        <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
+          <span data-label="mm" class="">mm</span>
+          <span data-label="in" class="">in</span>
+        </button>
+        ${idx > 1 ? `<button type="button" data-remove="${idx}" class="remove-btn text-slate-400 hover:text-red-400 transition-colors duration-200 flex-shrink-0">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>` : '<span class="w-4 flex-shrink-0"></span>'}
+      </div>
+      <p id="size-warn-${idx}" class="hidden text-red-500 dark:text-red-400 text-xs ml-7">Max storlek är 54 mm / 2,12″ — vi erbjuder inte större storlekar ännu.</p>
     `;
+
     inputsList.appendChild(row);
+
     const toggleBtn = row.querySelector<HTMLElement>('.unit-toggle')!;
     setUnitToggle(toggleBtn, resolvedUnit);
+
     toggleBtn.addEventListener('click', () => {
-      setUnitToggle(toggleBtn, (toggleBtn.dataset.unit as UnitType) === 'mm' ? 'in' : 'mm');
+      const current = toggleBtn.dataset.unit as UnitType;
+      setUnitToggle(toggleBtn, current === 'mm' ? 'in' : 'mm');
       update();
     });
+
     row.querySelector('.remove-btn')?.addEventListener('click', (e) => {
-      document.getElementById(`size-row-${(e.currentTarget as HTMLElement).dataset.remove!}`)?.remove();
-      recount(); update();
+      const btn = e.currentTarget as HTMLElement;
+      document.getElementById(`size-row-${btn.dataset.remove!}`)?.remove();
+      recount();
+      update();
     });
+
     const inputEl = row.querySelector<HTMLInputElement>('input')!;
     inputEl.value = value;
     inputEl.addEventListener('input', () => {
       let v = inputEl.value.replace(/[^0-9.,]/g, '');
       const firstSep = v.search(/[.,]/);
-      if (firstSep !== -1) v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
+      if (firstSep !== -1) {
+        v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
+      }
       if (inputEl.value !== v) inputEl.value = v;
       update();
     });
+
     if (count >= 20) addBtn.classList.add('opacity-40', 'cursor-not-allowed');
     update();
   }
 
   function recount() {
     const rows = inputsList.querySelectorAll('[id^="size-row-"]');
-    rows.forEach((row, i) => { const n = row.querySelector('span:first-child'); if (n) n.textContent = String(i + 1) + '.'; });
+    rows.forEach((row, i) => {
+      const num = row.querySelector('span.row-num');
+      if (num) num.textContent = String(i + 1) + '.';
+    });
     count = rows.length;
     addBtn.classList.toggle('opacity-40', count >= 20);
     addBtn.classList.toggle('cursor-not-allowed', count >= 20);
@@ -299,84 +326,150 @@ import '../../styles/global.css';
     return Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'))
       .map(row => {
         const val = row.querySelector<HTMLInputElement>('.size-field')!.value.replace(',', '.').trim();
-        const unit = row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm';
+        const unit = (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit) ?? 'mm';
         return val ? `${val} ${unit}` : '';
-      }).filter(Boolean);
+      })
+      .filter(Boolean);
   }
 
   function saveKit() {
-    const data = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]')).map(row => ({
+    const rows = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'));
+    const data = rows.map(row => ({
       value: row.querySelector<HTMLInputElement>('.size-field')!.value,
       unit: (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm') as UnitType,
     }));
     localStorage.setItem('xt_kit', JSON.stringify(data));
   }
 
+  function validateRow(row: HTMLElement): boolean {
+    const input = row.querySelector<HTMLInputElement>('.size-field')!;
+    const unit = (row.querySelector<HTMLElement>('.unit-toggle')?.dataset.unit ?? 'mm') as UnitType;
+    const warn = row.querySelector<HTMLElement>('[id^="size-warn-"]');
+    const raw = input.value.replace(',', '.').trim();
+    const val = parseFloat(raw);
+
+    if (!raw || isNaN(val)) {
+      input.style.borderColor = '';
+      input.style.boxShadow  = '';
+      warn?.classList.add('hidden');
+      return true;
+    }
+
+    const over = (unit === 'mm' && val > MAX_MM) || (unit === 'in' && val > MAX_IN);
+    input.style.borderColor = over ? 'rgb(239 68 68)' : '';
+    input.style.boxShadow  = over ? '0 0 0 3px rgba(239,68,68,0.15)' : '';
+    warn?.classList.toggle('hidden', !over);
+    return !over;
+  }
+
   function update() {
     const sizes = getSizes();
     const qty = sizes.length;
+
     const unitPrice = getUnitPrice(qty);
+    const total = (unitPrice * qty).toFixed(2);
     const pct = getDiscountPct(qty);
+
     document.getElementById('summary-qty')!.textContent = String(qty);
     document.getElementById('summary-unit')!.textContent = `€${unitPrice.toFixed(2)}`;
-    document.getElementById('summary-total')!.textContent = qty > 0 ? `€${(unitPrice * qty).toFixed(2)}` : '€0.00';
+    document.getElementById('summary-total')!.textContent = qty > 0 ? `€${total}` : '€0.00';
+
     const discRow = document.getElementById('summary-discount-row')!;
     if (pct > 0 && qty > 0) {
-      document.getElementById('summary-discount-label')!.textContent = `${pct}% rabatt`;
-      document.getElementById('summary-discount-amt')!.textContent = `-€${((BASE - unitPrice) * qty).toFixed(2)}`;
+      const saved = ((BASE - unitPrice) * qty).toFixed(2);
+      document.getElementById('summary-discount-label')!.textContent = `${pct}% off`;
+      document.getElementById('summary-discount-amt')!.textContent = `-€${saved}`;
       discRow.classList.remove('hidden');
-    } else { discRow.classList.add('hidden'); }
+    } else {
+      discRow.classList.add('hidden');
+    }
+
     const msg = persuasionText(qty);
-    if (msg) { persuasionEl.textContent = msg; persuasionEl.classList.remove('hidden'); }
-    else { persuasionEl.classList.add('hidden'); }
-    checkoutBtn.disabled = qty === 0;
+    if (msg) {
+      persuasionEl.textContent = msg;
+      persuasionEl.classList.remove('hidden');
+    } else {
+      persuasionEl.classList.add('hidden');
+    }
+
+    const allRows = Array.from(inputsList.querySelectorAll<HTMLElement>('[id^="size-row-"]'));
+    const allValid = allRows.map(row => validateRow(row)).every(Boolean);
+    checkoutBtn.disabled = qty === 0 || !allValid;
     saveKit();
   }
 
-  addBtn.addEventListener('click', () => { if (count < 20) addInput(); });
+  addBtn.addEventListener('click', () => {
+    if (count < 20) addInput();
+  });
 
   checkoutBtn.addEventListener('click', async () => {
     const sizes = getSizes();
     if (!sizes.length) return;
+
     checkoutBtn.disabled = true;
-    checkoutBtn.textContent = 'Omdirigerar till kassan…';
+    checkoutBtn.textContent = 'Redirecting to checkout…';
+
     try {
       const res = await fetch('/api/create-checkout.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sizes, lang: 'sv' }),
+        body: JSON.stringify({ sizes, lang: '' }),
       });
       const data = await res.json();
-      if (data.url) { window.location.href = data.url; } else { throw new Error(); }
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error();
+      }
     } catch {
       checkoutBtn.disabled = false;
-      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Gå till kassan`;
-      alert('Något gick fel. Försök igen.');
+      checkoutBtn.innerHTML = `<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Proceed to Checkout`;
+      alert('Something went wrong. Please try again.');
     }
   });
 
   const kitEmailInput = document.getElementById('kit-email-input') as HTMLInputElement;
   const kitEmailSubmit = document.getElementById('kit-email-submit') as HTMLButtonElement;
+
   if (localStorage.getItem('xt_email_captured')) {
     document.getElementById('email-capture-form')!.classList.add('hidden');
     document.getElementById('email-capture-success')!.classList.remove('hidden');
   }
+
   kitEmailSubmit.addEventListener('click', async () => {
     const email = kitEmailInput.value.trim();
     if (!email || !email.includes('@')) { kitEmailInput.focus(); return; }
-    kitEmailSubmit.disabled = true; kitEmailSubmit.textContent = '…';
-    try { await fetch('/api/subscribe.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) }); } catch {}
+
+    kitEmailSubmit.disabled = true;
+    kitEmailSubmit.textContent = '…';
+
+    try {
+      await fetch('/api/subscribe.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+    } catch { /* fail silently */ }
+
     localStorage.setItem('xt_email_captured', '1');
     document.getElementById('email-capture-form')!.classList.add('hidden');
     document.getElementById('email-capture-success')!.classList.remove('hidden');
   });
-  kitEmailInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') kitEmailSubmit.click(); });
+
+  kitEmailInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') kitEmailSubmit.click();
+  });
 
   const saved = localStorage.getItem('xt_kit');
   let savedRows: { value: string; unit: UnitType }[] = [];
   try { savedRows = saved ? JSON.parse(saved) : []; } catch { savedRows = []; }
-  if (savedRows.length > 0) { savedRows.forEach(({ value, unit }) => addInput(value, unit)); update(); }
-  else { addInput(); }
+
+  if (savedRows.length > 0) {
+    savedRows.forEach(({ value, unit }) => addInput(value, unit));
+    update();
+  } else {
+    addInput();
+  }
 </script>
 
 <style>
@@ -388,6 +481,31 @@ import '../../styles/global.css';
     transition: stroke 0.2s;
   }
   div:has(#add-xtruder:hover) .add-xtruder-rect {
-    stroke: rgba(232, 73, 12, 0.5) !important;
+    stroke: rgba(232, 73, 12, 1) !important;
+    stroke-width: 3.5 !important;
+  }
+
+  /* Stripe-style focus ring — :global() needed for JS-injected .size-field elements */
+  @keyframes stripe-focus-in {
+    from { box-shadow: 0 0 0 0 rgba(5, 112, 222, 0.45); }
+    to   { box-shadow: 0 0 0 4px rgba(5, 112, 222, 0.24); }
+  }
+  @keyframes stripe-focus-in-dark {
+    from { box-shadow: 0 0 0 0 rgba(79, 156, 249, 0.55); }
+    to   { box-shadow: 0 0 0 4px rgba(79, 156, 249, 0.30); }
+  }
+  :global(.size-field:focus),
+  :global(#kit-email-input:focus) {
+    border-color: #0570DE !important;
+    border-width: 2px;
+    box-shadow: 0 0 0 4px rgba(5, 112, 222, 0.24);
+    animation: stripe-focus-in 120ms ease-out forwards;
+  }
+  :global(.dark .size-field:focus),
+  :global(.dark #kit-email-input:focus) {
+    border-color: #4F9CF9 !important;
+    border-width: 2px;
+    box-shadow: 0 0 0 4px rgba(79, 156, 249, 0.30);
+    animation: stripe-focus-in-dark 120ms ease-out forwards;
   }
 </style>

@@ -3,11 +3,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --dash-stroke: rgba(0, 0, 0, 0.18);
+  --dash-stroke: rgba(232, 73, 12, 0.55);
   --neo-shadow: #000;
 }
 .dark {
-  --dash-stroke: rgba(255, 255, 255, 0.2);
+  --dash-stroke: rgba(232, 73, 12, 0.55);
   --neo-shadow: #fff;
 }
 
