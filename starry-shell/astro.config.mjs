@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://xtrudertools.com',
 
-  prefetch: true,
+  prefetch: { prefetchAll: true },
 
   vite: {
     plugins: [tailwindcss()],
