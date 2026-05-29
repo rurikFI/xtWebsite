@@ -136,7 +136,7 @@ export const translations = {
     founderStrip: {
       eyebrow: "The origin",
       headline: "This project started under a housefloor in the Finnish archipelago.",
-      quote: "I was completely sure that there would exist a tool like the Xtruder already, but I could not find it anywhere.",
+      quote: "I was totally sure I'd seen this tool somewhere before, but I could never find it, so I decided to create it myself, with the help of my son",
       attribution: "— Patrik Örtendahl, co-founder",
       grounding: "That thought came to him in 2012, while insulating pipes under his house in southern Finland. 14 years later, the Xtruder exists.",
       cta: "Read our full story",
@@ -363,7 +363,7 @@ export const translations = {
     founderStrip: {
       eyebrow: "Ursprunget",
       headline: "Det här projektet började under ett golvbjälklag i den finska skärgården.",
-      quote: "Jag var helt säker på att ett sådant verktyg redan existerade, men jag kunde inte hitta det någonstans.",
+      quote: "Jag var helt säker på att jag hade sett det här verktyget någonstans tidigare, men jag kunde aldrig hitta det – så jag bestämde mig för att skapa det själv, med hjälp av min son",
       attribution: "— Patrik Örtendahl, medgrundare",
       grounding: "Den tanken fick han 2012, när han isolerade rör under sitt hus i södra Finland. 14 år senare finns Xtruder.",
       cta: "Läs vår historia",
@@ -590,7 +590,7 @@ export const translations = {
     founderStrip: {
       eyebrow: "Alkuperä",
       headline: "Tämä projekti sai alkunsa lattianrajan alta Suomen saaristossa.",
-      quote: "Olin täysin varma, että tällainen työkalu oli jo olemassa – mutta en löytänyt sitä mistään.",
+      quote: "Olin täysin varma, että olin nähnyt tämän työkalun jossain aiemmin, mutta en koskaan löytänyt sitä – joten päätin luoda sen itse, poikani avulla",
       attribution: "— Patrik Örtendahl, perustaja",
       grounding: "Ajatus tuli vuonna 2012, kun hän eristeli putkia talonsa alla Etelä-Suomessa. 14 vuotta myöhemmin Xtruder on olemassa.",
       cta: "Lue tarinaamme",
