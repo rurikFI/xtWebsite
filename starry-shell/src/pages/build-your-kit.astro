@@ -71,15 +71,16 @@ import '../styles/global.css';
             <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Volume pricing</h2>
             <div class="space-y-2.5">
               {[
-                ['1–2 units',  '€29.99 / unit', false, false, 'FULL PRICE', false],
-                ['3–5 units',  '€26.99 / unit', true,  false, '-10%',       false],
-                ['6–9 units',  '€22.49 / unit', true,  false, '-25%',       false],
-                ['10–20 units','€20.99 / unit', true,  true,  '-30%',       true ],
-              ].map(([range, price, disc, best, label, isBest]) => (
+                ['1–2 units',  '€29.99 / unit', false, false, 'FULL PRICE', false, false],
+                ['3–5 units',  '€26.99 / unit', true,  false, '-10%',       false, false],
+                ['6–9 units',  '€23.99 / unit', true,  false, '-20%',       false, true ],
+                ['10–20 units','€20.99 / unit', true,  true,  '-30%',       true,  true ],
+              ].map(([range, price, disc, best, label, isBest, freeShip]) => (
                 <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.06]'}`}>
                   <div class="flex items-center gap-2">
                     <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-600 dark:text-slate-300'}`}>{range}</span>
                     <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-600 dark:text-green-400' : 'text-slate-500 dark:text-slate-500'}`}>{label}</span>
+                    {freeShip && <span class="text-xs font-bold text-green-600 dark:text-green-400">+FREE shipping</span>}
                   </div>
                   <div class="flex items-center gap-2">
                     {disc && <span class="text-xs text-slate-500 dark:text-slate-500 line-through">€29.99</span>}
@@ -89,6 +90,7 @@ import '../styles/global.css';
               ))}
             </div>
             <p class="text-slate-500 dark:text-slate-500 text-xs mt-4">All prices in EUR. Tax calculated at checkout.</p>
+            <p class="text-slate-500 dark:text-slate-500 text-xs mt-1.5">🚚 Free shipping on all orders of 6+ units.</p>
           </div>
 
           <!-- Email capture -->
@@ -130,8 +132,11 @@ import '../styles/global.css';
           <div class="grid grid-cols-3 gap-3">
             {[
               ['🇫🇮', 'Made in Finland'],
-              ['🔒', 'Secure checkout'],
-              ['📦', 'Ships worldwide'],
+              ['🔒', 'Secure checkout by Stripe'],
+              ['📦', 'Ships to all of Europe'],
+              ['💱', 'Pay in any currency'],
+              ['🛡️', 'Risk free — free refunds within 30 days'],
+              ['', ''],
             ].map(([icon, label]) => (
               <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-xl p-4 text-center shadow-sm dark:shadow-none">
                 <p class="text-2xl mb-1">{icon}</p>
@@ -221,14 +226,14 @@ import '../styles/global.css';
 
   function getUnitPrice(qty: number): number {
     if (qty >= 10) return parseFloat((BASE * 0.70).toFixed(2));
-    if (qty >= 6)  return parseFloat((BASE * 0.75).toFixed(2));
+    if (qty >= 6)  return parseFloat((BASE * 0.80).toFixed(2));
     if (qty >= 3)  return parseFloat((BASE * 0.90).toFixed(2));
     return BASE;
   }
 
   function getDiscountPct(qty: number): number {
     if (qty >= 10) return 30;
-    if (qty >= 6)  return 25;
+    if (qty >= 6)  return 20;
     if (qty >= 3)  return 10;
     return 0;
   }
@@ -239,13 +244,13 @@ import '../styles/global.css';
     if (qty === 2) return '🔥 Add just one more Xtruder and unlock 10% off your entire order!';
     if (qty >= 3 && qty <= 5) {
       const need = 6 - qty;
-      return `🔥 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 25% off your entire order — you're almost there!`;
+      return `🚚 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 20% off + FREE shipping on your entire order — you're right there!`;
     }
     if (qty >= 6 && qty <= 9) {
       const need = 10 - qty;
-      return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
+      return `✅ 20% off + free shipping unlocked! Add ${need} more Xtruder${need > 1 ? 's' : ''} to unlock our BEST deal — 30% off + free shipping on your entire order!`;
     }
-    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off your entire order.";
+    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off + free shipping on your entire order.";
     return '';
   }
 

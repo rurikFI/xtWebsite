@@ -183,7 +183,7 @@ export const translations = {
       tierBadgeOff25: "25% off",
       tierBestDeal: "Best deal",
       orderCta: "Build Your Kit",
-      orderFootnote: "Secure checkout via Stripe · Ships worldwide",
+      orderFootnote: "Secure checkout via Stripe · Ships to all of Europe",
     },
     cta: {
       badge: "Ready to get started?",
@@ -218,7 +218,7 @@ export const translations = {
       legalLinks: [
         { href: "/privacy-policy/", label: "Privacy Policy" },
         { href: "/terms-conditions/", label: "Terms & Conditions" },
-        { href: "/return-policy/", label: "Return Policy" },
+        { href: "/refund-policy/", label: "Refund Policy" },
         { href: "/shipping-policy/", label: "Shipping Policy" },
         { href: "/warranty/", label: "Warranty" },
         { href: "/patent/", label: "Patent" },
@@ -445,7 +445,7 @@ export const translations = {
       legalLinks: [
         { href: "/sv/privacy-policy/", label: "Integritetspolicy" },
         { href: "/sv/terms-conditions/", label: "Villkor" },
-        { href: "/sv/return-policy/", label: "Returpolicy" },
+        { href: "/sv/refund-policy/", label: "Återbetalningspolicy" },
         { href: "/sv/shipping-policy/", label: "Leveranspolicy" },
         { href: "/sv/warranty/", label: "Garanti" },
         { href: "/sv/patent/", label: "Patent" },
@@ -672,7 +672,7 @@ export const translations = {
       legalLinks: [
         { href: "/fi/privacy-policy/", label: "Tietosuojakäytäntö" },
         { href: "/fi/terms-conditions/", label: "Käyttöehdot" },
-        { href: "/fi/return-policy/", label: "Palautuskäytäntö" },
+        { href: "/fi/refund-policy/", label: "Hyvityskäytäntö" },
         { href: "/fi/shipping-policy/", label: "Toimitusehdot" },
         { href: "/fi/warranty/", label: "Takuu" },
         { href: "/fi/patent/", label: "Patentti" },

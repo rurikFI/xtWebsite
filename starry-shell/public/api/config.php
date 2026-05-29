@@ -14,4 +14,5 @@ define('STRIPE_PUBLISHABLE', defined('_STRIPE_PUBLISHABLE') && _STRIPE_PUBLISHAB
 define('POSTI_API_KEY',     defined('_POSTI_API_KEY') ? _POSTI_API_KEY : _env('POSTI_API_KEY'));
 define('POSTI_CUST_NO',     defined('_POSTI_CUST_NO') ? _POSTI_CUST_NO : _env('POSTI_CUST_NO'));
 define('ADMIN_SECRET',      defined('_ADMIN_SECRET')  ? _ADMIN_SECRET  : _env('ADMIN_SECRET'));
+define('RESEND_API_KEY',    defined('_RESEND_API_KEY') ? _RESEND_API_KEY : _env('RESEND_API_KEY'));
 define('EMAILS_CSV',        __DIR__ . '/../../emails.csv');

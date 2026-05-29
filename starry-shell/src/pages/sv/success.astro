@@ -6,8 +6,8 @@ import '../../styles/global.css';
 <script>localStorage.removeItem('xt_kit'); localStorage.removeItem('xt_email_captured');</script>
 
 <Layout title="Order bekräftad — Xtruder™" lang="sv">
-  <main class="min-h-screen bg-slate-50 dark:bg-[#0F172A] flex items-center justify-center px-4">
-    <div class="text-center max-w-lg">
+  <main class="min-h-screen bg-slate-50 dark:bg-[#0F172A] flex items-center justify-center px-4 py-16">
+    <div class="text-center max-w-lg w-full">
       <div class="flex items-center justify-center gap-2 mb-10">
         <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
         <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
@@ -22,11 +22,36 @@ import '../../styles/global.css';
       <p class="text-slate-600 dark:text-slate-300 text-lg mb-3">
         Tack för din beställning. Ditt anpassade Xtruder-kit förbereds nu.
       </p>
-      <p class="text-slate-400 dark:text-slate-500 text-sm mb-10">
+      <p id="email-line" class="text-slate-400 dark:text-slate-500 text-sm mb-10 hidden">
+        Bekräftelse skickad till <span id="email-display" class="font-medium text-slate-600 dark:text-slate-400"></span>
+      </p>
+      <p id="email-fallback" class="text-slate-400 dark:text-slate-500 text-sm mb-10">
         Du får snart ett e-postbekräftelse med dina orderuppgifter.
       </p>
 
-      <div class="bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl p-6 mb-10 text-left space-y-3">
+      <div id="order-summary" class="hidden bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl p-6 mb-10 text-left">
+        <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Ordersammanfattning</p>
+        <div class="space-y-3">
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">Storlekar</span>
+            <span id="summary-sizes" class="text-slate-800 dark:text-white font-medium text-right max-w-xs"></span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">Antal</span>
+            <span id="summary-qty" class="text-slate-800 dark:text-white font-medium"></span>
+          </div>
+          <div class="flex justify-between text-sm">
+            <span class="text-slate-500 dark:text-slate-400">Beräknad leverans</span>
+            <span id="summary-delivery" class="text-slate-800 dark:text-white font-medium"></span>
+          </div>
+          <div class="flex justify-between text-sm pt-3 border-t border-slate-100 dark:border-white/10">
+            <span class="font-bold text-slate-800 dark:text-white">Totalt betalt</span>
+            <span id="summary-total" class="font-black text-brand text-base"></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="fallback-summary" class="bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl p-6 mb-10 text-left space-y-3">
         <div class="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-sm">
           <svg class="w-5 h-5 text-brand flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           Betalning mottagen och bekräftad
@@ -48,3 +73,32 @@ import '../../styles/global.css';
     </div>
   </main>
 </Layout>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+
+  if (sessionId) {
+    fetch(`/api/send-order-email.php?session_id=${encodeURIComponent(sessionId)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (!data.ok || !data.order) return;
+        const o = data.order;
+
+        document.getElementById('order-summary')!.classList.remove('hidden');
+        document.getElementById('fallback-summary')!.classList.add('hidden');
+
+        document.getElementById('summary-sizes')!.textContent = o.sizes;
+        document.getElementById('summary-qty')!.textContent = `${o.qty} Xtruder${o.qty > 1 ? 's' : ''}`;
+        document.getElementById('summary-delivery')!.textContent = o.delivery;
+        document.getElementById('summary-total')!.textContent = o.total;
+
+        if (o.email) {
+          document.getElementById('email-display')!.textContent = o.email;
+          document.getElementById('email-line')!.classList.remove('hidden');
+          document.getElementById('email-fallback')!.classList.add('hidden');
+        }
+      })
+      .catch(() => {});
+  }
+</script>

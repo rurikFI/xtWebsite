@@ -25,15 +25,15 @@ $qty = count($sizes);
 // Pricing tiers
 function unitPriceCents(int $qty): int {
     if ($qty >= 10) return (int) round(2999 * 0.70);
-    if ($qty >= 6)  return (int) round(2999 * 0.75);
-    if ($qty >= 6)  return (int) round(2999 * 0.90);
+    if ($qty >= 6)  return (int) round(2999 * 0.80);
+    if ($qty >= 3)  return (int) round(2999 * 0.90);
     return 2999;
 }
 
 function discountLabel(int $qty): string {
     if ($qty >= 10) return '30% off — best deal';
-    if ($qty >= 6)  return '25% off';
-    if ($qty >= 6)  return '10% off';
+    if ($qty >= 6)  return '20% off + free shipping';
+    if ($qty >= 3)  return '10% off';
     return 'Standard price';
 }
 

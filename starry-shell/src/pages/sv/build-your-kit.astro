@@ -66,15 +66,16 @@ import '../../styles/global.css';
             <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
             <div class="space-y-2.5">
               {[
-                ['1–2 enheter',   '€29.99 / enhet', false, false, 'FULLPRIS', false],
-                ['3–5 enheter',   '€26.99 / enhet', true,  false, '-10%',     false],
-                ['6–9 enheter',   '€22.49 / enhet', true,  false, '-25%',     false],
-                ['10–20 enheter', '€20.99 / enhet', true,  true,  '-30%',     true ],
-              ].map(([range, price, disc, best, label, isBest]) => (
+                ['1–2 enheter',   '€29.99 / enhet', false, false, 'FULLPRIS', false, false],
+                ['3–5 enheter',   '€26.99 / enhet', true,  false, '-10%',     false, false],
+                ['6–9 enheter',   '€23.99 / enhet', true,  false, '-20%',     false, true ],
+                ['10–20 enheter', '€20.99 / enhet', true,  true,  '-30%',     true,  true ],
+              ].map(([range, price, disc, best, label, isBest, freeShip]) => (
                 <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.06]'}`}>
                   <div class="flex items-center gap-2">
                     <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-600 dark:text-slate-300'}`}>{range}</span>
                     <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-600 dark:text-green-400' : 'text-slate-400 dark:text-slate-500'}`}>{label}</span>
+                    {freeShip && <span class="text-xs font-bold text-green-600 dark:text-green-400">+GRATIS frakt</span>}
                   </div>
                   <div class="flex items-center gap-2">
                     {disc && <span class="text-xs text-slate-500 dark:text-slate-500 line-through">€29.99</span>}
@@ -84,6 +85,7 @@ import '../../styles/global.css';
               ))}
             </div>
             <p class="text-slate-500 dark:text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
+            <p class="text-slate-500 dark:text-slate-500 text-xs mt-1.5">🚚 Gratis frakt på alla beställningar med 6+ enheter.</p>
           </div>
 
           <div id="email-capture-box" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
@@ -115,8 +117,11 @@ import '../../styles/global.css';
           <div class="grid grid-cols-3 gap-3">
             {[
               ['🇫🇮', 'Tillverkad i Finland'],
-              ['🔒', 'Säker kassa'],
-              ['📦', 'Levererar världen över'],
+              ['🔒', 'Säker kassa via Stripe'],
+              ['📦', 'Levererar till hela Europa'],
+              ['💱', 'Betala i valfri valuta'],
+              ['🛡️', 'Riskfritt — gratis returer inom 30 dagar'],
+              ['', ''],
             ].map(([icon, label]) => (
               <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-xl p-4 text-center shadow-sm dark:shadow-none">
                 <p class="text-2xl mb-1">{icon}</p>
@@ -195,31 +200,31 @@ import '../../styles/global.css';
 
   function getUnitPrice(qty: number): number {
     if (qty >= 10) return parseFloat((BASE * 0.70).toFixed(2));
-    if (qty >= 6)  return parseFloat((BASE * 0.75).toFixed(2));
+    if (qty >= 6)  return parseFloat((BASE * 0.80).toFixed(2));
     if (qty >= 3)  return parseFloat((BASE * 0.90).toFixed(2));
     return BASE;
   }
 
   function getDiscountPct(qty: number): number {
     if (qty >= 10) return 30;
-    if (qty >= 6)  return 25;
+    if (qty >= 6)  return 20;
     if (qty >= 3)  return 10;
     return 0;
   }
 
   function persuasionText(qty: number): string {
     if (qty === 0) return '';
-    if (qty === 1) return '💡 Add a second Xtruder to cover more sizes — still at full price. Or add one more and unlock 10% off your entire order!';
-    if (qty === 2) return '🔥 Add just one more Xtruder and unlock 10% off your entire order!';
+    if (qty === 1) return '💡 Lägg till en andra Xtruder för fler storlekar — fortfarande till fullt pris. Eller lägg till en till och lås upp 10% rabatt!';
+    if (qty === 2) return '🔥 Lägg till bara en till Xtruder och lås upp 10% rabatt på hela beställningen!';
     if (qty >= 3 && qty <= 5) {
       const need = 6 - qty;
-      return `🔥 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock 25% off your entire order — you're almost there!`;
+      return `🚚 Lägg till ${need} till Xtruder${need > 1 ? '' : ''} och lås upp 20% rabatt + GRATIS frakt på hela beställningen — du är precis där!`;
     }
     if (qty >= 6 && qty <= 9) {
       const need = 10 - qty;
-      return `🏆 Add ${need} more Xtruder${need > 1 ? 's' : ''} and unlock our BEST deal — 30% off your entire order!`;
+      return `✅ 20% rabatt + gratis frakt upplåst! Lägg till ${need} till för vårt BÄSTA erbjudande — 30% rabatt + gratis frakt!`;
     }
-    if (qty >= 10) return "🏆 Best deal unlocked! You're getting 30% off your entire order.";
+    if (qty >= 10) return "🏆 Bästa erbjudandet upplåst! Du får 30% rabatt + gratis frakt på hela beställningen.";
     return '';
   }
 
