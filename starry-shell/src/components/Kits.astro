@@ -9,8 +9,9 @@ const { lang = 'en' } = Astro.props;
 const t = translations[lang].kits;
 const kitUrl = lang === 'en' ? '/build-your-kit/' : `/${lang}/build-your-kit/`;
 
-const tierPrices = ['€29.99/u', '€26.99/u', '€22.49/u', '€20.99/u'];
-const tierBadges = ['', t.tierBadgeOff10, t.tierBadgeOff25, t.tierBestDeal];
+const tierPrices = ['€29.99/u', '€26.99/u', '€23.99/u', '€20.99/u'];
+const tierBadges = ['', t.tierBadgeOff10, t.tierBadgeOff20, t.tierBestDeal];
+const tierFreeShip = [false, false, true, true];
 ---
 
 <section id="kits" class="py-24 bg-slate-50 dark:bg-[#0F172A] relative overflow-hidden transition-colors duration-300">
@@ -45,6 +46,7 @@ const tierBadges = ['', t.tierBadgeOff10, t.tierBadgeOff25, t.tierBestDeal];
           <p class={`text-xs font-semibold mb-1 ${tierBadges[i] === t.tierBestDeal ? 'text-brand' : 'text-slate-500 dark:text-slate-400'}`}>{range}</p>
           <p class={`font-bold text-lg ${tierBadges[i] === t.tierBestDeal ? 'text-brand' : 'text-slate-800 dark:text-white'}`}>{tierPrices[i]}</p>
           {tierBadges[i] && <p class={`text-xs mt-1 ${tierBadges[i] === t.tierBestDeal ? 'text-brand font-semibold' : 'text-green-400'}`}>{tierBadges[i]}</p>}
+          {tierFreeShip[i] && <p class="text-xs mt-1 text-green-500 dark:text-green-400 font-semibold">🚚 Free shipping</p>}
         </div>
       ))}
     </div>

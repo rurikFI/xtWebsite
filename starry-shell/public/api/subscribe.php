@@ -43,8 +43,8 @@ $html = <<<HTML
         <!-- Header -->
         <tr>
           <td style="background:#e8490c;padding:32px 40px;text-align:center;">
-            <p style="margin:0;color:#ffffff;font-size:28px;font-weight:900;letter-spacing:-0.5px;">Xtruder™</p>
-            <p style="margin:6px 0 0;color:rgba(255,255,255,0.85);font-size:13px;">Made in Finland</p>
+            <img src="https://xtrudertools.com/logo.png" alt="Xtruder™" style="height:32px;width:auto;display:block;margin:0 auto 10px;" />
+            <p style="margin:0;color:rgba(255,255,255,0.85);font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">Innovation in insulation</p>
           </td>
         </tr>
 
@@ -106,6 +106,6 @@ $html = <<<HTML
 </html>
 HTML;
 
-send_email($email, 'Welcome to Xtruder — here\'s something for you 🎉', $html);
+send_email($email, 'Welcome to Xtruder — here\'s something for you 🎉', $html, 'Xtruder Tools <info@xtrudertools.com>');
 
 echo json_encode(['ok' => true]);

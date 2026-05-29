@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import ProductCarousel from '../../components/ProductCarousel.astro';
+import VideoLightbox from '../../components/VideoLightbox.astro';
 import '../../styles/global.css';
 ---
 
@@ -38,7 +40,7 @@ import '../../styles/global.css';
         <div class="space-y-6 order-2 lg:order-1">
 
           <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
-            <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Vad du beställer</h2>
+            <h2 class="font-heading text-4xl text-slate-900 dark:text-white mb-4">Vad du beställer</h2>
             <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-5">
               Xtruder™ är ett patenterat isolerings- och beläggningsverktyg som applicerar material jämnt runt rör, kablar och slangar i alla storlekar. Varje enhet är anpassad till den diameter du anger — för en perfekt passform varje gång.
             </p>
@@ -60,10 +62,12 @@ import '../../styles/global.css';
                 </div>
               ))}
             </div>
+
+            <VideoLightbox src="/SizeshowExamples-2.mp4" playbackRate={0.25} />
           </div>
 
           <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
-            <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
+            <h2 class="font-heading text-4xl text-slate-900 dark:text-white mb-4">Volymprissättning</h2>
             <div class="space-y-2.5">
               {[
                 ['1–2 enheter',   '€29.99 / enhet', false, false, 'FULLPRIS', false, false],
@@ -87,6 +91,8 @@ import '../../styles/global.css';
             <p class="text-slate-500 dark:text-slate-500 text-xs mt-4">Alla priser i EUR. Skatt beräknas vid kassan.</p>
             <p class="text-slate-500 dark:text-slate-500 text-xs mt-1.5">🚚 Gratis frakt på alla beställningar med 6+ enheter.</p>
           </div>
+
+          <ProductCarousel heading="Produktfoton" disclaimer="Produkten kan skilja sig något från bilderna." />
 
           <div id="email-capture-box" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-sm dark:shadow-none">
             <div id="email-capture-form">
@@ -121,7 +127,7 @@ import '../../styles/global.css';
               ['📦', 'Levererar till hela Europa'],
               ['💱', 'Betala i valfri valuta'],
               ['🛡️', 'Riskfritt — gratis returer inom 30 dagar'],
-              ['', ''],
+              ['🛠️', 'Varje order är skräddarsydd'],
             ].map(([icon, label]) => (
               <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-xl p-4 text-center shadow-sm dark:shadow-none">
                 <p class="text-2xl mb-1">{icon}</p>
@@ -134,8 +140,9 @@ import '../../styles/global.css';
         <!-- RIGHT: Kitbyggaren -->
         <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 lg:sticky lg:top-28 order-1 lg:order-2 shadow-sm dark:shadow-none">
 
-          <h2 class="font-heading text-2xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">Ange diametern för varje Xtruder du behöver.</p>
+          <h2 class="font-heading text-4xl text-slate-900 dark:text-white mb-1">Dina Xtruders</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm mb-1">Ange diametern för varje Xtruder du behöver.</p>
+          <p class="text-slate-500 dark:text-slate-500 text-xs mb-6">Varje enhet tillverkas exakt efter dina mått. Du kan ange dimensioner med upp till två decimaler — t.ex. <span class="font-medium">15,56 mm</span> eller <span class="font-medium">1,25 in</span>.</p>
 
           <div id="size-inputs" class="space-y-3 mb-4"></div>
 
@@ -306,7 +313,7 @@ import '../../styles/global.css';
       let v = inputEl.value.replace(/[^0-9.,]/g, '');
       const firstSep = v.search(/[.,]/);
       if (firstSep !== -1) {
-        v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '');
+        v = v.slice(0, firstSep + 1) + v.slice(firstSep + 1).replace(/[.,]/g, '').slice(0, 2);
       }
       if (inputEl.value !== v) inputEl.value = v;
       update();
@@ -464,6 +471,7 @@ import '../../styles/global.css';
   kitEmailInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') kitEmailSubmit.click();
   });
+
 
   const saved = localStorage.getItem('xt_kit');
   let savedRows: { value: string; unit: UnitType }[] = [];

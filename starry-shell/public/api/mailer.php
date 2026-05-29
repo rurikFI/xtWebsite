@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-function send_email(string $to, string $subject, string $html): bool {
+function send_email(string $to, string $subject, string $html, string $from = 'Xtruder Tools <orders@xtrudertools.com>'): bool {
     if (!RESEND_API_KEY) return false;
 
     $payload = json_encode([
-        'from'    => 'Xtruder Tools <orders@xtrudertools.com>',
+        'from'    => $from,
         'to'      => [$to],
         'subject' => $subject,
         'html'    => $html,

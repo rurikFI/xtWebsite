@@ -1,4 +1,12 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { translations } from '../i18n/translations';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const t = translations[lang].popup;
 ---
 
 <style>
@@ -25,45 +33,33 @@
 
     <!-- Step 1: Question screen -->
     <div id="popup-step1">
-      <!-- Logo -->
       <div class="flex items-center justify-center gap-2 mb-6">
         <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
         <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
       </div>
 
-      <!-- Offer -->
       <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6">
         <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
-        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">{t.badge} <span class="normal-case text-xs font-normal">— {t.badgeSub}</span></p>
       </div>
 
-      <!-- Question -->
-      <p class="text-brand text-xs font-semibold uppercase tracking-widest mb-1">Answer the question to claim your discount</p>
-      <p class="text-white font-semibold text-base mb-4">What problem are you trying to solve?</p>
+      <p class="text-brand text-xs font-semibold uppercase tracking-widest mb-1">{t.step1Label}</p>
+      <p class="text-white font-semibold text-base mb-4">{t.step1Question}</p>
 
-      <!-- Answer buttons -->
       <div class="flex flex-col gap-2.5 w-full mb-5">
-        <button class="answer-btn w-full bg-slate-800 hover:bg-brand border border-white/10 hover:border-brand text-slate-200 hover:text-white text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
-          Insulating pipes or cables quickly
-        </button>
-        <button class="answer-btn w-full bg-slate-800 hover:bg-brand border border-white/10 hover:border-brand text-slate-200 hover:text-white text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
-          Getting a uniform coating on round surfaces
-        </button>
-        <button class="answer-btn w-full bg-slate-800 hover:bg-brand border border-white/10 hover:border-brand text-slate-200 hover:text-white text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
-          Reducing material waste on the job
-        </button>
-        <button class="answer-btn w-full bg-slate-800 hover:bg-brand border border-white/10 hover:border-brand text-slate-200 hover:text-white text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left">
-          Other…
-        </button>
+        {t.answers.map(answer => (
+          <button class="answer-btn w-full bg-slate-800 hover:bg-brand border border-white/10 hover:border-brand text-slate-200 hover:text-white text-sm font-medium rounded-xl px-4 py-3 transition-all duration-200 text-left cursor-pointer">
+            {answer}
+          </button>
+        ))}
       </div>
 
-      <!-- Dismiss -->
       <button id="popup-dismiss" class="text-slate-500 hover:text-slate-400 text-xs underline underline-offset-2 transition-colors duration-200 cursor-pointer">
-        I don't like saving money
+        {t.dismiss}
       </button>
     </div>
 
-    <!-- Step 2: Email screen (hidden initially) -->
+    <!-- Step 2: Email screen -->
     <div id="popup-step2" class="hidden w-full flex flex-col items-center">
       <div class="flex items-center justify-center gap-2 mb-6">
         <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover" />
@@ -72,29 +68,28 @@
 
       <div class="bg-brand/10 border border-brand/30 rounded-xl px-4 py-3 mb-6 w-full">
         <p class="text-brand font-bold text-2xl" style="font-family:'Racing Sans One',sans-serif;">30% OFF</p>
-        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">Exclusive discount <span class="normal-case text-xs font-normal">— for new customers only</span></p>
+        <p class="text-slate-300 text-sm mt-0.5 uppercase tracking-wide font-semibold">{t.badge} <span class="normal-case text-xs font-normal">— {t.badgeSub}</span></p>
       </div>
 
-      <p class="text-white font-semibold text-base mb-5">Sign up for email to receive your discount!</p>
+      <p class="text-white font-semibold text-base mb-5">{t.step2Heading}</p>
 
       <div class="w-full flex flex-col gap-3">
         <input
           id="popup-email"
           type="email"
-          placeholder="you@example.com"
+          placeholder={t.placeholder}
           class="w-full bg-slate-800 border border-white/10 focus:border-brand/60 rounded-xl px-4 py-3 text-slate-200 text-sm placeholder-slate-500 outline-none transition-colors duration-200"
         />
         <button
           id="popup-submit"
-          class="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-3 transition-colors duration-200"
+          class="w-full bg-brand hover:bg-brand-hover text-white font-semibold text-sm rounded-xl px-4 py-3 transition-colors duration-200 cursor-pointer"
         >
-          Continue
+          {t.cta}
         </button>
       </div>
 
-      <!-- Step 2 dismiss -->
       <button id="popup-dismiss2" class="mt-4 text-slate-500 hover:text-slate-400 text-xs underline underline-offset-2 transition-colors duration-200 cursor-pointer">
-        No thanks
+        {t.dismissStep2}
       </button>
     </div>
 
@@ -105,8 +100,8 @@
         <img src="/logo.png" alt="Xtruder™" class="h-7 w-auto" />
       </div>
       <p class="text-4xl mb-4">🎉</p>
-      <p class="text-white font-semibold text-xl mb-2" style="font-family:'Racing Sans One',sans-serif;">You've got the deal!</p>
-      <p class="text-slate-400 text-sm">It will be automatically activated at checkout.</p>
+      <p class="text-white font-semibold text-xl mb-2" style="font-family:'Racing Sans One',sans-serif;">{t.thankyouHeading}</p>
+      <p class="text-slate-400 text-sm">{t.thankyouSub}</p>
     </div>
 
   </div>
@@ -167,7 +162,7 @@
 
     const btn = document.getElementById('popup-submit') as HTMLButtonElement;
     btn.disabled = true;
-    btn.textContent = 'Saving…';
+    btn.textContent = '…';
 
     try {
       await fetch('/api/subscribe.php', {
@@ -182,10 +177,9 @@
     localStorage.setItem(STORAGE_KEY, String(Date.now() + COOLDOWN_MS * 99));
     showStep(3);
 
-    // bounce in, wait 2.5s, bounce out and close
     const card = document.getElementById('popup-card')!;
     card.classList.remove('popup-bounce-in');
-    void card.offsetWidth; // force reflow to restart animation
+    void card.offsetWidth;
     card.classList.add('popup-bounce-in');
     setTimeout(() => {
       card.classList.remove('popup-bounce-in');

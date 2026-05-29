@@ -1,0 +1,113 @@
+---
+interface Props {
+  src: string;
+  playbackRate?: number;
+}
+const { src, playbackRate = 0.25 } = Astro.props;
+---
+
+<!-- Inline video -->
+<div class="relative cursor-zoom-in group" id="vlb-trigger">
+  <video
+    id="vlb-inline"
+    src={src}
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="none"
+    class="w-full rounded-xl mt-5 shadow-md pointer-events-none"
+  ></video>
+  <!-- Hover hint -->
+  <div class="absolute inset-0 mt-5 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/20">
+    <div class="bg-white/90 text-slate-800 text-xs font-semibold rounded-full px-3 py-1.5 shadow">Click to expand</div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="vlb-lightbox" style="display:none;" class="fixed inset-0 z-[999] bg-black/35 backdrop-blur-sm">
+  <!-- Video card -->
+  <div id="vlb-wrapper" class="absolute inset-0 flex items-center justify-center pt-40 pb-24 px-20 pointer-events-none">
+    <div id="vlb-card" class="relative inline-flex pointer-events-auto">
+      <video
+        id="vlb-modal-video"
+        src={src}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        class="max-h-[72vh] max-w-[80vw] rounded-xl shadow-2xl"
+      ></video>
+      <!-- Close button on video corner -->
+      <button id="vlb-close" aria-label="Close" class="absolute -top-3 -right-3 flex items-center gap-1.5 bg-white text-slate-800 font-semibold text-sm rounded-full pl-3 pr-4 py-2 shadow-lg hover:bg-slate-100 transition-colors duration-200 cursor-pointer">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes vlb-in {
+    0%   { transform: scale(0.85); opacity: 0; }
+    60%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  @keyframes vlb-out {
+    0%   { transform: scale(1);    opacity: 1; }
+    40%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(0.85); opacity: 0; }
+  }
+  .vlb-bounce-in  { animation: vlb-in  0.35s cubic-bezier(.22,.61,.36,1) forwards; }
+  .vlb-bounce-out { animation: vlb-out 0.3s  cubic-bezier(.55,0,1,.45)   forwards; }
+</style>
+
+<script define:vars={{ playbackRate }}>
+  const trigger     = document.getElementById('vlb-trigger');
+  const lightbox    = document.getElementById('vlb-lightbox');
+  const card        = document.getElementById('vlb-card');
+  const closeBtn    = document.getElementById('vlb-close');
+  const inlineVideo = document.getElementById('vlb-inline');
+  const modalVideo  = document.getElementById('vlb-modal-video');
+
+  // Set playback rates
+  function setRate(video) {
+    video.playbackRate = playbackRate;
+    video.addEventListener('loadedmetadata', () => { video.playbackRate = playbackRate; }, { once: true });
+  }
+  setRate(inlineVideo);
+  setRate(modalVideo);
+
+  function openLightbox() {
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    modalVideo.currentTime = inlineVideo.currentTime;
+    modalVideo.play();
+    card.classList.remove('vlb-bounce-out');
+    void card.offsetWidth;
+    card.classList.add('vlb-bounce-in');
+  }
+
+  function closeLightbox() {
+    card.classList.remove('vlb-bounce-in');
+    card.classList.add('vlb-bounce-out');
+    card.addEventListener('animationend', () => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+      card.classList.remove('vlb-bounce-out');
+      modalVideo.pause();
+    }, { once: true });
+  }
+
+  trigger.addEventListener('click', openLightbox);
+  closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.id === 'vlb-wrapper') closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.style.display !== 'none') closeLightbox();
+  });
+</script>

@@ -1,0 +1,304 @@
+---
+interface Props {
+  heading?: string;
+  disclaimer?: string;
+}
+const { heading = 'Product photos', disclaimer = 'Product may differ slightly from images.' } = Astro.props;
+
+const images = [
+  { src: '/DSC00925.jpg', alt: 'Xtruder product photo 1' },
+  { src: '/DSC00926.jpg', alt: 'Xtruder product photo 2' },
+  { src: '/DSC00927.jpg', alt: 'Xtruder product photo 3' },
+  { src: '/DSC00928.jpg', alt: 'Xtruder product photo 4' },
+  { src: '/DSC00930.jpg', alt: 'Xtruder product photo 5' },
+  { src: '/DSC00931.jpg', alt: 'Xtruder product photo 6' },
+  { src: '/DSC00932.jpg', alt: 'Xtruder product photo 7' },
+  { src: '/DSC00933.jpg', alt: 'Xtruder product photo 8' },
+  { src: '/DSC00935.jpg', alt: 'Xtruder product photo 9' },
+  { src: '/DSC00936.jpg', alt: 'Xtruder product photo 10' },
+  { src: '/DSC00937.jpg', alt: 'Xtruder product photo 11' },
+  { src: '/DSC00938.jpg', alt: 'Xtruder product photo 12' },
+];
+---
+
+<div id="pc-card" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 rounded-2xl p-7 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.18)] dark:shadow-none">
+  <h2 class="font-heading text-4xl text-slate-900 dark:text-white mb-4">{heading}</h2>
+  <div class="relative">
+    <!-- Track -->
+    <div class="overflow-hidden rounded-xl">
+      <div id="pc-track" class="flex will-change-transform" style="transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);">
+        {images.map(({ src, alt }, i) => (
+          <img
+            src={src}
+            alt={alt}
+            data-pc-img={i}
+            class="w-full flex-shrink-0 object-cover aspect-[4/3] cursor-zoom-in"
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        ))}
+      </div>
+    </div>
+
+    <!-- Prev -->
+    <button id="pc-prev" aria-label="Previous photo" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-white/10 rounded-full flex items-center justify-center shadow-md hover:bg-white dark:hover:bg-slate-700 transition-colors duration-200 backdrop-blur-sm cursor-pointer">
+      <svg class="w-4 h-4 text-slate-700 dark:text-slate-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+
+    <!-- Next -->
+    <button id="pc-next" aria-label="Next photo" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/90 dark:bg-slate-800/90 border border-slate-200 dark:border-white/10 rounded-full flex items-center justify-center shadow-md hover:bg-white dark:hover:bg-slate-700 transition-colors duration-200 backdrop-blur-sm cursor-pointer">
+      <svg class="w-4 h-4 text-slate-700 dark:text-slate-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <!-- Counter -->
+    <div class="absolute bottom-2 right-3 bg-black/50 text-white text-xs font-semibold px-2 py-0.5 rounded-full backdrop-blur-sm">
+      <span id="pc-current">1</span> / {images.length}
+    </div>
+
+    <!-- Dots -->
+    <div class="flex justify-center gap-1.5 mt-3 flex-wrap px-2">
+      {images.map((_, i) => (
+        <button
+          data-pc-dot={i}
+          aria-label={`Go to photo ${i + 1}`}
+          class={`h-1.5 rounded-full transition-all duration-200 cursor-pointer ${i === 0 ? 'w-4 bg-brand' : 'w-1.5 bg-slate-300 dark:bg-slate-600'}`}
+        ></button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <p class="text-slate-400 dark:text-slate-500 text-xs italic mt-3">*{disclaimer}</p>
+</div>
+
+<!-- Lightbox -->
+<div id="pc-lightbox" style="display:none;" class="fixed inset-0 z-[999] bg-black/35 backdrop-blur-sm">
+
+  <!-- Image wrapper (rendered first = painted first = below nav buttons) -->
+  <div id="pc-lb-wrapper" class="absolute inset-0 flex items-center justify-center pt-40 pb-24 px-20 pointer-events-none">
+    <!-- Relative container sizes to the image so close button anchors to its corner -->
+    <div id="pc-lb-card" class="relative inline-flex pointer-events-auto">
+      <img id="pc-lb-img" src="" alt="" class="max-h-[72vh] max-w-[80vw] object-contain rounded-xl select-none" style="transform-origin: center center;" />
+      <!-- Close — sits on the image's top-right corner -->
+      <button id="pc-lb-close" aria-label="Close" class="absolute -top-3 -right-3 flex items-center gap-1.5 bg-white text-slate-800 font-semibold text-sm rounded-full pl-3 pr-4 py-2 shadow-lg hover:bg-slate-100 transition-colors duration-200 cursor-pointer">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Prev -->
+  <button id="pc-lb-prev" aria-label="Previous photo" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 hover:bg-white text-slate-800 rounded-full flex items-center justify-center shadow-lg transition-colors duration-200 cursor-pointer">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <!-- Next -->
+  <button id="pc-lb-next" aria-label="Next photo" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/90 hover:bg-white text-slate-800 rounded-full flex items-center justify-center shadow-lg transition-colors duration-200 cursor-pointer">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+
+  <!-- Counter -->
+  <div class="absolute bottom-4 right-5 text-white/60 text-xs">
+    <span id="pc-lb-counter">1</span> / {images.length}
+  </div>
+
+  <!-- Hint -->
+  <p id="pc-lb-hint" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-xs select-none pointer-events-none whitespace-nowrap">Scroll to zoom · Drag to pan · Double-click to reset</p>
+</div>
+
+<style>
+  @keyframes lb-in {
+    0%   { transform: scale(0.85); opacity: 0; }
+    60%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  @keyframes lb-out {
+    0%   { transform: scale(1);    opacity: 1; }
+    40%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(0.85); opacity: 0; }
+  }
+  .lb-bounce-in  { animation: lb-in  0.35s cubic-bezier(.22,.61,.36,1) forwards; }
+  .lb-bounce-out { animation: lb-out 0.3s  cubic-bezier(.55,0,1,.45)   forwards; }
+</style>
+
+<script>
+  // ── Carousel ──────────────────────────────────────────────────────────
+  const track   = document.getElementById('pc-track') as HTMLElement;
+  const counter = document.getElementById('pc-current') as HTMLElement;
+  const dots    = Array.from(document.querySelectorAll<HTMLElement>('[data-pc-dot]'));
+  const total   = dots.length;
+  let current   = 0;
+
+  function goTo(index: number) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    counter.textContent = String(current + 1);
+    dots.forEach((dot, i) => {
+      const active = i === current;
+      dot.style.width      = active ? '1rem' : '0.375rem';
+      dot.style.background = active ? 'var(--color-brand, #E8490C)' : '';
+      dot.classList.toggle('bg-brand',          active);
+      dot.classList.toggle('bg-slate-300',      !active);
+      dot.classList.toggle('dark:bg-slate-600', !active);
+    });
+  }
+
+  document.getElementById('pc-prev')?.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+  document.getElementById('pc-next')?.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
+
+  // ── Auto-advance ──────────────────────────────────────────────────────
+  const carouselEl = document.getElementById('pc-card')!;
+  let timer: ReturnType<typeof setInterval>;
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => goTo(current + 1), 4000);
+  }
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  const pauseEls = [
+    carouselEl,
+    document.getElementById('pc-prev'),
+    document.getElementById('pc-next'),
+  ];
+  pauseEls.forEach(el => el?.addEventListener('mouseenter', () => clearInterval(timer)));
+  carouselEl.addEventListener('mouseleave', () => startTimer());
+
+  startTimer();
+
+  // ── Lightbox ──────────────────────────────────────────────────────────
+  const lightbox  = document.getElementById('pc-lightbox') as HTMLElement;
+  const lbCard    = document.getElementById('pc-lb-card') as HTMLElement;
+  const lbImg     = document.getElementById('pc-lb-img') as HTMLImageElement;
+  const lbClose   = document.getElementById('pc-lb-close') as HTMLElement;
+  const lbHint    = document.getElementById('pc-lb-hint') as HTMLElement;
+  const lbCounter = document.getElementById('pc-lb-counter') as HTMLElement;
+
+  const carouselImgs = Array.from(track.querySelectorAll<HTMLImageElement>('[data-pc-img]'));
+  let lbIndex    = 0;
+  let scale      = 1;
+  let tx         = 0;
+  let ty         = 0;
+  let dragging   = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+
+  function applyTransform(animated = false) {
+    lbImg.style.transition = animated ? 'transform 0.25s ease' : 'none';
+    lbImg.style.transform  = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    lbImg.style.cursor     = scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'zoom-in';
+  }
+
+  function lbGoTo(index: number) {
+    lbIndex = (index + carouselImgs.length) % carouselImgs.length;
+    const img = carouselImgs[lbIndex];
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCounter.textContent = String(lbIndex + 1);
+    scale = 1; tx = 0; ty = 0;
+    applyTransform(true);
+  }
+
+  function openLightbox(index: number) {
+    lbGoTo(index);
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    lbCard.classList.remove('lb-bounce-out');
+    void lbCard.offsetWidth; // force reflow so animation restarts
+    lbCard.classList.add('lb-bounce-in');
+    lbHint.style.opacity = '1';
+    lbHint.style.transition = '';
+    setTimeout(() => {
+      lbHint.style.transition = 'opacity 0.6s';
+      lbHint.style.opacity    = '0';
+    }, 3000);
+  }
+
+  function closeLightbox() {
+    lbCard.classList.remove('lb-bounce-in');
+    lbCard.classList.add('lb-bounce-out');
+    lbCard.addEventListener('animationend', () => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+      lbCard.classList.remove('lb-bounce-out');
+    }, { once: true });
+  }
+
+  // Scroll to zoom
+  lightbox.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    scale = Math.min(5, Math.max(1, scale + (e.deltaY < 0 ? 0.25 : -0.25)));
+    if (scale === 1) { tx = 0; ty = 0; }
+    applyTransform(true);
+  }, { passive: false });
+
+  // Double-click to reset zoom
+  lbImg.addEventListener('dblclick', () => {
+    scale = 1; tx = 0; ty = 0;
+    applyTransform(true);
+  });
+
+  // Drag to pan — read live computed position so mid-animation drags don't jump
+  lbImg.addEventListener('mousedown', (e) => {
+    if (scale <= 1) return;
+    e.preventDefault();
+    // Snap tx/ty to wherever the image actually is visually right now
+    const matrix = new DOMMatrix(getComputedStyle(lbImg).transform);
+    tx = matrix.m41;
+    ty = matrix.m42;
+    lbImg.style.transition = 'none';
+    lbImg.style.transform  = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    dragging   = true;
+    dragStartX = e.clientX - tx;
+    dragStartY = e.clientY - ty;
+    applyTransform();
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    tx = e.clientX - dragStartX;
+    ty = e.clientY - dragStartY;
+    applyTransform();
+  });
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    applyTransform();
+  });
+
+  // Lightbox nav
+  document.getElementById('pc-lb-prev')?.addEventListener('click', () => lbGoTo(lbIndex - 1));
+  document.getElementById('pc-lb-next')?.addEventListener('click', () => lbGoTo(lbIndex + 1));
+
+  // Arrow keys
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'none') return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   lbGoTo(lbIndex - 1);
+    if (e.key === 'ArrowRight')  lbGoTo(lbIndex + 1);
+  });
+
+  // Click backdrop to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || (e.target as HTMLElement).id === 'pc-lb-wrapper') closeLightbox();
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+
+  // Open on carousel image click
+  carouselImgs.forEach((img, i) => {
+    img.addEventListener('click', () => openLightbox(i));
+  });
+</script>
