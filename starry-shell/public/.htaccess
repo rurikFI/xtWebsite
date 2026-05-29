@@ -1,3 +1,8 @@
+# Block direct HTTP access to secrets file
+<Files "secrets.php">
+    Require all denied
+</Files>
+
 # Security headers
 <IfModule mod_headers.c>
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
