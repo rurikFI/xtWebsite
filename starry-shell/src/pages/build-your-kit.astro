@@ -7,7 +7,7 @@ import VideoLightbox from '../components/VideoLightbox.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Build Your Kit — Xtruder™" viewport="width=440, initial-scale=1.0">
+<Layout title="Build Your Kit — Xtruder™">
   <Navbar lang="en" />
 
   <main class="min-h-screen bg-slate-50 dark:bg-[#0F172A] pt-24 pb-20 transition-colors duration-300">
@@ -117,7 +117,7 @@ import '../styles/global.css';
                   id="kit-email-input"
                   type="email"
                   placeholder="you@example.com"
-                  class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
+                  class="flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-base placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
                 />
                 <button
                   id="kit-email-submit"
@@ -305,7 +305,7 @@ import '../styles/global.css';
           id="size-input-${idx}"
           inputmode="decimal"
           placeholder="e.g. 25"
-          class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-base sm:text-sm placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
+          class="size-field flex-1 min-w-0 bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-200 text-base placeholder-slate-400 dark:placeholder-slate-500 outline-none transition-[border-color] duration-150"
         />
         <button type="button" data-unit="${resolvedUnit}" class="unit-toggle flex-shrink-0 self-stretch flex items-stretch bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 rounded-xl px-1 py-1 gap-0.5 cursor-pointer">
           <span data-label="mm" class="">mm</span>
