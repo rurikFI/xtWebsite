@@ -23,7 +23,7 @@ import '../styles/global.css';
       </svg>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <!-- Page header -->
       <div class="text-center mb-14">
@@ -82,7 +82,10 @@ import '../styles/global.css';
               ].map(([range, price, disc, best, label, isBest, freeShip]) => (
                 <div class={`flex items-center justify-between rounded-xl px-4 py-3 ${best ? 'bg-brand/10 border border-brand/30' : 'bg-slate-50 dark:bg-white/[0.03] border border-slate-100 dark:border-white/[0.06]'}`}>
                   <div class="flex items-center gap-2">
-                    <span class={`text-sm font-medium ${best ? 'text-brand' : 'text-slate-600 dark:text-slate-300'}`}>{range}</span>
+                    <span class={`inline-flex flex-col text-sm font-medium leading-tight ${best ? 'text-brand' : 'text-slate-600 dark:text-slate-300'}`}>
+                      <span>{(range as string).replace(' units', '')}</span>
+                      <span>units</span>
+                    </span>
                     <span class={`text-xs font-bold px-2 py-0.5 rounded-full ${isBest ? 'bg-brand text-white' : best ? 'text-brand' : disc ? 'text-green-600 dark:text-green-400' : 'text-slate-500 dark:text-slate-500'}`}>{label}</span>
                     {freeShip && <span class="text-xs font-bold text-green-600 dark:text-green-400">+FREE shipping</span>}
                   </div>
