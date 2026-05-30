@@ -55,7 +55,8 @@
   background-clip: text;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+a, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0.18); }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0F172A; }
