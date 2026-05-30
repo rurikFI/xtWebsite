@@ -12,12 +12,12 @@ const t = translations[lang].footer;
 <footer class="bg-white dark:bg-black py-12 border-t border-slate-200 dark:border-slate-800/60 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-x-16 gap-y-10 mb-10">
+    <div class="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-x-4 sm:gap-x-16 gap-y-8 sm:gap-y-10 mb-10">
       <!-- Brand -->
-      <div>
+      <div class="col-span-3 sm:col-span-1">
         <div class="flex items-center gap-2 mb-4">
           <img src="/favicon.webp" alt="" class="h-8 w-8 rounded-md object-cover flex-shrink-0 self-center" />
-          <img src="/logo.png" alt="Xtruder™" class="h-8 w-auto" style="filter: var(--logo-filter)" />
+          <img src="/logo.png" alt="Xtruder™" class="h-8 w-auto" style="filter: var(--logo-filter); transform: translateY(-4px)" />
         </div>
         <p class="text-slate-400 dark:text-slate-500 text-sm leading-relaxed">
           {t.tagline1}<br/>{t.tagline2}
@@ -67,8 +67,29 @@ const t = translations[lang].footer;
     </div>
 
     <!-- Bottom bar -->
-    <div class="border-t border-slate-200 dark:border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="border-t border-slate-200 dark:border-slate-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-slate-400 dark:text-slate-700 text-xs">{t.bottomText}</p>
+
+      <!-- Language switcher -->
+      <div class="flex items-center gap-2.5">
+        {(['en', 'sv', 'fi'] as const).map((l) => (
+          <a
+            id={`lang-footer-${l}`}
+            href="#"
+            title={l === 'en' ? 'English' : l === 'sv' ? 'Svenska' : 'Suomi'}
+            class={`w-8 h-5 rounded-sm overflow-hidden border flex-shrink-0 cursor-pointer transition-opacity duration-200 ${
+              lang === l
+                ? 'border-slate-400/60 dark:border-white/50 ring-2 ring-slate-300/50 dark:ring-white/30 opacity-100'
+                : 'border-slate-200 dark:border-white/20 opacity-50 hover:opacity-100'
+            }`}
+          >
+            {l === 'en' && (<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="white" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="30" fill="white"/><rect y="10" width="60" height="10" fill="white"/><rect x="27" width="6" height="30" fill="#C8102E"/><rect y="12" width="60" height="6" fill="#C8102E"/></svg>)}
+            {l === 'sv' && (<svg viewBox="0 0 16 10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="16" height="10" fill="#006AA7"/><rect x="5" width="2" height="10" fill="#FECC02"/><rect y="4" width="16" height="2" fill="#FECC02"/></svg>)}
+            {l === 'fi' && (<svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full"><rect width="18" height="11" fill="white"/><rect y="4" width="18" height="3" fill="#003580"/><rect x="5" width="3" height="11" fill="#003580"/></svg>)}
+          </a>
+        ))}
+      </div>
+
       <div class="flex items-center gap-2">
         <div class="w-5 h-3.5 rounded-sm overflow-hidden flex-shrink-0">
           <svg viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">

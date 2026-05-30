@@ -5,11 +5,13 @@ interface Props {
   title?: string;
   description?: string;
   lang?: Lang;
+  viewport?: string;
 }
 const {
   title = "Xtruder™ — Insulate in a New, Efficient Way",
   description = "The Xtruder™ — Patented insulation and coating tool. Apply materials uniformly around pipes, cables, hoses, and more. Made in Finland.",
   lang = 'en',
+  viewport = 'width=device-width, initial-scale=1.0',
 } = Astro.props;
 ---
 
@@ -17,7 +19,7 @@ const {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content={viewport} />
     <meta name="description" content={description} />
     <link rel="icon" type="image/webp" href="/favicon.webp" />
     <title>{title}</title>
