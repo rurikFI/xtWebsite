@@ -121,6 +121,9 @@ function createPostiLabel(array $p): array {
     return ['ok' => true, 'data' => $data];
 }
 
+// --- Fetch orders (must run before POST handler so inline update works) ---
+$orders = $authed ? fetchOrders() : [];
+
 // --- Handle POST actions ---
 $result        = null;
 $resultSession = null;   // session_id that just got labeled (for inline PDF display)
@@ -197,12 +200,6 @@ if ($authed && $_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['secret'])
         ]);
         $activeTab = 'manual';
     }
-}
-
-// --- Fetch orders for display ---
-$orders = [];
-if ($authed) {
-    $orders = fetchOrders();
 }
 
 function fmtDate(int $ts): string {
