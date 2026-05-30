@@ -47,9 +47,18 @@ function stripePost(string $path, array $params): ?array {
 }
 
 function fetchOrders(): array {
-    $data = stripeGet('/checkout/sessions?limit=50&status=complete');
-    if (!$data || empty($data['data'])) return [];
-    return array_filter($data['data'], fn($s) => ($s['payment_status'] ?? '') === 'paid');
+    $all      = [];
+    $lastId   = null;
+    do {
+        $qs   = '/checkout/sessions?limit=100&status=complete' . ($lastId ? '&starting_after=' . urlencode($lastId) : '');
+        $data = stripeGet($qs);
+        if (!$data || empty($data['data'])) break;
+        foreach ($data['data'] as $s) {
+            if (($s['payment_status'] ?? '') === 'paid') $all[] = $s;
+        }
+        $lastId  = $data['has_more'] ? end($data['data'])['id'] : null;
+    } while ($lastId);
+    return $all;
 }
 
 // --- Posti label creation ---
@@ -113,8 +122,9 @@ function createPostiLabel(array $p): array {
 }
 
 // --- Handle POST actions ---
-$result     = null;
-$activeTab  = $_GET['tab'] ?? 'orders';
+$result        = null;
+$resultSession = null;   // session_id that just got labeled (for inline PDF display)
+$activeTab     = $_GET['tab'] ?? 'orders';
 
 if ($authed && $_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['secret']) && !isset($_POST['logout'])) {
 
@@ -156,7 +166,16 @@ if ($authed && $_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['secret'])
                     stripePost('/checkout/sessions/' . urlencode($sessionId), [
                         'metadata[posti_parcel_no]' => $parcelNo,
                     ]);
+                    // Refresh so the row shows "Labeled" badge with updated parcel no
+                    foreach ($orders as &$s) {
+                        if ($s['id'] === $sessionId) {
+                            $s['metadata']['posti_parcel_no'] = $parcelNo;
+                            break;
+                        }
+                    }
+                    unset($s);
                 }
+                $resultSession = $sessionId;
             }
         }
         $activeTab = 'orders';
@@ -279,7 +298,7 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
     <form method="POST"><button class="btn-sm" name="logout" value="1">Sign out</button></form>
   </div>
 
-  <?php if ($result): ?>
+  <?php if ($result && $activeTab === 'manual'): ?>
     <?php if (!empty($result['ok'])): ?>
       <?php
         $entry    = $result['data'][0] ?? $result['data'];
@@ -308,6 +327,13 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
         <?php endif; ?>
       </div>
     <?php endif; ?>
+  <?php elseif ($result && $activeTab === 'orders' && empty($result['ok'])): ?>
+    <div class="result err">
+      <div class="result-title">❌ <?= htmlspecialchars($result['error'] ?? 'Error') ?></div>
+      <?php if (!empty($result['details'])): ?>
+        <pre><?= htmlspecialchars(json_encode($result['details'], JSON_PRETTY_PRINT)) ?></pre>
+      <?php endif; ?>
+    </div>
   <?php endif; ?>
 
   <div class="tabs">
@@ -380,6 +406,21 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
                   </select>
                   <button class="label-btn" name="create_from_stripe" value="1">Create Label →</button>
                 </form>
+              <?php elseif ($resultSession === $s['id'] && !empty($result['ok'])): ?>
+                <?php
+                  $rEntry = $result['data'][0] ?? $result['data'];
+                  $rPdfs  = $rEntry['pdfs'] ?? [];
+                ?>
+                <?php if ($rPdfs): ?>
+                  <?php foreach ($rPdfs as $pdf): ?>
+                    <a href="/xt-ops/pdf.php?url=<?= urlencode($pdf['href'] ?? '') ?>" target="_blank"
+                       style="display:block;color:#4ade80;font-size:.78rem;font-weight:700;margin-bottom:.25rem;">
+                      📄 <?= htmlspecialchars($pdf['description'] ?? 'Print label') ?>
+                    </a>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <span style="color:#94a3b8;font-size:.75rem">Label created — check OmaPosti Pro</span>
+                <?php endif; ?>
               <?php elseif ($parcelNo): ?>
                 <span style="color:#475569;font-size:.75rem">Done</span>
               <?php else: ?>
