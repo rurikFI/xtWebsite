@@ -82,7 +82,8 @@ function createPostiLabel(array $p): array {
         'service'        => ['id' => $p['service'] ?? '2102'],
     ];
 
-    if (!empty($p['phone']))     $shipment['receiver']['phone']  = $p['phone'];
+    if (!empty($p['phone']))     { $shipment['receiver']['phone']  = $p['phone'];
+                                   $shipment['receiver']['mobile'] = $p['phone']; }
     if (!empty($p['email']))     $shipment['receiver']['email']  = $p['email'];
     if (!empty($p['order_ref'])) $shipment['senderReference']    = substr($p['order_ref'], 0, 35);
 
@@ -113,12 +114,12 @@ function createPostiLabel(array $p): array {
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
-    if ($curlErr) return ['error' => 'curl: ' . $curlErr];
+    if ($curlErr) return ['error' => 'curl: ' . $curlErr, 'payload' => $payload];
     $data = json_decode($response, true);
     if ($httpCode < 200 || $httpCode >= 300) {
-        return ['error' => 'Posti HTTP ' . $httpCode, 'details' => $data];
+        return ['error' => 'Posti HTTP ' . $httpCode, 'details' => $data, 'payload' => $payload, 'raw' => $response];
     }
-    return ['ok' => true, 'data' => $data];
+    return ['ok' => true, 'data' => $data, 'payload' => $payload];
 }
 
 // --- Fetch orders (must run before POST handler so inline update works) ---
@@ -324,13 +325,26 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
         <?php endif; ?>
       </div>
     <?php endif; ?>
-  <?php elseif ($result && $activeTab === 'orders' && empty($result['ok'])): ?>
+  <?php elseif ($result && $activeTab === 'orders'): ?>
+    <?php if (empty($result['ok'])): ?>
     <div class="result err">
-      <div class="result-title">❌ <?= htmlspecialchars($result['error'] ?? 'Error') ?></div>
+      <div class="result-title">❌ <?= htmlspecialchars($result['error'] ?? 'Posti error') ?></div>
       <?php if (!empty($result['details'])): ?>
         <pre><?= htmlspecialchars(json_encode($result['details'], JSON_PRETTY_PRINT)) ?></pre>
       <?php endif; ?>
+      <?php if (!empty($result['raw'])): ?>
+        <pre style="margin-top:.5rem"><?= htmlspecialchars($result['raw']) ?></pre>
+      <?php endif; ?>
     </div>
+    <?php endif; ?>
+    <details style="margin-bottom:1rem;font-size:.75rem;color:#475569">
+      <summary style="cursor:pointer">Debug: Posti request/response</summary>
+      <pre style="background:#0f172a;padding:1rem;border-radius:8px;margin-top:.5rem;overflow:auto;font-size:.72rem;color:#94a3b8"><?= htmlspecialchars(json_encode([
+        'payload_sent' => $result['payload'] ?? null,
+        'posti_response' => $result['data'] ?? ($result['details'] ?? null),
+        'ok' => !empty($result['ok']),
+      ], JSON_PRETTY_PRINT)) ?></pre>
+    </details>
   <?php endif; ?>
 
   <div class="tabs">
@@ -394,16 +408,7 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
               <?php endif; ?>
             </td>
             <td>
-              <?php if ($hasAddr && !$parcelNo): ?>
-                <form method="POST">
-                  <input type="hidden" name="session_id" value="<?= htmlspecialchars($s['id']) ?>">
-                  <select name="service" class="service-sel">
-                    <option value="2102">Express Parcel</option>
-                    <option value="2461">Small Parcel</option>
-                  </select>
-                  <button class="label-btn" name="create_from_stripe" value="1">Create Label →</button>
-                </form>
-              <?php elseif ($resultSession === $s['id'] && !empty($result['ok'])): ?>
+              <?php if ($resultSession === $s['id'] && !empty($result['ok'])): ?>
                 <?php
                   $rEntry = $result['data'][0] ?? $result['data'];
                   $rPdfs  = $rEntry['pdfs'] ?? [];
@@ -418,6 +423,15 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
                 <?php else: ?>
                   <span style="color:#94a3b8;font-size:.75rem">Label created — check OmaPosti Pro</span>
                 <?php endif; ?>
+              <?php elseif ($hasAddr && !$parcelNo): ?>
+                <form method="POST">
+                  <input type="hidden" name="session_id" value="<?= htmlspecialchars($s['id']) ?>">
+                  <select name="service" class="service-sel">
+                    <option value="2102">Express Parcel</option>
+                    <option value="2461">Small Parcel</option>
+                  </select>
+                  <button class="label-btn" name="create_from_stripe" value="1">Create Label →</button>
+                </form>
               <?php elseif ($parcelNo): ?>
                 <span style="color:#475569;font-size:.75rem">Done</span>
               <?php else: ?>
