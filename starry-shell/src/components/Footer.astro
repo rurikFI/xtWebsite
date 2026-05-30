@@ -22,7 +22,17 @@ const t = translations[lang].footer;
         <p class="text-slate-400 dark:text-slate-500 text-sm leading-relaxed">
           {t.tagline1}<br/>{t.tagline2}
         </p>
-        <p class="text-slate-400 dark:text-slate-700 text-xs mt-3">&copy; {new Date().getFullYear()} Xtruder Tools AB. {t.copyright}</p>
+        <div class="mt-4 space-y-1.5">
+          <a href="tel:+358503775332" class="flex items-center gap-2 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.19 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.13 1.05.37 2.07.7 3.06a2 2 0 01-.45 2.11L6.2 8.12A16 16 0 0015.88 17.8l1.23-1.23a2 2 0 012.11-.45c.99.33 2.01.57 3.06.7A2 2 0 0122 16.92z"/></svg>
+            +358 50 377 5332
+          </a>
+          <a href="mailto:support@xtrudertools.com" class="flex items-center gap-2 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            support@xtrudertools.com
+          </a>
+        </div>
+        <p class="text-slate-400 dark:text-slate-700 text-xs mt-4">&copy; {new Date().getFullYear()} Xtruder Tools AB. {t.copyright}</p>
       </div>
 
       <!-- Product links -->

@@ -23,10 +23,10 @@ import '../styles/global.css';
       </svg>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto pl-1 pr-2 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
       <!-- Page header -->
-      <div class="text-center mb-14">
+      <div class="text-center mb-14 px-4 sm:px-0">
         <span class="text-brand font-semibold text-sm uppercase tracking-widest mb-3 block">Custom order</span>
         <h1 class="font-heading text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">
           Build Your <span class="text-gradient">Xtruder Kit</span>
@@ -319,6 +319,7 @@ import '../styles/global.css';
     `;
 
     inputsList.appendChild(row);
+    row.classList.add('row-bounce-in');
 
     const toggleBtn = row.querySelector<HTMLElement>('.unit-toggle')!;
     setUnitToggle(toggleBtn, resolvedUnit);
@@ -515,6 +516,15 @@ import '../styles/global.css';
 </script>
 
 <style>
+  @keyframes row-in {
+    0%   { transform: scale(0.85); opacity: 0; }
+    60%  { transform: scale(1.04); opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
+  }
+  :global(.row-bounce-in) {
+    animation: row-in 0.35s cubic-bezier(.22,.61,.36,1) forwards;
+  }
+
   @keyframes march-dashes {
     to { stroke-dashoffset: -20; }
   }

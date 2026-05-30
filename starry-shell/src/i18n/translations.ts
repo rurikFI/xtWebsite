@@ -230,7 +230,7 @@ export const translations = {
         { href: "/#materials", label: "Compatible Materials" },
       ],
       companyLinks: [
-        { href: "https://www.xtrudertools.com", label: "Visit Store", external: true },
+        { href: "/build-your-kit/", label: "Visit Store", external: false },
         { href: "/about-us/", label: "About Us", external: false },
         { href: "/contact-us/", label: "Contact Us", external: false },
       ],
@@ -476,7 +476,7 @@ export const translations = {
         { href: "/sv/#materials", label: "Kompatibla material" },
       ],
       companyLinks: [
-        { href: "https://www.xtrudertools.com", label: "Besök butiken", external: true },
+        { href: "/sv/build-your-kit/", label: "Besök butiken", external: false },
         { href: "/sv/about-us/", label: "Om oss", external: false },
         { href: "/sv/contact-us/", label: "Kontakta oss", external: false },
       ],
@@ -722,7 +722,7 @@ export const translations = {
         { href: "/fi/#materials", label: "Yhteensopivat materiaalit" },
       ],
       companyLinks: [
-        { href: "https://www.xtrudertools.com", label: "Vieraile kaupassa", external: true },
+        { href: "/fi/build-your-kit/", label: "Vieraile kaupassa", external: false },
         { href: "/fi/about-us/", label: "Meistä", external: false },
         { href: "/fi/contact-us/", label: "Ota yhteyttä", external: false },
       ],

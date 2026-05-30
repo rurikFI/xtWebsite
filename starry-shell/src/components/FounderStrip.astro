@@ -55,11 +55,17 @@ const t = translations[lang].founderStrip;
         {t.founders.map(({ name, role, relation }) => (
           <div class="flex flex-col items-center gap-3 bg-white dark:bg-white/[0.04] border border-orange-100 dark:border-white/[0.08] rounded-2xl px-5 py-6 sm:px-8 sm:py-9 shadow-sm flex-1 sm:flex-none sm:w-48 lg:w-52">
 
-            <!-- Avatar placeholder -->
-            <div class="w-24 h-24 rounded-full bg-orange-50 dark:bg-white/[0.06] border-2 border-orange-200 dark:border-white/10 flex items-center justify-center flex-shrink-0">
-              <svg class="w-12 h-12 text-brand/40 dark:text-brand/30" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-              </svg>
+            <!-- Avatar -->
+            <div class="w-24 h-24 rounded-full border-2 border-orange-200 dark:border-white/10 flex-shrink-0 overflow-hidden">
+              {name.startsWith('Patrik') ? (
+                <img src="/patrik-founder.jpg" alt={name} class="w-full h-full object-cover object-[center_25%]" />
+              ) : (
+                <div class="w-full h-full bg-orange-50 dark:bg-white/[0.06] flex items-center justify-center">
+                  <svg class="w-12 h-12 text-brand/40 dark:text-brand/30" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                  </svg>
+                </div>
+              )}
             </div>
 
             <!-- Name + role -->

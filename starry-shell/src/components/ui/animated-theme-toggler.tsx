@@ -116,7 +116,7 @@ export function AnimatedThemeToggler({ sound = true }: AnimatedThemeTogglerProps
           strokeWidth="2"
           strokeLinecap="round"
           initial={false}
-          animate={{ rotate: isDark ? 270 : 0 }}
+          animate={{ rotate: isDark ? 0 : 270 }}
           transition={spring}
           style={{ overflow: "visible" }}
         >
@@ -124,7 +124,7 @@ export function AnimatedThemeToggler({ sound = true }: AnimatedThemeTogglerProps
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
             <motion.circle
               initial={false}
-              animate={{ cx: isDark ? 17 : 33, cy: isDark ? 8 : 0 }}
+              animate={{ cx: isDark ? 33 : 17, cy: isDark ? 0 : 8 }}
               transition={spring}
               r="9"
               fill="black"
@@ -138,16 +138,16 @@ export function AnimatedThemeToggler({ sound = true }: AnimatedThemeTogglerProps
             stroke="none"
             mask={`url(#${maskId})`}
             initial={false}
-            animate={{ r: isDark ? 9 : 5 }}
+            animate={{ r: isDark ? 5 : 9 }}
             transition={spring}
           />
 
           <motion.g
             initial={false}
             animate={{
-              opacity: isDark ? 0 : 1,
-              scale: isDark ? 0 : 1,
-              rotate: isDark ? -30 : 0,
+              opacity: isDark ? 1 : 0,
+              scale: isDark ? 1 : 0,
+              rotate: isDark ? 0 : -30,
             }}
             transition={spring}
             style={{ transformOrigin: "12px 12px" }}
