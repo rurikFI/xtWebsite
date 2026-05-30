@@ -119,6 +119,11 @@ function createPostiLabel(array $p): array {
     if ($httpCode < 200 || $httpCode >= 300) {
         return ['error' => 'Posti HTTP ' . $httpCode, 'details' => $data, 'payload' => $payload, 'raw' => $response];
     }
+    // Posti returns HTTP 200 even for validation failures
+    if (isset($data['validation_status']) && $data['validation_status'] === 'NOK') {
+        $desc = $data['errors'][0]['description'] ?? 'Validation failed';
+        return ['error' => $desc, 'details' => $data, 'payload' => $payload];
+    }
     return ['ok' => true, 'data' => $data, 'payload' => $payload];
 }
 
@@ -421,20 +426,28 @@ input:focus, select:focus { border-color: rgba(232,73,12,.5); }
                     </a>
                   <?php endforeach; ?>
                 <?php else: ?>
-                  <span style="color:#94a3b8;font-size:.75rem">Label created — check OmaPosti Pro</span>
+                  <span style="color:#94a3b8;font-size:.75rem;display:block;margin-bottom:.4rem">Label created — check OmaPosti Pro</span>
                 <?php endif; ?>
-              <?php elseif ($hasAddr && !$parcelNo): ?>
-                <form method="POST">
+              <?php endif; ?>
+              <?php if ($hasAddr && !$parcelNo): ?>
+                <form method="POST" style="margin-top:<?= $resultSession === $s['id'] ? '.5rem' : '0' ?>">
                   <input type="hidden" name="session_id" value="<?= htmlspecialchars($s['id']) ?>">
+                  <?php
+                    $rowCountry = $addr['country'] ?? 'FI';
+                    $domestic   = in_array($rowCountry, ['FI','AX','EE','LT','LV']);
+                  ?>
                   <select name="service" class="service-sel">
-                    <option value="2102">Express Parcel</option>
-                    <option value="2461">Small Parcel</option>
+                    <?php if ($domestic): ?>
+                      <option value="2102">Express Parcel (<?= htmlspecialchars($rowCountry) ?>)</option>
+                      <option value="2461">Small Parcel</option>
+                    <?php else: ?>
+                      <option value="2103">Intl Express Parcel (<?= htmlspecialchars($rowCountry) ?>)</option>
+                      <option value="2102">Express Parcel (domestic only)</option>
+                    <?php endif; ?>
                   </select>
                   <button class="label-btn" name="create_from_stripe" value="1">Create Label →</button>
                 </form>
-              <?php elseif ($parcelNo): ?>
-                <span style="color:#475569;font-size:.75rem">Done</span>
-              <?php else: ?>
+              <?php elseif (!$hasAddr): ?>
                 <span style="color:#475569;font-size:.75rem">Add address manually ↓</span>
               <?php endif; ?>
             </td>
