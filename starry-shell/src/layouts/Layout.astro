@@ -53,24 +53,14 @@ const {
       // 2. Initialize pixel
       fbq('init', '1915222213150549');
 
-      // 3. Default all consent signals to denied
-      fbq('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-      });
+      // 3. Default consent to revoked
+      fbq('consent', 'revoke');
 
-      // 4. Restore full consent for returning visitors who already accepted
+      // 4. Restore consent for returning visitors who already accepted
       try {
         var _xc = JSON.parse(localStorage.getItem('xt-cookie-consent') || '{}');
         if (_xc.marketing === true) {
-          fbq('consent', 'update', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
-            analytics_storage: 'granted',
-          });
+          fbq('consent', 'grant');
         }
       } catch (e) {}
 

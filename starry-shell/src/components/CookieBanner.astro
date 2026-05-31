@@ -90,21 +90,7 @@ const privacyHref = lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-polic
 
     function applyConsent(granted) {
       if (typeof fbq !== 'function') return;
-      if (granted) {
-        fbq('consent', 'update', {
-          ad_storage: 'granted',
-          ad_user_data: 'granted',
-          ad_personalization: 'granted',
-          analytics_storage: 'granted',
-        });
-      } else {
-        fbq('consent', 'update', {
-          ad_storage: 'denied',
-          ad_user_data: 'denied',
-          ad_personalization: 'denied',
-          analytics_storage: 'denied',
-        });
-      }
+      fbq('consent', granted ? 'grant' : 'revoke');
     }
 
     function hideBanner() {
