@@ -86,6 +86,7 @@ const privacyHref = lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-polic
     } catch (e) {}
 
     function applyConsent(granted) {
+      if (typeof fbq !== 'function') return;
       if (granted) {
         fbq('consent', 'update', {
           ad_storage: 'granted',
