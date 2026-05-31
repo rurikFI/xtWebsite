@@ -7,6 +7,7 @@ interface Props {
 }
 const { lang = 'en' } = Astro.props;
 const t = translations[lang].footer;
+const cookieSettingsLabel = translations[lang].cookieBanner.footerLink;
 ---
 
 <footer class="bg-white dark:bg-black py-12 border-t border-slate-200 dark:border-slate-800/60 transition-colors duration-300">
@@ -72,6 +73,15 @@ const t = translations[lang].footer;
               <a href={href} class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm cursor-pointer">{label}</a>
             </li>
           ))}
+          <li>
+            <button
+              type="button"
+              onclick="window.openCookieSettings()"
+              class="text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 text-sm cursor-pointer text-left"
+            >
+              {cookieSettingsLabel}
+            </button>
+          </li>
         </ul>
       </div>
     </div>
