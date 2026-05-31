@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../i18n/translations';
+import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
   title?: string;
@@ -37,8 +38,9 @@ const {
     <style is:global>
       body { font-family: 'Nunito Sans', sans-serif; }
     </style>
-    <!-- Meta Pixel -->
+    <!-- Meta Pixel with Facebook Consent Mode -->
     <script is:inline>
+      // 1. Load fbevents.js SDK
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -47,12 +49,38 @@ const {
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window,document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init','1915222213150549');
-      fbq('track','PageView');
+
+      // 2. Initialize pixel
+      fbq('init', '1915222213150549');
+
+      // 3. Default all consent signals to denied
+      fbq('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      });
+
+      // 4. Restore full consent for returning visitors who already accepted
+      try {
+        var _xc = JSON.parse(localStorage.getItem('xt-cookie-consent') || '{}');
+        if (_xc.marketing === true) {
+          fbq('consent', 'update', {
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+            analytics_storage: 'granted',
+          });
+        }
+      } catch (e) {}
+
+      // 5. Track page view (consent state already set above)
+      fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1915222213150549&ev=PageView&noscript=1"/></noscript>
   </head>
   <body class="bg-white dark:bg-[#0F172A] text-slate-700 transition-colors duration-300">
     <slot />
+    <CookieBanner lang={lang} />
   </body>
 </html>
