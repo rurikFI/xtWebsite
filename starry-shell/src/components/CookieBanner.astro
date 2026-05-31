@@ -17,8 +17,10 @@ const privacyHref = lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-polic
   aria-labelledby="cookie-banner-title"
   class="hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 shadow-2xl"
 >
-  <div class="max-w-4xl mx-auto px-4 py-5 sm:px-6">
-    <h3 id="cookie-banner-title" class="text-sm font-semibold text-slate-900 dark:text-white mb-1">{t.title}</h3>
+  <div class="max-w-4xl mx-auto px-4 py-5 sm:px-6 flex items-start gap-5">
+    <img src="/cookie.jpg" alt="" class="hidden sm:block w-16 h-16 rounded-xl object-cover flex-shrink-0 mt-1" />
+    <div class="flex-1 min-w-0">
+    <h3 id="cookie-banner-title" class="text-sm font-semibold text-slate-900 dark:text-white mb-1" style="font-family: Arial, Helvetica, sans-serif;">{t.title}</h3>
     <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
       {t.description}{' '}
       <a href={privacyHref} class="underline hover:text-slate-900 dark:hover:text-white transition-colors">
@@ -67,10 +69,11 @@ const privacyHref = lang === 'en' ? '/privacy-policy/' : `/${lang}/privacy-polic
       <button
         id="cookie-accept-btn"
         type="button"
-        class="text-sm px-4 py-2 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-700 dark:hover:bg-slate-100 transition-colors font-medium cursor-pointer"
+        class="text-sm px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors font-medium cursor-pointer"
       >
         {t.acceptAll}
       </button>
+    </div>
     </div>
   </div>
 </div>

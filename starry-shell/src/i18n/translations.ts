@@ -255,7 +255,7 @@ export const translations = {
       },
       marketing: {
         label: "Marketing",
-        description: "Used to show you relevant ads on Facebook.",
+        description: "Used to understand customer behaviour.",
       },
       acceptAll: "Accept All",
       savePreferences: "Save Preferences",
@@ -517,7 +517,7 @@ export const translations = {
       },
       marketing: {
         label: "Marknadsföring",
-        description: "Används för att visa dig relevanta annonser på Facebook.",
+        description: "Används för att förstå kundbeteende.",
       },
       acceptAll: "Acceptera alla",
       savePreferences: "Spara inställningar",
@@ -779,7 +779,7 @@ export const translations = {
       },
       marketing: {
         label: "Markkinointi",
-        description: "Käytetään relevanttien mainosten näyttämiseen Facebookissa.",
+        description: "Käytetään asiakaskäyttäytymisen ymmärtämiseen.",
       },
       acceptAll: "Hyväksy kaikki",
       savePreferences: "Tallenna asetukset",
