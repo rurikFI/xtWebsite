@@ -245,6 +245,22 @@ export const translations = {
       madeIn: "Made in Finland",
       bottomText: "Patented technology. Unauthorized reproduction prohibited.",
     },
+    cookieBanner: {
+      title: "Cookie Preferences",
+      description: "We use cookies to improve your experience and serve relevant ads. See our",
+      privacyLinkText: "Privacy Policy",
+      necessary: {
+        label: "Necessary",
+        description: "Required for the site to function. Always active.",
+      },
+      marketing: {
+        label: "Marketing",
+        description: "Used to show you relevant ads on Facebook.",
+      },
+      acceptAll: "Accept All",
+      savePreferences: "Save Preferences",
+      footerLink: "Cookie Settings",
+    },
   },
 
   sv: {
@@ -491,6 +507,22 @@ export const translations = {
       madeIn: "Tillverkad i Finland",
       bottomText: "Patenterad teknologi. Otillåten reproduktion förbjuden.",
     },
+    cookieBanner: {
+      title: "Cookie-inställningar",
+      description: "Vi använder cookies för att förbättra din upplevelse och visa relevanta annonser. Se vår",
+      privacyLinkText: "Integritetspolicy",
+      necessary: {
+        label: "Nödvändiga",
+        description: "Krävs för att webbplatsen ska fungera. Alltid aktiv.",
+      },
+      marketing: {
+        label: "Marknadsföring",
+        description: "Används för att visa dig relevanta annonser på Facebook.",
+      },
+      acceptAll: "Acceptera alla",
+      savePreferences: "Spara inställningar",
+      footerLink: "Cookie-inställningar",
+    },
   },
 
   fi: {
@@ -736,6 +768,22 @@ export const translations = {
       ],
       madeIn: "Valmistettu Suomessa",
       bottomText: "Patentoitu teknologia. Luvaton jäljentäminen kielletty.",
+    },
+    cookieBanner: {
+      title: "Evästeasetukset",
+      description: "Käytämme evästeitä käyttökokemuksen parantamiseen ja relevanttien mainosten näyttämiseen. Katso",
+      privacyLinkText: "Tietosuojakäytäntö",
+      necessary: {
+        label: "Välttämättömät",
+        description: "Vaaditaan sivuston toimintaan. Aina aktiivinen.",
+      },
+      marketing: {
+        label: "Markkinointi",
+        description: "Käytetään relevanttien mainosten näyttämiseen Facebookissa.",
+      },
+      acceptAll: "Hyväksy kaikki",
+      savePreferences: "Tallenna asetukset",
+      footerLink: "Evästeasetukset",
     },
   },
 } as const;
