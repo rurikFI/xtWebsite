@@ -23,6 +23,21 @@ const stepMedia = [
 ];
 ---
 
+<style>
+  @media (min-width: 768px) {
+    /* Interleaved DOM order: step0, media0, step1, media1, step2, media2, step3, media3 */
+    /* On desktop: push each pair into its column, steps in row 1, media in row 2 */
+    .steps-grid > *:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .steps-grid > *:nth-child(2) { grid-column: 1; grid-row: 2; }
+    .steps-grid > *:nth-child(3) { grid-column: 2; grid-row: 1; }
+    .steps-grid > *:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .steps-grid > *:nth-child(5) { grid-column: 3; grid-row: 1; }
+    .steps-grid > *:nth-child(6) { grid-column: 3; grid-row: 2; }
+    .steps-grid > *:nth-child(7) { grid-column: 4; grid-row: 1; }
+    .steps-grid > *:nth-child(8) { grid-column: 4; grid-row: 2; }
+  }
+</style>
+
 <section id="how-it-works" class="py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -36,45 +51,45 @@ const stepMedia = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-x-6 gap-y-0">
-      {/* Step info row */}
+    <div class="steps-grid grid md:grid-cols-4 md:grid-rows-2 gap-x-6 gap-y-0">
       {steps.map(({ n, accent, title, body }, i) => (
-        <div class={`relative text-center reveal reveal-d${i + 1} pb-6`}>
-          <div class={`w-16 h-16 ${accent ? 'bg-brand shadow-orange-200' : 'bg-[#64748B] shadow-slate-200'} rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg`}>
-            <span class="font-heading font-black text-white text-2xl">{n}</span>
-          </div>
-          {i < 3 && (
-            <div class={`hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r ${accent ? 'from-brand/40 to-slate-200' : i === 2 ? 'from-slate-300 to-brand/40' : 'from-slate-300 to-slate-200'}`}></div>
-          )}
-          <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">{title}</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">{body}</p>
-        </div>
-      ))}
-
-      {/* Media row — all items share the same grid row so they're always level */}
-      {stepMedia.map((media, i) => (
-        <div class={`reveal reveal-d${i + 1}`}>
-          <div class="rounded-2xl overflow-hidden border border-slate-100 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.35)] aspect-[4/3] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_-4px_rgba(0,0,0,0.4)]">
-            {media.type === 'image' ? (
-              <img
-                src={media.src}
-                alt={media.alt ?? ''}
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            ) : (
-              <video
-                src={media.src}
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="none"
-                class="w-full h-full object-cover"
-              />
+        <>
+          {/* Step */}
+          <div class={`relative text-center reveal reveal-d${i + 1} pb-6`}>
+            <div class={`w-16 h-16 ${accent ? 'bg-brand shadow-orange-200' : 'bg-[#64748B] shadow-slate-200'} rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg`}>
+              <span class="font-heading font-black text-white text-2xl">{n}</span>
+            </div>
+            {i < 3 && (
+              <div class={`hidden md:block absolute top-8 left-[calc(50%+32px)] right-0 h-px bg-gradient-to-r ${accent ? 'from-brand/40 to-slate-200' : i === 2 ? 'from-slate-300 to-brand/40' : 'from-slate-300 to-slate-200'}`}></div>
             )}
+            <h3 class="font-heading font-bold text-slate-900 text-lg mb-2">{title}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">{body}</p>
           </div>
-        </div>
+
+          {/* Media */}
+          <div class={`reveal reveal-d${i + 1} pb-6 md:pb-0`}>
+            <div class="rounded-2xl overflow-hidden border border-slate-100 shadow-[0_8px_30px_-4px_rgba(0,0,0,0.35)] aspect-[4/3] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_48px_-4px_rgba(0,0,0,0.4)]">
+              {stepMedia[i].type === 'image' ? (
+                <img
+                  src={stepMedia[i].src}
+                  alt={stepMedia[i].alt ?? ''}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <video
+                  src={stepMedia[i].src}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  class="w-full h-full object-cover"
+                />
+              )}
+            </div>
+          </div>
+        </>
       ))}
     </div>
 
