@@ -29,3 +29,8 @@ emails.csv
 
 # server secrets — upload manually, never commit
 public/api/secrets.php
+
+# stale/unused pages
+src/pages/checkout.astro
+src/pages/sv/checkout.astro
+src/pages/fi/checkout.astro

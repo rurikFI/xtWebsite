@@ -93,6 +93,15 @@ import '../../styles/global.css';
         document.getElementById('summary-delivery')!.textContent = o.delivery;
         document.getElementById('summary-total')!.textContent = o.total;
 
+        if (typeof (window as any).fbq === 'function' && !sessionStorage.getItem('xt_purchase_' + sessionId)) {
+          sessionStorage.setItem('xt_purchase_' + sessionId, '1');
+          (window as any).fbq('track', 'Purchase', {
+            value: parseFloat(o.total.replace('€', '')),
+            currency: 'EUR',
+            num_items: o.qty,
+          });
+        }
+
         if (o.email) {
           document.getElementById('email-display')!.textContent = o.email;
           document.getElementById('email-line')!.classList.remove('hidden');
